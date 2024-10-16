@@ -10,6 +10,50 @@ GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
+--Trigger kiểm tra NameCustomer là một tên hợp lệ không chứa kí tự số
+CREATE TRIGGER trg_check_namecustomer
+ON Customers
+INSTEAD OF INSERT, UPDATE
+AS
+BEGIN
+    DECLARE @name NVARCHAR(100);
+
+    SELECT @name = NameCustomer FROM inserted;
+
+    IF @name LIKE '%[0-9]%'
+    BEGIN
+        RAISERROR ('Tên khách hàng không được chứa ký tự số.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+		DECLARE @IdCustomer CHAR(6);
+
+		SELECT @IdCustomer = IdCustomer FROM inserted;
+
+		IF (EXISTS(SELECT 1 FROM Customers WHERE IdCustomer=@IdCustomer))
+		BEGIN
+			DECLARE @PhoneNumber CHAR(10);
+			DECLARE @AddressCustomer NVARCHAR(150);
+
+			SELECT @PhoneNumber = PhoneNumber, 
+					@AddressCustomer = AddressCustomer 
+			FROM inserted;
+
+			UPDATE Customers 
+			SET NameCustomer=@name, PhoneNumber=@PhoneNumber, AddressCustomer=@AddressCustomer
+			WHERE IdCustomer=@IdCustomer;
+		END
+		ELSE
+		BEGIN 
+			INSERT INTO Customers
+			SELECT * FROM inserted;
+		END
+    END
+END;
+GO
+
+
 --Trigger kiểm tra PhoneNumber là chuổi số điện thoại Việt Nam
 CREATE TRIGGER trg_checkPhoneNumberCustomers
 ON Customers
@@ -17,13 +61,14 @@ AFTER INSERT, UPDATE
 AS
 BEGIN
     DECLARE @PhoneNumber CHAR(10);
-    DECLARE @RegexPattern NVARCHAR(100) = '^(0[3|5|7|8|9])[0-9]{8}$';
 
     SELECT @PhoneNumber = PhoneNumber FROM inserted;
 
-    IF @PhoneNumber NOT LIKE @RegexPattern
+    IF @PhoneNumber NOT LIKE '0[35789]%' 
+        OR LEN(@PhoneNumber) <> 10
+        OR @PhoneNumber NOT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
     BEGIN
-        RAISERROR('Số điện thoại không hợp lệ. Vui lòng nhập số điện thoại Việt Nam.', 16, 1);
+        RAISERROR('Số điện thoại không hợp lệ. Vui lòng nhập số điện thoại Việt Nam hợp lệ.', 16, 1);
         ROLLBACK TRANSACTION;
     END
 END;
@@ -60,11 +105,18 @@ CREATE PROCEDURE SP_UpdateCustomer
 AS
 BEGIN
     BEGIN TRY
-        UPDATE Customers 
-		SET NameCustomer=@NameCustomer, PhoneNumber=@PhoneNumber, AddressCustomer=@AddressCustomer
-		WHERE IdCustomer=@IdCustomer;
+        IF (EXISTS(SELECT 1 FROM Customers WHERE Customers.IdCustomer=@IdCustomer))
+		BEGIN
+			UPDATE Customers 
+			SET NameCustomer=@NameCustomer, PhoneNumber=@PhoneNumber, AddressCustomer=@AddressCustomer
+			WHERE IdCustomer=@IdCustomer;
 
-        SET @Result = 1;
+			SET @Result=1; 
+		END
+		ELSE
+		BEGIN
+			SET @Result=0;
+		END
     END TRY
     BEGIN CATCH
         SET @Result = 0;
@@ -79,9 +131,16 @@ CREATE PROCEDURE SP_DeleteCustomer
 AS
 BEGIN
 	BEGIN TRY
-		DELETE FROM Customers WHERE Customers.IdCustomer=@IdCustomer;
+		IF (EXISTS(SELECT 1 FROM Customers WHERE Customers.IdCustomer=@IdCustomer))
+		BEGIN
+			DELETE FROM Customers WHERE Customers.IdCustomer=@IdCustomer;
 
-		SET @Result=1;
+			SET @Result=1; 
+		END
+		ELSE
+		BEGIN
+			SET @Result=0;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result=0

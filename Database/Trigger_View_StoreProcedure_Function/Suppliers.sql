@@ -3,33 +3,77 @@ CREATE TABLE Suppliers(
 	IdSupplier CHAR(6) PRIMARY KEY,
 	NameSupplier NVARCHAR(100) NOT NULL,
 	AddressSupplier NVARCHAR(150) NOT NULL,
-	PhoneNumber CHAR(10) UNIQUE NOT NULL,
+	PhoneNumber CHAR(10) UNIQUE NOT NULL
 );
 */
 GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
---Trigger kiểm tra PhoneNumber là chuổi số điện thoại Việt Nam
+-- Trigger kiểm tra NameSupplier là một tên hợp lệ không chứa kí tự số
+CREATE TRIGGER trg_check_namesupplier
+ON Suppliers
+INSTEAD OF INSERT, UPDATE
+AS
+BEGIN
+    DECLARE @name NVARCHAR(100);
+
+    SELECT @name = NameSupplier FROM inserted;
+
+    IF @name LIKE '%[0-9]%'
+    BEGIN
+        RAISERROR ('Tên nhà cung cấp không được chứa ký tự số.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+		DECLARE @IdSupplier CHAR(6);
+
+		SELECT @IdSupplier = IdSupplier FROM inserted;
+
+		IF (EXISTS(SELECT 1 FROM Suppliers WHERE IdSupplier=@IdSupplier))
+		BEGIN
+			DECLARE @PhoneNumber CHAR(10);
+			DECLARE @AddressSupplier NVARCHAR(150);
+
+			SELECT @PhoneNumber = PhoneNumber, 
+					@AddressSupplier = AddressSupplier 
+			FROM inserted;
+
+			UPDATE Suppliers
+			SET NameSupplier=@name, PhoneNumber=@PhoneNumber, AddressSupplier=@AddressSupplier
+			WHERE IdSupplier=@IdSupplier;
+		END
+		ELSE
+		BEGIN 
+			INSERT INTO Suppliers
+			SELECT * FROM inserted;
+		END
+    END
+END;
+GO
+
+-- Trigger kiểm tra PhoneNumber là chuỗi số điện thoại Việt Nam
 CREATE TRIGGER trg_checkPhoneNumberSuppliers
 ON Suppliers
 AFTER INSERT, UPDATE
 AS
 BEGIN
     DECLARE @PhoneNumber CHAR(10);
-    DECLARE @RegexPattern NVARCHAR(100) = '^(0[3|5|7|8|9])[0-9]{8}$';
 
     SELECT @PhoneNumber = PhoneNumber FROM inserted;
 
-    IF @PhoneNumber NOT LIKE @RegexPattern
+    IF @PhoneNumber NOT LIKE '0[35789]%' 
+        OR LEN(@PhoneNumber) <> 10
+        OR @PhoneNumber NOT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
     BEGIN
-        RAISERROR('Số điện thoại không hợp lệ. Vui lòng nhập số điện thoại Việt Nam.', 16, 1);
+        RAISERROR('Số điện thoại không hợp lệ. Vui lòng nhập số điện thoại Việt Nam hợp lệ.', 16, 1);
         ROLLBACK TRANSACTION;
     END
 END;
 GO
 
---Store Procedure thưc hiện việc thêm dữ liệu vào bảng Suppliers
+-- Store Procedure thực hiện việc thêm dữ liệu vào bảng Suppliers
 CREATE PROCEDURE SP_InsertSupplier
     @IdSupplier CHAR(6),
     @NameSupplier NVARCHAR(100),
@@ -50,7 +94,7 @@ BEGIN
 END;
 GO
 
---Store Procedure thưc hiện việc cập nhật liệu trong bảng Suppliers
+-- Store Procedure thực hiện việc cập nhật liệu trong bảng Suppliers
 CREATE PROCEDURE SP_UpdateSupplier
     @IdSupplier CHAR(6),
     @NameSupplier NVARCHAR(100),
@@ -60,11 +104,18 @@ CREATE PROCEDURE SP_UpdateSupplier
 AS
 BEGIN
     BEGIN TRY
-        UPDATE Suppliers
-		SET NameSupplier=@NameSupplier, PhoneNumber=@PhoneNumber, AddressSupplier=@AddressSupplier
-		WHERE IdSupplier=@IdSupplier;
+		IF (EXISTS(SELECT 1 FROM Suppliers WHERE Suppliers.IdSupplier=@IdSupplier))
+		BEGIN
+			UPDATE Suppliers
+			SET NameSupplier=@NameSupplier, PhoneNumber=@PhoneNumber, AddressSupplier=@AddressSupplier
+			WHERE IdSupplier=@IdSupplier;
 
-        SET @Result = 1;
+			SET @Result = 1;
+		END
+		ELSE
+		BEGIN
+			SET @Result=0;
+		END
     END TRY
     BEGIN CATCH
         SET @Result = 0;
@@ -72,24 +123,31 @@ BEGIN
 END;
 GO
 
---Store Procedure thưc hiện việc xóa dữ liệu trong bảng Suppliers
+-- Store Procedure thực hiện việc xóa dữ liệu trong bảng Suppliers
 CREATE PROCEDURE SP_DeleteSupplier
 	@IdSupplier CHAR(6),
 	@Result INT OUTPUT
 AS
 BEGIN
 	BEGIN TRY
-		DELETE FROM Suppliers WHERE Suppliers.IdSupplier=@IdSupplier;
+		IF (EXISTS(SELECT 1 FROM Suppliers WHERE Suppliers.IdSupplier=@IdSupplier))
+		BEGIN
+			DELETE FROM Suppliers WHERE Suppliers.IdSupplier=@IdSupplier;
 
-		SET @Result=1;
+			SET @Result=1;
+		END
+		ELSE
+		BEGIN
+			SET @Result=0;
+		END
 	END TRY
 	BEGIN CATCH
-		SET @Result=0
+		SET @Result=0;
 	END CATCH;
 END;
 GO
 
---Function lấy ra thông tin của tất cả nhà cung cấp
+-- Function lấy ra thông tin của tất cả nhà cung cấp
 CREATE FUNCTION Fn_GetAllSupplier ()
 RETURNS TABLE
 AS
@@ -99,7 +157,7 @@ AS
 	);
 GO
 
---Function lấy thông tin nhà cung cấp thông qua mã nhà cung cấp
+-- Function lấy thông tin nhà cung cấp thông qua mã nhà cung cấp
 CREATE FUNCTION Fn_GetSupplierById (@IdSupplier CHAR(6))
 RETURNS TABLE
 AS
@@ -110,7 +168,7 @@ AS
 	);
 GO
 
---Function lấy IdSupplier bằng PhoneNumber của Supplier
+-- Function lấy IdSupplier bằng PhoneNumber của Supplier
 CREATE FUNCTION Fn_GetIdSupplierByPhoneNumber (@PhoneNumber CHAR(10))
 RETURNS CHAR(6)
 AS

@@ -3,17 +3,18 @@ CREATE TABLE Products(
 	IdProduct CHAR(6) PRIMARY KEY,
 	NameProduct NVARCHAR(100) NOT NULL,
 	Unit NVARCHAR(30) NOT NULL,
-	UnitPriceImport REAL NOT NULL,
-	UnitPriceExport REAL NOT NULL,
-	QuantityProduct REAL NOT NULL,
+	UnitPriceImport DECIMAL(18, 2) NOT NULL,	--giá mua vào
+	UnitPriceExport DECIMAL(18, 2) NOT NULL,	--giá bán ra
+	QuantityProduct DECIMAL(18, 2) NOT NULL,
 	IdTypeProduct CHAR(6) NOT NULL,
-	IdSupplier CHAR(6) NOT NULL,
-	ImageProduct IMAGE,
-	CONSTRAINT FK_TypeProduct FOREIGN KEY (IdTypeProduct) REFERENCES TypeProducts(IdTypeProduct),
-	CONSTRAINT FK_Supplier FOREIGN KEY (IdSupplier) REFERENCES Suppliers(IdSupplier),
-	CONSTRAINT Check_Product CHECK (UnitPriceImport >= 0 AND UnitPriceExport >= 0 AND QuantityProduct >=0) 
+	IdSupplier CHAR(6),
+	ImageProduct VARBINARY(MAX),
+	CONSTRAINT FK_TypeProduct FOREIGN KEY (IdTypeProduct) REFERENCES TypeProducts(IdTypeProduct) ON DELETE CASCADE,
+	CONSTRAINT FK_Supplier FOREIGN KEY (IdSupplier) REFERENCES Suppliers(IdSupplier) ON DELETE SET NULL,
+	CONSTRAINT Check_Product CHECK (UnitPriceImport > 0 AND UnitPriceImport > 0 AND QuantityProduct >= 0) 
 );
 */
+
 GO
 USE QuanLyTaiChinhCuaHangXayDung
 GO
@@ -23,20 +24,20 @@ CREATE PROCEDURE SP_InsertProduct
 	@IdProduct CHAR(6),
 	@NameProduct NVARCHAR(100),
 	@Unit NVARCHAR(30),
-	@UnitPriceImport REAL,
-	@UnitPriceExport REAL,
-	@QuantityProduct REAL,
+	@UnitPriceImport DECIMAL(18, 2),
+	@UnitPriceExport DECIMAL(18, 2),
+	@QuantityProduct DECIMAL(18, 2),
 	@IdTypeProduct CHAR(6),
 	@IdSupplier CHAR(6),
-	@ImageProduct IMAGE,
+	@ImageProduct VARBINARY(MAX),
 	@Result INT OUTPUT
 AS
 BEGIN
 	BEGIN TRY
 		INSERT INTO Products (IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
 								QuantityProduct, IdTypeProduct, IdSupplier, ImageProduct)
-		VALUES Products (@IdProduct, @NameProduct, @Unit, @UnitPriceImport, @UnitPriceExport, 
-								@QuantityProduct, @IdTypeProduct, @IdSupplier, @ImageProduct);
+		VALUES (@IdProduct, @NameProduct, @Unit, @UnitPriceImport, @UnitPriceExport, 
+					@QuantityProduct, @IdTypeProduct, @IdSupplier, @ImageProduct);
 
 		SET @Result = 1;
 	END TRY
@@ -53,23 +54,30 @@ CREATE PROCEDURE SP_UpdateProduct
 	@IdProduct CHAR(6),
 	@NameProduct NVARCHAR(100),
 	@Unit NVARCHAR(30),
-	@UnitPriceImport REAL,
-	@UnitPriceExport REAL,
-	@QuantityProduct REAL,
+	@UnitPriceImport DECIMAL(18, 2),
+	@UnitPriceExport DECIMAL(18, 2),
+	@QuantityProduct DECIMAL(18, 2),
 	@IdTypeProduct CHAR(6),
 	@IdSupplier CHAR(6),
-	@ImageProduct IMAGE,
+	@ImageProduct VARBINARY(MAX),
 	@Result INT OUTPUT
 AS
 BEGIN
 	BEGIN TRY
-		UPDATE Products
-		SET NameProduct=@NameProduct, Unit=@Unit, UnitPriceImport=@UnitPriceImport, 
-			UnitPriceExport=@UnitPriceExport, QuantityProduct=@QuantityProduct, 
-			IdTypeProduct=@IdTypeProduct, IdSupplier=@IdSupplier, ImageProduct=@ImageProduct 
-		WHERE IdProduct=@IdProduct;
+		IF (EXISTS(SELECT 1 FROM Products WHERE IdProduct=@IdProduct))
+		BEGIN
+			UPDATE Products
+			SET NameProduct=@NameProduct, Unit=@Unit, UnitPriceImport=@UnitPriceImport, 
+				UnitPriceExport=@UnitPriceExport, QuantityProduct=@QuantityProduct, 
+				IdTypeProduct=@IdTypeProduct, IdSupplier=@IdSupplier, ImageProduct=@ImageProduct 
+			WHERE IdProduct=@IdProduct;
 
-		SET @Result=1;
+			SET @Result=1;
+		END
+		ELSE
+		BEGIN
+			SET @Result = 0;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result=0;
@@ -82,13 +90,20 @@ GO
 --Store Procedure thực hiện việc xóa dữ liệu vào bảng Products 
 CREATE PROCEDURE SP_DeleteProduct
 	@IdProduct CHAR(6),
-	@Result INT
+	@Result INT OUTPUT
 AS
 BEGIN
 	BEGIN TRY
-		DELETE FROM Products WHERE Products.IdProduct=@IdProduct;
+		IF(EXISTS(SELECT 1 FROM Products WHERE IdProduct=@IdProduct))
+		BEGIN
+			DELETE FROM Products WHERE Products.IdProduct=@IdProduct;
 
-		SET @Result=1;
+			SET @Result = 1;
+		END
+		ELSE
+		BEGIN
+			SET @Result = 0;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result=0;
@@ -106,6 +121,8 @@ AS
 								QuantityProduct, IdTypeProduct, IdSupplier, ImageProduct
 		FROM Products
 	);
+GO
+
 --Function thực hiện việc lất ra thông tin của Product bằng IdProduct
 CREATE FUNCTION Fn_GetProductById (@IdProduct CHAR(6))
 RETURNS TABLE
@@ -125,12 +142,12 @@ RETURNS @result TABLE (
     IdProduct CHAR(6),
     NameProduct NVARCHAR(100),
     Unit NVARCHAR(30),
-    UnitPriceImport REAL,
-    UnitPriceExport REAL,
-    QuantityProduct REAL,
+    UnitPriceImport DECIMAL(18, 2),
+    UnitPriceExport DECIMAL(18, 2),
+    QuantityProduct DECIMAL(18, 2),
     IdTypeProduct CHAR(6),
     IdSupplier CHAR(6),
-    ImageProduct IMAGE
+    ImageProduct VARBINARY(MAX)
 )
 AS
 BEGIN
@@ -152,42 +169,4 @@ BEGIN
 END;
 GO
 
---Function lấy ra thông tin sản phẩm do nhà cung cấp có mã IdSuppler cung cấp
-CREATE FUNCTION Fn_GetProductByIdSupplier (@IdSupplier CHAR(6))
-RETURNS TABLE
-AS
-	RETURN
-	(
-		SELECT IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
-								QuantityProduct, IdTypeProduct, IdSupplier, ImageProduct
-		FROM Products 
-		WHERE Products.IdSupplier=@IdSupplier
-	);
-GO
- 
---Function lấy ra thông tin sản phẩm khi truyền vào khoảng giá mua vào @MinPrice, @MaxPrice
-CREATE FUNCTION Fn_GetProductsByImportPriceRange (@MinPrice REAL, @MaxPrice REAL)
-RETURNS TABLE
-AS
-	RETURN
-	(
-		SELECT IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
-				QuantityProduct, IdTypeProduct, IdSupplier, ImageProduct
-		FROM Products P
-		WHERE P.UnitPriceImport >= @MinPrice AND P.UnitPriceImport <= @MaxPrice
-	);
-GO
-
---Function lấy ra thông tin sản phẩm khi truyền vào khoảng giá bán ra @MinPrice, @MaxPrice
-CREATE FUNCTION Fn_GetProductsByExportPriceRange (@MinPrice REAL, @MaxPrice REAL)
-RETURNS TABLE
-AS
-	RETURN
-	(
-		SELECT IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
-				QuantityProduct, IdTypeProduct, IdSupplier, ImageProduct
-		FROM Products P
-		WHERE P.UnitPriceExport >= @MinPrice AND P.UnitPriceExport <= @MaxPrice
-	);
-GO
 

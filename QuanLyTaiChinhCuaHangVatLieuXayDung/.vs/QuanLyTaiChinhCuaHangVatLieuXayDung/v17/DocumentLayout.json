@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|d:\\he_quan_tri_co_so_du_lieu\\do_an_cuoi_ky_nhom_5\\quanlytaichinhcuahangvatlieuxaydung\\quanlytaichinhcuahangvatlieuxaydung\\model\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|solutionrelative:quanlytaichinhcuahangvatlieuxaydung\\model\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|d:\\he_quan_tri_co_so_du_lieu\\do_an_cuoi_ky_nhom_5\\quanlytaichinhcuahangvatlieuxaydung\\quanlytaichinhcuahangvatlieuxaydung\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|solutionrelative:quanlytaichinhcuahangvatlieuxaydung\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|d:\\he_quan_tri_co_so_du_lieu\\do_an_cuoi_ky_nhom_5\\quanlytaichinhcuahangvatlieuxaydung\\quanlytaichinhcuahangvatlieuxaydung\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\quanlytaichinhcuahangvatlieuxaydung\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|solutionrelative:quanlytaichinhcuahangvatlieuxaydung\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|d:\\he_quan_tri_co_so_du_lieu\\do_an_cuoi_ky_nhom_5\\quanlytaichinhcuahangvatlieuxaydung\\quanlytaichinhcuahangvatlieuxaydung\\model\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|solutionrelative:quanlytaichinhcuahangvatlieuxaydung\\model\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,6 +35,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Home.cs",
+              "DocumentMoniker": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung\\Home.cs",
+              "RelativeDocumentMoniker": "QuanLyTaiChinhCuaHangVatLieuXayDung\\Home.cs",
+              "ToolTip": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung\\Home.cs",
+              "RelativeToolTip": "QuanLyTaiChinhCuaHangVatLieuXayDung\\Home.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T02:40:49.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Products.cs",
               "DocumentMoniker": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung\\Model\\Products.cs",
               "RelativeDocumentMoniker": "QuanLyTaiChinhCuaHangVatLieuXayDung\\Model\\Products.cs",

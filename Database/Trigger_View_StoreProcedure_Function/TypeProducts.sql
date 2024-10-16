@@ -36,11 +36,18 @@ CREATE PROCEDURE SP_UpdateTypeProduct
 AS
 BEGIN
 	BEGIN TRY
-		UPDATE TypeProducts 
-		SET NameTypeProduct=@NameTypeProduct 
-		WHERE IdTypeProduct=@IdTypeProduct;
+		IF (EXISTS(SELECT 1 FROM TypeProducts WHERE IdTypeProduct=@IdTypeProduct))
+		BEGIN
+			UPDATE TypeProducts 
+			SET NameTypeProduct=@NameTypeProduct 
+			WHERE IdTypeProduct=@IdTypeProduct;
 		
-		SET @Result = 1;
+			SET @Result = 1;
+		END
+		ELSE
+		BEGIN 
+			SET @Result=0;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;
@@ -55,9 +62,16 @@ CREATE PROCEDURE SP_DeleteTypeProduct
 AS
 BEGIN
 	BEGIN TRY
-		DELETE FROM TypeProducts WHERE TypeProducts.IdTypeProduct=@IdTypeProduct;
+		IF (EXISTS(SELECT 1 FROM TypeProducts WHERE IdTypeProduct=@IdTypeProduct))
+		BEGIN
+			DELETE FROM TypeProducts WHERE TypeProducts.IdTypeProduct=@IdTypeProduct;
 
-		SET @Result=1;
+			SET @Result=1;
+		END
+		ELSE
+		BEGIN 
+			SET @Result=0;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result=0;
@@ -105,3 +119,14 @@ BEGIN
 	RETURN @IdTypeProduct;
 END;
 GO
+
+--Function Lấy ra thông tin TypeProduct khi biết IdTypeProduct
+CREATE FUNCTION Fn_GetTypeProduct (@IdTypeProduct CHAR(6))
+RETURNS TABLE
+AS
+	RETURN
+	(
+		SELECT IdTypeProduct, NameTypeProduct
+		FROM TypeProducts
+		WHERE TypeProducts.IdTypeProduct=@IdTypeProduct
+	);

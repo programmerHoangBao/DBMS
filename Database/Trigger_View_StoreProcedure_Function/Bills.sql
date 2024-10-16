@@ -1,4 +1,17 @@
-﻿
+﻿/*
+CREATE TABLE Bills(
+	IdBill CHAR(6) PRIMARY KEY,
+	IdCustomer CHAR(6),
+	IdSupplier CHAR (6),
+	DateCreate DATE NOT NULL,
+	TypeBill NVARCHAR(20) NOT NULL,
+	Total DECIMAL(18, 2) NOT NULL,
+	FOREIGN KEY (IdCustomer) REFERENCES Customers(IdCustomer) ON DELETE SET NULL,
+	FOREIGN KEY (IdSupplier) REFERENCES Suppliers(IdSupplier) ON DELETE SET NULL,
+	CHECK (TypeBill IN (N'Hóa Đơn Nhập Hàng', N'Hóa Đơn Xuất Hàng'))
+);
+*/
+
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
@@ -10,8 +23,8 @@ AS
 BEGIN
     UPDATE b
     SET TypeBill = CASE 
-        WHEN EXISTS (SELECT 1 FROM Customers WHERE IdCustomer = i.IdCustomer AND i.IdCustomer IS NOT NULL) THEN 'Import Bill'
-        WHEN EXISTS (SELECT 1 FROM Suppliers WHERE IdSupplier = i.IdSupplier AND i.IdSupplier IS NOT NULL) THEN 'Export Bill'
+        WHEN EXISTS (SELECT 1 FROM Customers WHERE IdCustomer = i.IdCustomer AND i.IdCustomer IS NOT NULL) THEN N'Hóa Đơn Nhập Hàng'
+        WHEN EXISTS (SELECT 1 FROM Suppliers WHERE IdSupplier = i.IdSupplier AND i.IdSupplier IS NOT NULL) THEN N'Hóa Đơn Xuất Hàng'
         ELSE b.TypeBill
     END
     FROM Bills b
@@ -19,20 +32,41 @@ BEGIN
 END;
 GO
 
---Strore Procedure thực hiện việc thêm dữ liệu vào Bills
-CREATE PROCEDURE SP_InsertBill
+--Strore Procedure thực hiện việc thêm hóa đơn thuộc loại nhập hàng vào Bills
+CREATE PROCEDURE SP_InsertImportBill
 	@IdBill CHAR(6),
 	@IdCustomer CHAR(6),
-	@IdSupplier CHAR (6),
 	@DateCreate DATE,
 	@TypeBill CHAR(15),
-	@Total REAL,
+	@Total DECIMAL(18, 2),
 	@Result INT OUTPUT
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO Bills(IdBill, IdCustomer, IdSupplier, DateCreate, TypeBill, Total)
-		VALUES (@IdBill, @IdCustomer, @IdSupplier, @DateCreate, @TypeBill, @Total);
+		INSERT INTO Bills(IdBill, IdCustomer, DateCreate, TypeBill, Total)
+		VALUES (@IdBill, @IdCustomer, @DateCreate, @TypeBill, @Total);
+
+		SET @Result = 1;
+	END TRY
+	BEGIN CATCH
+		SET @Result = 0;
+	END CATCH
+END;
+GO
+
+--Strore Procedure thực hiện việc thêm hóa đơn thuộc loại xuất hàng vào Bills
+CREATE PROCEDURE SP_InsertExportBill
+	@IdBill CHAR(6),
+	@IdSupplier CHAR(6),
+	@DateCreate DATE,
+	@TypeBill CHAR(15),
+	@Total DECIMAL(18, 2),
+	@Result INT OUTPUT
+AS
+BEGIN
+	BEGIN TRY
+		INSERT INTO Bills(IdBill, IdSupplier, DateCreate, TypeBill, Total)
+		VALUES (@IdBill, @IdSupplier, @DateCreate, @TypeBill, @Total);
 
 		SET @Result = 1;
 	END TRY
@@ -49,17 +83,24 @@ CREATE PROCEDURE SP_UpdateBill
 	@IdSupplier CHAR (6),
 	@DateCreate DATE,
 	@TypeBill CHAR(15),
-	@Total REAL,
+	@Total DECIMAL(18, 2),
 	@Result INT OUTPUT
 AS
 BEGIN
 	BEGIN TRY
-		UPDATE Bills 
-		SET IdCustomer=@IdCustomer, IdSupplier=@IdSupplier, 
-		DateCreate=@DateCreate, TypeBill=@TypeBill, Total=@Total 
-		WHERE IdBill = @IdBill;
+		IF(EXISTS(SELECT 1 FROM Bills WHERE Bills.IdBill=@IdBill))
+		BEGIN
+			UPDATE Bills 
+			SET IdCustomer=@IdCustomer, IdSupplier=@IdSupplier, 
+			DateCreate=@DateCreate, TypeBill=@TypeBill, Total=@Total 
+			WHERE IdBill = @IdBill;
 
-		SET @Result = 1;
+			SET @Result = 1;
+		END
+		ELSE
+		BEGIN
+			SET @Result = 0;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;
@@ -70,12 +111,20 @@ GO
 --Strore Procedure thực hiện việc xóa dữ liệu vào Bills
 CREATE PROCEDURE SP_DeleteBill  
 	@IdBill CHAR(6),
+	@Result INT OUTPUT
 AS
 BEGIN
 	BEGIN TRY
-		DELETE FROM Bills WHERE IdBill = @IdBill;
+		IF(EXISTS(SELECT 1 FROM Bills WHERE Bills.IdBill=@IdBill))
+		BEGIN
+			DELETE FROM Bills WHERE IdBill = @IdBill;
 
-		SET @Result = 1;
+			SET @Result = 1;
+		END
+		ELSE
+		BEGIN
+			SET @Result = 0;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;
@@ -83,23 +132,51 @@ BEGIN
 END;
 GO
 
---Function thực hiện việc tính tổng hóa đơn
-CREATE FUNCTION Fn_TotalBillImport (@IdBill CHAR(6))
-RETURNS REAL
+--Function thực hiện việc tính tổng giá trị hóa đơn nhập hàng khi có mã hóa đơn xác định
+CREATE FUNCTION Fn_TotalImportBill (@IdBill CHAR(6))
+RETURNS DECIMAL(18, 2)
 AS
 BEGIN
-	DECLARE @TotalBill REAL;
+	DECLARE @TotalBill DECIMAL(18, 2);
 
 	SELECT @TotalBill=SUM(Products.UnitPriceImport * DetailBills.QuantityProduct) 
 	FROM (DetailBills INNER JOIN Products 
 			ON DetailBills.IdProduct = Products.IdProduct )
-	WHERE DetailBills.IdBill=@IdBill;
+		 INNER JOIN Bills 
+			ON Bills.IdBill = DetailBills.IdBill
+	WHERE DetailBills.IdBill=@IdBill AND Bills.TypeBill = N'Hóa Đơn Nhập Hàng';
 
+	IF (@TotalBill IS NULL)
+	BEGIN
+		SET @TotalBill=-1;
+	END
 	RETURN @TotalBill;
 END;
 GO
 
---Function lấy ra tất cả dữ liệu bảng Bills thuộc loại 'Import Bill'
+--Function thực hiện việc tính tống giá trị hóa đơn xuất hàng khi có mã hóa đơn
+CREATE FUNCTION Fn_TotalExportBill (@IdBill CHAR(6))
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+	DECLARE @TotalBill DECIMAL(18, 2);
+
+	SELECT @TotalBill=SUM(Products.UnitPriceExport * DetailBills.QuantityProduct) 
+	FROM (DetailBills INNER JOIN Products 
+			ON DetailBills.IdProduct = Products.IdProduct )
+		 INNER JOIN Bills 
+			ON Bills.IdBill = DetailBills.IdBill
+	WHERE DetailBills.IdBill=@IdBill AND Bills.TypeBill = N'Hóa Đơn Xuất Hàng';
+
+	IF (@TotalBill IS NULL)
+	BEGIN
+		SET @TotalBill=-1;
+	END
+	RETURN @TotalBill;
+END;
+GO
+
+--Function lấy ra tất cả dữ liệu bảng Bills thuộc loại N'Hóa Đơn Nhập Hàng'
 CREATE FUNCTION Fn_GetAllImportBill ()
 RETURNS TABLE
 AS
@@ -107,10 +184,11 @@ AS
 	(
 		SELECT IdBill, IdSupplier, DateCreate, TypeBill, Total 
 		FROM Bills 
-		WHERE TypeBill = 'Import Bill'
+		WHERE TypeBill = N'Hóa Đơn Nhập Hàng'
 	);
 GO
---Function lấy ra tất cả dữ liệu bảng Bills thuộc loại 'Export Bill'
+
+--Function lấy ra tất cả dữ liệu bảng Bills thuộc loại N'Hóa Đơn Xuất Hàng'
 CREATE FUNCTION Fn_GetAllExportBill ()
 RETURNS TABLE
 AS
@@ -118,90 +196,45 @@ AS
 	(
 		SELECT IdBill, IdCustomer, DateCreate, TypeBill, Total 
 		FROM Bills 
-		WHERE TypeBill = 'Export Bill'
+		WHERE TypeBill = N'Hóa Đơn Xuất Hàng'
 	);
 GO
 
---Function Tính tổng giá trị hóa đơn của tất cả Bill thuộc loại Import Bill
-CREATE FUNCTION Fn_TotalValueOfAllImportBill ()
-RETURNS REAL
-AS
-BEGIN
-	DECLARE @TotalValue REAL;
-
-	SELECT @TotalValue=SUM(Bills.Total) 
-	FROM Bills 
-	WHERE Bills.TypeBill = 'Import Bill';
-
-	RETURN @TotalValue;
-END;
-GO
-
---Function tính tổng giá trị hóa đơn của tất cả các Bill thuộc loại Export Bill
-CREATE FUNCTION Fn_TotalValueOfAllExportBill ()
-RETURNS REAL
-AS
-BEGIN
-	DECLARE @TotalValue REAL;
-
-	SELECT @TotalValue=SUM(Bills.Total) 
-	FROM Bills 
-	WHERE Bills.TypeBill = 'Export Bill';
-
-	RETURN @TotalValue;
-END;
-GO
-
---Function lấy ra danh sách sản phẩm của Bill thuộc loại Import Bill khi biết IdBill
+--Function lấy ra thông tin sản phẩm của Bill thuộc loại N'Hóa Đơn Nhập Hàng' khi biết IdBill
 CREATE FUNCTION Fn_GetListProductImportBill (@IdBill CHAR(6))
 RETURNS TABLE
 AS
 	RETURN
 	(
 		SELECT Products.IdProduct, Products.NameProduct, Products.Unit, 
-				Products.UnitPriceImport 
+				Products.UnitPriceImport, DetailBills.QuantityProduct,
+				Products.ImageProduct
 		FROM ((Bills INNER JOIN DetailBills 
 				ON Bills.IdBill = DetailBills.IdBill) 
 			  INNER JOIN Products
 			    ON DetailBills.IdProduct = Products.IdProduct) 
-		WHERE (Bills.IdBill = @IdBill AND Bills.TypeBill = 'Import Bill')
+		WHERE (Bills.IdBill = @IdBill AND Bills.TypeBill = N'Hóa Đơn Nhập Hàng')
 	);
 GO
 
---Function lấy ra danh sách sản phẩm của Bill thuộc loại Import Bill khi biết IdBill
+--Function lấy ra thông tin sản phẩm của Bill thuộc loại N'Hóa Đơn Xuất Hàng' khi biết IdBill
 CREATE FUNCTION Fn_GetListProductExportBill (@IdBill CHAR(6))
 RETURNS TABLE
 AS
 	RETURN
 	(
 		SELECT Products.IdProduct, Products.NameProduct, Products.Unit, 
-				Products.UnitPriceImport 
+				Products.UnitPriceImport, DetailBills.QuantityProduct,
+				Products.ImageProduct
 		FROM ((Bills INNER JOIN DetailBills 
 				ON Bills.IdBill = DetailBills.IdBill) 
 			  INNER JOIN Products
 			    ON DetailBills.IdProduct = Products.IdProduct) 
-		WHERE (Bills.IdBill = @IdBill AND Bills.TypeBill = 'Export Bill')
+		WHERE (Bills.IdBill = @IdBill AND Bills.TypeBill = N'Hóa Đơn Xuất Hàng')
 	);
 GO
 
-
---Function lấy ra IdBill qua IdCustomer và DateCreate của Exporpt Bill
-CREATE FUNCTION Fn_GetIdBillByIdCustomerAndDateCreate (
-	@IdCustomer CHAR(6),
-	@DateCreate DATE
-)
-RETURNS TABLE
-AS
-	RETURN
-	(
-		SELECT Bills.IdBill
-		FROM Bills
-		WHERE (Bills.IdCustomer = @IdCustomer 
-				AND CAST(Bills.DateCreate AS DATE) = CAST(@DateCreate AS DATE) 
-				AND Bills.TypeBill = 'Export Bill')
-	);
-GO
---Function lấy ra IdBill qua IdSupplier và DateCreate của Import Bill
+--Function lấy ra IdBill qua IdSupplier và DateCreate của N'Hóa Đơn Nhập Hàng'
 CREATE FUNCTION Fn_GetIdBillByIdSupplierAndDateCreate (
 	@IdSupplier CHAR(6),
 	@DateCreate DATE
@@ -214,12 +247,12 @@ AS
 		FROM Bills
 		WHERE (Bills.IdSupplier = @IdSupplier 
 		AND CAST(Bills.DateCreate AS DATE) = CAST(@DateCreate AS DATE) 
-		AND Bills.TypeBill = 'Import Bill')
+		AND Bills.TypeBill = N'Hóa Đơn Nhập Hàng')
 	);
 GO
 
---Function lấy ra IdBill qua IdCustomer của bill Exporpt Bill
-CREATE FUNCTION Fn_GetIdBillByIdCustomer (
+--Function lấy ra IdBill qua IdCustomer và DateCreate của N'Hóa Đơn Xuất Hàng'
+CREATE FUNCTION Fn_GetIdBillByIdCustomerAndDateCreate (
 	@IdCustomer CHAR(6),
 	@DateCreate DATE
 )
@@ -230,10 +263,12 @@ AS
 		SELECT Bills.IdBill
 		FROM Bills
 		WHERE (Bills.IdCustomer = @IdCustomer 
-				AND Bills.TypeBill = 'Export Bill')
+				AND CAST(Bills.DateCreate AS DATE) = CAST(@DateCreate AS DATE) 
+				AND Bills.TypeBill = N'Hóa Đơn Xuất Hàng')
 	);
 GO
---Function lấy ra IdBill qua IdSupplier  của bill Import Bill
+
+--Function lấy ra IdBill qua IdSupplier  của bill N'Hóa Đơn Nhập Hàng'
 CREATE FUNCTION Fn_GetIdBillByIdSupplier (
 	@IdSupplier CHAR(6),
 	@DateCreate DATE
@@ -245,6 +280,150 @@ AS
 		SELECT Bills.IdSupplier
 		FROM Bills
 		WHERE (Bills.IdSupplier = @IdSupplier 
-		AND Bills.TypeBill = 'Import Bill')
+		AND Bills.TypeBill = N'Hóa Đơn Nhập Hàng')
 	);
+GO
+
+--Function lấy ra IdBill qua IdCustomer của bill N'Hóa Đơn Xuất Hàng'
+CREATE FUNCTION Fn_GetIdBillByIdCustomer (
+	@IdCustomer CHAR(6),
+	@DateCreate DATE
+)
+RETURNS TABLE
+AS
+	RETURN
+	(
+		SELECT Bills.IdBill
+		FROM Bills
+		WHERE (Bills.IdCustomer = @IdCustomer 
+				AND Bills.TypeBill = N'Hóa Đơn Xuất Hàng')
+	);
+GO
+
+--Function tính tổng giá trị bill nhập hàng trong một ngày cụ thể
+CREATE FUNCTION Fn_CalculateImportBillTotalByDate
+(
+    @InputDate DATE
+)
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    DECLARE @Total DECIMAL(18, 2);
+   
+    SELECT @Total = SUM(Bills.Total)
+    FROM Bills
+    WHERE 
+        (YEAR(Bills.DateCreate) = YEAR(@InputDate) AND 
+         MONTH(Bills.DateCreate) = MONTH(@InputDate) AND 
+         DAY(Bills.DateCreate) = DAY(@InputDate)) AND
+		 Bills.TypeBill=N'Hóa Đơn Nhập Hàng';
+    
+    RETURN ISNULL(@Total, 0);
+END;
+GO
+
+--Function tính tổng giá trị bill xuất hàng trong một ngày cụ thể
+CREATE FUNCTION Fn_CalculateExportBillTotalByDate
+(
+    @InputDate DATE
+)
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    DECLARE @Total DECIMAL(18, 2);
+   
+    SELECT @Total = SUM(Bills.Total)
+    FROM Bills
+    WHERE 
+        (YEAR(Bills.DateCreate) = YEAR(@InputDate) AND 
+         MONTH(Bills.DateCreate) = MONTH(@InputDate) AND 
+         DAY(Bills.DateCreate) = DAY(@InputDate)) AND
+		 Bills.TypeBill=N'Hóa Đơn Xuất Hàng';
+    
+    RETURN ISNULL(@Total, 0);
+END;
+GO
+
+--Function tính tổng giá trị bill nhập hàng trong một tháng cụ thể trong năm
+CREATE FUNCTION Fn_CalculateImportBillByMonth
+(
+    @Month INT,
+	@Year INT
+)
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    DECLARE @Total DECIMAL(18, 2);
+   
+    SELECT @Total = SUM(Bills.Total)
+    FROM Bills
+    WHERE 
+         YEAR(Bills.DateCreate) = @Year AND 
+         MONTH(Bills.DateCreate) = @Month AND 
+		 Bills.TypeBill=N'Hóa Đơn Nhập Hàng';
+    
+    RETURN ISNULL(@Total, 0);
+END;
+GO
+
+--Function tính tổng giá trị bill xuất hàng trong một tháng cụ thể trong năm
+CREATE FUNCTION Fn_CalculateExportBillByMonth
+(
+    @Month INT,
+	@Year INT
+)
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    DECLARE @Total DECIMAL(18, 2);
+   
+    SELECT @Total = SUM(Bills.Total)
+    FROM Bills
+    WHERE 
+         YEAR(Bills.DateCreate) = @Year AND 
+         MONTH(Bills.DateCreate) = @Month AND 
+		 Bills.TypeBill=N'Hóa Đơn Xuất Hàng';
+    
+    RETURN ISNULL(@Total, 0);
+END;
+GO
+
+--Function tính tổng giá trị bill nhập hàng trong một năm cụ thể
+CREATE FUNCTION Fn_CalculateImportBillByYear
+(
+	@Year INT
+)
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    DECLARE @Total DECIMAL(18, 2);
+   
+    SELECT @Total = SUM(Bills.Total)
+    FROM Bills
+    WHERE 
+         YEAR(Bills.DateCreate) = @Year AND 
+		 Bills.TypeBill=N'Hóa Đơn Nhập Hàng';
+    
+    RETURN ISNULL(@Total, 0);
+END;
+GO
+
+--Function tính tổng giá trị bill xuất hàng trong một năm cụ thể
+CREATE FUNCTION Fn_CalculateExportBillByYear
+(
+	@Year INT
+)
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    DECLARE @Total DECIMAL(18, 2);
+   
+    SELECT @Total = SUM(Bills.Total)
+    FROM Bills
+    WHERE 
+         YEAR(Bills.DateCreate) = @Year AND 
+		 Bills.TypeBill=N'Hóa Đơn Xuất Hàng';
+    
+    RETURN ISNULL(@Total, 0);
+END;
 GO
