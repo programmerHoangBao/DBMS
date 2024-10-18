@@ -53,7 +53,7 @@ CREATE TABLE Bills(
 	IdSupplier CHAR (6),
 	DateCreate DATE NOT NULL,
 	TypeBill NVARCHAR(20) NOT NULL,
-	Total DECIMAL(18, 2) NOT NULL,
+	Total DECIMAL(18, 2),
 	FOREIGN KEY (IdCustomer) REFERENCES Customers(IdCustomer) ON DELETE SET NULL,
 	FOREIGN KEY (IdSupplier) REFERENCES Suppliers(IdSupplier) ON DELETE SET NULL,
 	CHECK (TypeBill IN (N'Hóa Đơn Nhập Hàng', N'Hóa Đơn Xuất Hàng'))

@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,25 +69,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Display_Product.cs">
+    <Compile Include="User_Control\Products\DisplayProdcutInFormImport.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Display_Product.Designer.cs">
-      <DependentUpon>Display_Product.cs</DependentUpon>
+    <Compile Include="User_Control\Products\DisplayProdcutInFormImport.Designer.cs">
+      <DependentUpon>DisplayProdcutInFormImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Home.cs">
+    <Compile Include="Forms\Home\Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Home.Designer.cs">
+    <Compile Include="Forms\Home\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\MyDatabase.cs" />
     <Compile Include="Model\Products.cs" />
+    <Compile Include="Model\Suppliers.cs" />
+    <Compile Include="Model\TypeProducts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Display_Product.resx">
-      <DependentUpon>Display_Product.cs</DependentUpon>
+    <Compile Include="Service\Implements\ProductService.cs" />
+    <Compile Include="Service\Implements\SupplierService.cs" />
+    <Compile Include="Service\Implements\TypeProductService.cs" />
+    <Compile Include="Service\IProductService.cs" />
+    <Compile Include="Service\ISupplierService.cs" />
+    <Compile Include="Service\ITypeProductService.cs" />
+    <EmbeddedResource Include="User_Control\Products\DisplayProdcutInFormImport.resx">
+      <DependentUpon>DisplayProdcutInFormImport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Home.resx">
+    <EmbeddedResource Include="Forms\Home\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -119,6 +143,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\import.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\Products\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>QuanLyTaiChinhCuaHangXayDung.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -152,7 +152,7 @@ CREATE FUNCTION Fn_GetAllSupplier ()
 RETURNS TABLE
 AS
 	RETURN (
-		SELECT S.IdSupplier 'Id', S.NameSupplier 'Tên', S.PhoneNumber 'Số điện thoại', S.AddressSupplier 'Địa chỉ'
+		SELECT S.IdSupplier, S.NameSupplier, S.PhoneNumber, S.AddressSupplier
 		FROM Suppliers S
 	);
 GO
@@ -162,7 +162,7 @@ CREATE FUNCTION Fn_GetSupplierById (@IdSupplier CHAR(6))
 RETURNS TABLE
 AS
 	RETURN (
-		SELECT S.IdSupplier 'Id', S.NameSupplier 'Tên', S.PhoneNumber 'Số điện thoại', S.AddressSupplier 'Địa chỉ'
+		SELECT S.IdSupplier, S.NameSupplier, S.PhoneNumber, S.AddressSupplier
 		FROM Suppliers S
 		WHERE S.IdSupplier = @IdSupplier
 	);
@@ -182,3 +182,26 @@ BEGIN
 	RETURN @IdSupplier;
 END;
 GO
+
+
+--Fnction lấy các suppliers bằng cách nhập vào một thông tin bất kì
+CREATE FUNCTION Fn_SearchSupplier (@SearchTerm NVARCHAR(150))
+RETURNS TABLE
+AS	
+	RETURN
+	(
+		SELECT DISTINCT
+			S.IdSupplier,
+			S.NameSupplier,
+			S.PhoneNumber,
+			S.AddressSupplier
+		FROM Suppliers S
+		WHERE 
+			S.IdSupplier LIKE '%' + @SearchTerm +'%'
+			OR S.NameSupplier LIKE '%' + @SearchTerm +'%'
+			OR S.PhoneNumber LIKE '%' + @SearchTerm +'%'
+			OR S.AddressSupplier LIKE '%' + @SearchTerm +'%'
+	);
+
+GO
+

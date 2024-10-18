@@ -153,8 +153,8 @@ CREATE FUNCTION Fn_GetAllCustomer ()
 RETURNS TABLE
 AS
 	RETURN (
-		SELECT C.IdCustomer 'Id', C.NameCustomer 'Tên', C.PhoneNumber 'Số điện thoại', C.AddressCustomer 'Địa chỉ'
-		FROM Customers C
+		SELECT C.IdCustomer , C.NameCustomer , C.PhoneNumber , C.AddressCustomer 
+		FROM Customers C 
 	);
 GO
 
@@ -163,7 +163,7 @@ CREATE FUNCTION Fn_GetCustomerById (@IdCustomer CHAR(6))
 RETURNS TABLE
 AS
 	RETURN (
-		SELECT C.IdCustomer 'Id', C.NameCustomer 'Tên', C.PhoneNumber 'Số điện thoại', C.AddressCustomer 'Địa chỉ'
+		SELECT C.IdCustomer , C.NameCustomer , C.PhoneNumber , C.AddressCustomer 
 		FROM Customers C 
 		WHERE C.IdCustomer = @IdCustomer
 	);
@@ -183,3 +183,22 @@ BEGIN
 	RETURN @IdCustomer;
 END;
 GO
+
+--Fnction lấy các customer bằng cách nhập vào một thông tin bất kì
+CREATE FUNCTION Fn_SearchCustomer (@SearchTerm NVARCHAR(150))
+RETURNS TABLE
+AS	
+	RETURN
+	(
+		SELECT DISTINCT
+			C.IdCustomer,
+			C.NameCustomer,
+			C.PhoneNumber,
+			C.AddressCustomer
+		FROM Customers C 
+		WHERE 
+			C.IdCustomer LIKE '%' + @SearchTerm +'%'
+			OR C.NameCustomer LIKE '%' + @SearchTerm +'%'
+			OR C.PhoneNumber LIKE '%' + @SearchTerm +'%'
+			OR C.AddressCustomer LIKE '%' + @SearchTerm +'%'
+	);

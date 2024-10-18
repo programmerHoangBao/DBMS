@@ -13,12 +13,26 @@ GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
--- Trigger kiểm tra số lượng sản phẩm trước khi thực hiện xuất sản phẩm
-CREATE TRIGGER trg_CheckQuantityExport
+CREATE TRIGGER trg_ImportAndExportBill
 ON DetailBills
 AFTER INSERT, UPDATE
 AS
 BEGIN
+    DECLARE @IdBill CHAR(6);
+    DECLARE @IdProduct CHAR(6);
+    DECLARE @QuantityProductDetailBill DECIMAL(18, 2);
+    DECLARE @QuantityProduct DECIMAL(18, 2);
+    DECLARE @TotalBill DECIMAL(18, 2);
+
+    SELECT @IdBill = I.IdBill, 
+           @IdProduct = I.IdProduct, 
+           @QuantityProductDetailBill = I.QuantityProduct 
+    FROM inserted AS I;
+
+    SELECT @QuantityProduct = P.QuantityProduct 
+    FROM Products AS P 
+    WHERE P.IdProduct = @IdProduct;
+
     IF EXISTS (
         SELECT 1
         FROM Bills B
@@ -26,21 +40,39 @@ BEGIN
         WHERE B.TypeBill = N'Hóa Đơn Xuất Hàng'
     )
     BEGIN
-        IF EXISTS (
-            SELECT 1
-            FROM DetailBills DB
-            JOIN Products P ON DB.IdProduct = P.IdProduct
-            JOIN inserted I ON DB.IdBill = I.IdBill
-            WHERE DB.QuantityProduct > P.QuantityProduct
-        )
+        -- Kiểm tra số lượng sản phẩm trong kho
+        IF @QuantityProductDetailBill > @QuantityProduct
         BEGIN
             RAISERROR('Số lượng sản phẩm xuất khẩu vượt quá lượng hàng tồn kho sẵn có.', 16, 1);
             ROLLBACK TRANSACTION;
         END
+        ELSE
+        BEGIN
+            -- Cập nhật số lượng sản phẩm và tính tổng giá trị hóa đơn xuất hàng
+            UPDATE Products 
+            SET QuantityProduct = @QuantityProduct - @QuantityProductDetailBill
+            WHERE IdProduct = @IdProduct;
+
+            SELECT @TotalBill = dbo.Fn_TotalExportBill(@IdBill);
+            UPDATE Bills
+            SET Total = @TotalBill
+            WHERE IdBill = @IdBill;
+        END
+    END
+    ELSE
+    BEGIN
+        -- Cập nhật số lượng sản phẩm và tính tổng giá trị hóa đơn nhập hàng
+        UPDATE Products 
+        SET QuantityProduct = @QuantityProduct + @QuantityProductDetailBill
+        WHERE IdProduct = @IdProduct;
+
+        SELECT @TotalBill = dbo.Fn_TotalImportBill(@IdBill);
+        UPDATE Bills
+        SET Total = @TotalBill
+        WHERE IdBill = @IdBill;
     END
 END;
 GO
-
 
 --Store Procedure thực hiện thêm dữ liệu vào bảng DetailBills
 CREATE PROCEDURE SP_InsertDetailBill 

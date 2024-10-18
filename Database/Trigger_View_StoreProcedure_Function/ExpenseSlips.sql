@@ -90,6 +90,69 @@ BEGIN
 END;
 GO
 
+--Function lấy ra tất cả các ExpenseSlip
+CREATE FUNCTION Fn_GetAllExpenseSlip()
+RETURNS TABLE
+AS
+	RETURN
+	(
+		SELECT 
+			EX.IdExpenseSlip,
+			EX.Content,
+			EX.TypeExpenseSlip,
+			EX.TotalMoney
+		FROM ExpenseSlips EX
+	);
+GO
+
+--Function lấy ra ExpenseSlip bằng IdExpenseSlip
+CREATE FUNCTION Fn_GetExpenseSlipById (@IdExpenseSlip CHAR(6))
+RETURNS TABLE
+AS
+	RETURN
+	(
+		SELECT 
+			EX.IdExpenseSlip,
+			EX.Content,
+			EX.TypeExpenseSlip,
+			EX.TotalMoney
+		FROM ExpenseSlips EX
+		WHERE EX.IdExpenseSlip = @IdExpenseSlip
+	);
+GO
+
+--Function lấy ra các ExpenseSlip thuộc loại phiếu thu 
+CREATE FUNCTION Fn_GetExpenseSlipReceive ()
+RETURNS TABLE
+AS
+	RETURN
+	(
+		SELECT 
+			EX.IdExpenseSlip,
+			EX.Content,
+			EX.TypeExpenseSlip,
+			EX.TotalMoney
+		FROM ExpenseSlips EX
+		WHERE EX.TypeExpenseSlip = N'Phiếu Thu'
+	);
+GO
+
+--Function lấy ra các ExpenseSlip thuộc loại phiếu chi
+CREATE FUNCTION Fn_GetExpenseSlipSpend ()
+RETURNS TABLE
+AS
+	RETURN
+	(
+		SELECT 
+			EX.IdExpenseSlip,
+			EX.Content,
+			EX.TypeExpenseSlip,
+			EX.TotalMoney
+		FROM ExpenseSlips EX
+		WHERE EX.TypeExpenseSlip = N'Phiếu Chi'
+	);
+GO
+
 --Function Tổng số chi phí của phiếu thu
 CREATE FUNCTION Fn_CalculateTotalMoneyExpenseSlipReceive()
 RETURNS DECIMAL(18, 2)
@@ -120,130 +183,22 @@ BEGIN
 END;
 GO
 
---Tính tổng giá trị của phí phiếu thu trong một ngày cụ thể
-CREATE FUNCTION Fn_CalculateTotalInDateOfExpenseSlipReceive
-(
-    @InputDate DATE
-)
-RETURNS DECIMAL(18, 2)
+--Function thực hiện tìm kiến phiếu thu chi bàng một dữ liệu đầu vào bất kì
+CREATE FUNCTION Fn_SearchExpenseSlip (@SearchTerm NVARCHAR(MAX))
+RETURNS TABLE
 AS
-BEGIN
-    DECLARE @Total DECIMAL(18, 2);
-   
-    SELECT @Total = SUM(TotalMoney)
-    FROM ExpenseSlips
-    WHERE 
-        (YEAR(DateCreate) = YEAR(@InputDate) AND 
-         MONTH(DateCreate) = MONTH(@InputDate) AND 
-         DAY(DateCreate) = DAY(@InputDate)) AND
-		 ExpenseSlips.TypeExpenseSlip=N'Phiếu Thu';
-    
-    RETURN ISNULL(@Total, 0);
-END;
-GO
-
---Tính tổng giá trị của phí phiếu chi trong một ngày cụ thể
-CREATE FUNCTION Fn_CalculateTotalInDateOfExpenseSlipSpend
-(
-    @InputDate DATE
-)
-RETURNS DECIMAL(18, 2)
-AS
-BEGIN
-    DECLARE @Total DECIMAL(18, 2);
-   
-    SELECT @Total = SUM(TotalMoney)
-    FROM ExpenseSlips
-    WHERE 
-        (YEAR(DateCreate) = YEAR(@InputDate) AND 
-         MONTH(DateCreate) = MONTH(@InputDate) AND 
-         DAY(DateCreate) = DAY(@InputDate)) AND
-		 ExpenseSlips.TypeExpenseSlip=N'Phiếu Chi';
-    
-    RETURN ISNULL(@Total, 0);
-END;
-GO
-
---Tính tổng giá trị của phí phiếu thu trong một tháng cụ thể trong năm
-CREATE FUNCTION Fn_CalculateTotalInMonthOfExpenseSlipReceive
-(
-    @Month INT,
-	@Year INT
-)
-RETURNS DECIMAL(18, 2)
-AS
-BEGIN
-    DECLARE @Total DECIMAL(18, 2);
-   
-    SELECT @Total = SUM(TotalMoney)
-    FROM ExpenseSlips
-    WHERE 
-        (YEAR(DateCreate) = @Year) AND 
-        (MONTH(DateCreate) = @Month) AND
-		(ExpenseSlips.TypeExpenseSlip=N'Phiếu Thu');
-    
-    RETURN ISNULL(@Total, 0);
-END;
-GO
-
---Tính tổng giá trị của phí phiếu chi trong tháng cụ thể trong năm
-CREATE FUNCTION Fn_CalculateTotalInMonthOfExpenseSlipSpend
-(
-    @Month INT,
-	@Year INT
-)
-RETURNS DECIMAL(18, 2)
-AS
-BEGIN
-    DECLARE @Total DECIMAL(18, 2);
-   
-    SELECT @Total = SUM(TotalMoney)
-    FROM ExpenseSlips
-    WHERE 
-        (YEAR(DateCreate) = @Year) AND 
-        (MONTH(DateCreate) = @Month) AND
-		(ExpenseSlips.TypeExpenseSlip=N'Phiếu Chi');
-    
-    RETURN ISNULL(@Total, 0);
-END;
-GO
-
---Tính tổng giá trị của phí phiếu thu trong năm cụ thể
-CREATE FUNCTION Fn_CalculateTotalInYearOfExpenseSlipReceive
-(
-	@Year INT
-)
-RETURNS DECIMAL(18, 2)
-AS
-BEGIN
-    DECLARE @Total DECIMAL(18, 2);
-   
-    SELECT @Total = SUM(TotalMoney)
-    FROM ExpenseSlips
-    WHERE 
-        (YEAR(DateCreate) = @Year) AND 
-		(ExpenseSlips.TypeExpenseSlip=N'Phiếu Thu');
-    
-    RETURN ISNULL(@Total, 0);
-END;
-GO
-
---Tính tổng giá trị của phí chi trong một năm cụ thể
-CREATE FUNCTION Fn_CalculateTotalInYearOfExpenseSlipSpend
-(
-	@Year INT
-)
-RETURNS DECIMAL(18, 2)
-AS
-BEGIN
-    DECLARE @Total DECIMAL(18, 2);
-   
-    SELECT @Total = SUM(TotalMoney)
-    FROM ExpenseSlips
-    WHERE 
-        (YEAR(DateCreate) = @Year) AND 
-		(ExpenseSlips.TypeExpenseSlip=N'Phiếu Chi');
-    
-    RETURN ISNULL(@Total, 0);
-END;
+	RETURN
+	(
+		SELECT DISTINCT 
+			EX.IdExpenseSlip,
+			EX.Content,
+			EX.TypeExpenseSlip,
+			EX.TotalMoney
+		FROM ExpenseSlips EX 
+		WHERE
+			EX.IdExpenseSlip LIKE '%' + @SearchTerm + '%'
+			OR EX.Content LIKE '%' + @SearchTerm + '%'
+			OR EX.TypeExpenseSlip LIKE '%' + @SearchTerm + '%'
+			OR EX.TotalMoney LIKE '%' + @SearchTerm + '%' 
+	);
 GO

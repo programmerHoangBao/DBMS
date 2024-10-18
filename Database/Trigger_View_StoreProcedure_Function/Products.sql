@@ -137,36 +137,38 @@ AS
 GO
 
 --Function tìm kiếm gần đúng sản phẩm bằng thông tin bất kì của sản phẩm trừ ImageProduct
-CREATE FUNCTION Fn_FindSimilarProducts (@searchTerm NVARCHAR(100))
-RETURNS @result TABLE (
-    IdProduct CHAR(6),
-    NameProduct NVARCHAR(100),
-    Unit NVARCHAR(30),
-    UnitPriceImport DECIMAL(18, 2),
-    UnitPriceExport DECIMAL(18, 2),
-    QuantityProduct DECIMAL(18, 2),
-    IdTypeProduct CHAR(6),
-    IdSupplier CHAR(6),
-    ImageProduct VARBINARY(MAX)
-)
+CREATE FUNCTION Fn_SearchProducts (@SearchTerm NVARCHAR(150))
+RETURNS TABLE
 AS
-BEGIN
-    INSERT INTO @result
-    SELECT IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
-				QuantityProduct, IdTypeProduct, IdSupplier, ImageProduct
-    FROM Products
+RETURN 
+(
+    SELECT DISTINCT
+        P.IdProduct, 
+        P.NameProduct, 
+        P.Unit, 
+        P.UnitPriceImport, 
+        P.UnitPriceExport, 
+        P.QuantityProduct, 
+		P.IdTypeProduct,
+		P.IdSupplier,
+		P.ImageProduct
+    FROM 
+        Products P
+    INNER JOIN 
+        TypeProducts T ON P.IdTypeProduct = T.IdTypeProduct
+    INNER JOIN 
+        Suppliers S ON P.IdSupplier = S.IdSupplier
     WHERE 
-		IdProduct LIKE '%' + @searchTerm + '%' OR
-        NameProduct LIKE '%' + @searchTerm + '%' OR
-        Unit LIKE '%' + @searchTerm + '%' OR
-        CAST(UnitPriceImport AS NVARCHAR) LIKE '%' + @searchTerm + '%' OR
-        CAST(UnitPriceExport AS NVARCHAR) LIKE '%' + @searchTerm + '%' OR
-        CAST(QuantityProduct AS NVARCHAR) LIKE '%' + @searchTerm + '%' OR
-        IdTypeProduct LIKE '%' + @searchTerm + '%' OR
-        IdSupplier LIKE '%' + @searchTerm + '%';
-        
-    RETURN;
-END;
+        P.IdProduct LIKE '%' + @SearchTerm + '%' 
+        OR P.NameProduct LIKE '%' + @SearchTerm + '%'
+        OR P.Unit LIKE '%' + @SearchTerm + '%'
+		OR CAST(P.UnitPriceImport AS NVARCHAR(150)) LIKE '%' + @SearchTerm + '%' 
+		OR CAST(P.UnitPriceExport AS NVARCHAR(150)) LIKE '%' + @SearchTerm + '%' 
+		OR T.IdTypeProduct LIKE '%' + @SearchTerm + '%'
+        OR T.NameTypeProduct LIKE '%' + @SearchTerm + '%'
+		OR S.IdSupplier LIKE '%' + @SearchTerm + '%'
+        OR S.NameSupplier LIKE '%' + @SearchTerm + '%'
+		OR S.PhoneNumber LIKE '%' + @SearchTerm + '%'
+		OR S.AddressSupplier LIKE '%' + @SearchTerm + '%'
+);
 GO
-
-

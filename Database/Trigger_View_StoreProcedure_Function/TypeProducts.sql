@@ -105,23 +105,8 @@ BEGIN
 END;
 GO
 
---Function thực hiện việt lấy ra IdTypeProduct thông qua NameTypeProduct
-CREATE FUNCTION Fn_GetIdByNameTypeProduct (@NameTypeProduct NVARCHAR(100))
-RETURNS CHAR(6)
-AS
-BEGIN
-	DECLARE @IdTypeProduct CHAR(6);
-
-	SELECT @IdTypeProduct=TP.IdTypeProduct
-	FROM TypeProducts TP
-	WHERE TP.NameTypeProduct=@NameTypeProduct;
-
-	RETURN @IdTypeProduct;
-END;
-GO
-
 --Function Lấy ra thông tin TypeProduct khi biết IdTypeProduct
-CREATE FUNCTION Fn_GetTypeProduct (@IdTypeProduct CHAR(6))
+CREATE FUNCTION Fn_GetTypeProductById (@IdTypeProduct CHAR(6))
 RETURNS TABLE
 AS
 	RETURN
@@ -130,3 +115,4 @@ AS
 		FROM TypeProducts
 		WHERE TypeProducts.IdTypeProduct=@IdTypeProduct
 	);
+GO
