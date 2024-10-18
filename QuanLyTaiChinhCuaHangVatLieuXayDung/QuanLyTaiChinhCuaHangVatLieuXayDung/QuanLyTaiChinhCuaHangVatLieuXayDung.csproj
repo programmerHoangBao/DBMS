@@ -47,6 +47,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>QuanLyTaiChinhCuaHangVatLieuXayDung.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SunnyUI, Version=3.7.2.0, Culture=neutral, PublicKeyToken=27d7d2e821d97aeb, processorArchitecture=MSIL">
       <HintPath>..\packages\SunnyUI.3.7.2\lib\net472\SunnyUI.dll</HintPath>
@@ -69,6 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Service\ICustomerService.cs" />
+    <Compile Include="Service\Implements\CustomerService.cs" />
     <Compile Include="User_Control\Products\DisplayProdcutInFormImport.cs">
       <SubType>UserControl</SubType>
     </Compile>

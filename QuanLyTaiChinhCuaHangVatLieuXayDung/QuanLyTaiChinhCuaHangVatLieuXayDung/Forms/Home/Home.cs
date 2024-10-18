@@ -1,5 +1,6 @@
 ﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Service;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
     {
         private MyDatabase myDatabase = new MyDatabase();
         private Form formChild;     //Form con
+        private DataGridView dataGridView;
         public Home()
         {
             InitializeComponent();
@@ -42,9 +44,22 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
         {
 
         }
+
         private void uiSymbolButton_Home_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void uiSymbolButton_Customer_Click(object sender, EventArgs e)
+        {
+            CustomerService customerService = new CustomerService();
+                List<Customer> customers = customerService.GetAllCustomer();
+
+                foreach (Customer customer in customers)
+                {
+                    Console.WriteLine($"Id: {customer.IdCustomer}, Name: {customer.NameCustomer}");
+            }
+            
         }
     }
 }

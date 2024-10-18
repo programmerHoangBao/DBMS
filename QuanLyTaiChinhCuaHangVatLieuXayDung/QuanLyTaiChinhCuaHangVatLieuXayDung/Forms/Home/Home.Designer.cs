@@ -37,6 +37,7 @@
             this.flowLayoutPanel_Menu = new System.Windows.Forms.FlowLayoutPanel();
             this.uiSymbolButton_Home = new Sunny.UI.UISymbolButton();
             this.uiPanel_Body = new Sunny.UI.UIPanel();
+            this.uiSymbolButton_Customer = new Sunny.UI.UISymbolButton();
             this.panel_header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiImageButton_Hamburger_menu)).BeginInit();
             this.flowLayoutPanel_Menu.SuspendLayout();
@@ -63,7 +64,7 @@
             this.uiLabel_header.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel_header.Location = new System.Drawing.Point(710, 4);
             this.uiLabel_header.Name = "uiLabel_header";
-            this.uiLabel_header.Size = new System.Drawing.Size(165, 52);
+            this.uiLabel_header.Size = new System.Drawing.Size(141, 42);
             this.uiLabel_header.TabIndex = 1;
             this.uiLabel_header.Text = "Header";
             // 
@@ -96,6 +97,7 @@
             // 
             this.flowLayoutPanel_Menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButton_Home);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButton_Customer);
             this.flowLayoutPanel_Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel_Menu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel_Menu.Location = new System.Drawing.Point(0, 50);
@@ -133,9 +135,25 @@
             this.uiPanel_Body.Text = "Body";
             this.uiPanel_Body.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiSymbolButton_Customer
+            // 
+            this.uiSymbolButton_Customer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton_Customer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButton_Customer.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButton_Customer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButton_Customer.Location = new System.Drawing.Point(3, 59);
+            this.uiSymbolButton_Customer.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButton_Customer.Name = "uiSymbolButton_Customer";
+            this.uiSymbolButton_Customer.Radius = 20;
+            this.uiSymbolButton_Customer.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButton_Customer.TabIndex = 1;
+            this.uiSymbolButton_Customer.Text = "Customer";
+            this.uiSymbolButton_Customer.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButton_Customer.Click += new System.EventHandler(this.uiSymbolButton_Customer_Click);
+            // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1478, 1144);
             this.Controls.Add(this.uiPanel_Body);
@@ -167,5 +185,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Menu;
         private Sunny.UI.UISymbolButton uiSymbolButton_Home;
         private Sunny.UI.UIPanel uiPanel_Body;
+        private Sunny.UI.UISymbolButton uiSymbolButton_Customer;
     }
 }

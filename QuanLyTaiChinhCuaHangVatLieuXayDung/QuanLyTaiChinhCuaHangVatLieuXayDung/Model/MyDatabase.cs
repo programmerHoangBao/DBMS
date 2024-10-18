@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,7 +17,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
 
         public MyDatabase()
         {
-            string filePath = GetCurrentFolderPath() + @"\Database\QuanLyTaiChinhCuaHangXayDung.mdf";
+            string filePath = @"D:\CodeDBMS\DoAn\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHangVatLieuXayDung\Database\" + @"QuanLyTaiChinhCuaHangXayDung.mdf";
             this.connectionString = CreateConnectionString(filePath);
             this.connection = new SqlConnection(this.connectionString);
         }
@@ -29,7 +30,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
         }
         public static string CreateConnectionString(string filePath)
         {
-            return $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @filePath + ";Integrated Security=True";
+            //return $@"Data Source=.;AttachDbFilename=DoAn;Integrated Security=True; Connect Timeout = 5;";
+            return $@"Data Source=localhost;AttachDbFilename=" + @filePath + ";Integrated Security=True; Connect Timeout = 5;";
         }
 
         public void OpenConnection()
