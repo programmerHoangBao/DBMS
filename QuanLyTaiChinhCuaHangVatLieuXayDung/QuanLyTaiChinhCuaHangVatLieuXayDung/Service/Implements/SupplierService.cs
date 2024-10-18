@@ -74,6 +74,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 this.myDatabase.OpenConnection();
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
                 cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdSupplier", idSupplier);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -106,7 +107,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             throw new NotImplementedException();
         }
 
-        Suppliers SearchSupplier(string searchTerm)
+        public Suppliers SearchSupplier(string searchTerm)
         {
             throw new NotImplementedException();
         }

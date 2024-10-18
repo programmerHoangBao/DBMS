@@ -1,4 +1,5 @@
 ﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
         private void Home_Load(object sender, EventArgs e)
         {
         }
+
+        //Thực hiện hiển thị form con
         void OpenFormChild(Form formChild)
         {
             this.uiPanel_Body.Controls.Clear();
@@ -30,6 +33,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
             this.formChild = formChild;
             this.formChild.TopLevel = false;
             this.uiPanel_Body.Controls.Add(this.formChild);
+            this.formChild.FormBorderStyle = FormBorderStyle.None;
             this.formChild.Dock = DockStyle.Fill;
             this.formChild.Show();
         }
@@ -40,7 +44,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
         }
         private void uiSymbolButton_Home_Click(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
