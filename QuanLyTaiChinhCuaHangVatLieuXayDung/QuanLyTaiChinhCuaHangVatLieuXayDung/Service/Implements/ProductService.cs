@@ -26,9 +26,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
             throw new NotImplementedException();
         }
 
-        public List<Products> GetAllProduct()
+        public List<Product> GetAllProduct()
         {
-            List<Products> products = new List<Products>();
+            List<Product> products = new List<Product>();
             string sqlQuery = "SELECT * FROM Fn_GetAllProduct()";
 
             try
@@ -37,11 +37,11 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
                 cmd.CommandType = CommandType.Text;
                 SqlDataReader reader = cmd.ExecuteReader();
-                Products product;
+                Product product;
 
                 while (reader.Read())
                 {
-                    product = new Products();
+                    product = new Product();
                     product.IdProduct = reader["IdProduct"].ToString();
                     product.NameProduct = reader["NameProduct"].ToString();
                     product.Unit = reader["Unit"].ToString();
@@ -69,22 +69,22 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
             return products;
         }
 
-        public Products GetProductById(string idProduct)
+        public Product GetProductById(string idProduct)
         {
             throw new NotImplementedException();
         }
 
-        public bool InsertProduct(Products product)
+        public bool InsertProduct(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateProduct(Products product)
+        public bool UpdateProduct(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public Products SearchProducts(string searchTerm)
+        public List<Product> SearchProducts(string searchTerm)
         {
             throw new NotImplementedException();
         }

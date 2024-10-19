@@ -47,14 +47,14 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             return result;
         }
 
-        public List<TypeProducts> GetAllTypeProdcut()
+        public List<TypeProduct> GetAllTypeProdcut()
         {
             throw new NotImplementedException();
         }
 
-        public TypeProducts GetTypeProductById(string idTypeProduct)
+        public TypeProduct GetTypeProductById(string idTypeProduct)
         {
-            TypeProducts typeProduct = new TypeProducts();
+            TypeProduct typeProduct = new TypeProduct();
             string sqlQuery = "SELECT * FROM Fn_GetTypeProductById(@IdTypeProduct)";
 
             try
@@ -84,7 +84,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             return typeProduct;
         }
 
-        public bool InsertTypeProduct(TypeProducts typeProduct)
+        public bool InsertTypeProduct(TypeProduct typeProduct)
         {
             bool result = false;
             string sqlQuery = "SP_InsertTypeProduct";
@@ -119,7 +119,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             return result;
         }
 
-        public bool UpdateTypeProduct(TypeProducts typeProduct)
+        public bool UpdateTypeProduct(TypeProduct typeProduct)
         {
             bool result = false;
             string sqlQuery = "SP_UpdateTypeProduct";

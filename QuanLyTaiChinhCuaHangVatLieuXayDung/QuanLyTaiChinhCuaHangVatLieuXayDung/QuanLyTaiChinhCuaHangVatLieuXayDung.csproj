@@ -82,9 +82,9 @@
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\MyDatabase.cs" />
-    <Compile Include="Model\Products.cs" />
-    <Compile Include="Model\Suppliers.cs" />
-    <Compile Include="Model\TypeProducts.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Supplier.cs" />
+    <Compile Include="Model\TypeProduct.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Implements\ProductService.cs" />

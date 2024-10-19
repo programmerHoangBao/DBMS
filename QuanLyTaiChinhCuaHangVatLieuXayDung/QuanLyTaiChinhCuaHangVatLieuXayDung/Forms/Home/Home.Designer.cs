@@ -36,6 +36,8 @@
             this.panel_footer = new System.Windows.Forms.Panel();
             this.flowLayoutPanel_Menu = new System.Windows.Forms.FlowLayoutPanel();
             this.uiSymbolButton_Home = new Sunny.UI.UISymbolButton();
+            this.productButton = new Sunny.UI.UISymbolButton();
+            this.expenseSlipButton = new Sunny.UI.UISymbolButton();
             this.uiPanel_Body = new Sunny.UI.UIPanel();
             this.panel_header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiImageButton_Hamburger_menu)).BeginInit();
@@ -63,7 +65,7 @@
             this.uiLabel_header.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel_header.Location = new System.Drawing.Point(710, 4);
             this.uiLabel_header.Name = "uiLabel_header";
-            this.uiLabel_header.Size = new System.Drawing.Size(165, 52);
+            this.uiLabel_header.Size = new System.Drawing.Size(141, 42);
             this.uiLabel_header.TabIndex = 1;
             this.uiLabel_header.Text = "Header";
             // 
@@ -86,7 +88,7 @@
             this.panel_footer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.panel_footer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_footer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_footer.Location = new System.Drawing.Point(0, 1094);
+            this.panel_footer.Location = new System.Drawing.Point(0, 1005);
             this.panel_footer.Margin = new System.Windows.Forms.Padding(5);
             this.panel_footer.Name = "panel_footer";
             this.panel_footer.Size = new System.Drawing.Size(1478, 50);
@@ -96,12 +98,14 @@
             // 
             this.flowLayoutPanel_Menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButton_Home);
+            this.flowLayoutPanel_Menu.Controls.Add(this.productButton);
+            this.flowLayoutPanel_Menu.Controls.Add(this.expenseSlipButton);
             this.flowLayoutPanel_Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel_Menu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel_Menu.Location = new System.Drawing.Point(0, 50);
             this.flowLayoutPanel_Menu.Margin = new System.Windows.Forms.Padding(5);
             this.flowLayoutPanel_Menu.Name = "flowLayoutPanel_Menu";
-            this.flowLayoutPanel_Menu.Size = new System.Drawing.Size(200, 1044);
+            this.flowLayoutPanel_Menu.Size = new System.Drawing.Size(200, 955);
             this.flowLayoutPanel_Menu.TabIndex = 3;
             // 
             // uiSymbolButton_Home
@@ -120,6 +124,36 @@
             this.uiSymbolButton_Home.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.uiSymbolButton_Home.Click += new System.EventHandler(this.uiSymbolButton_Home_Click);
             // 
+            // productButton
+            // 
+            this.productButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.productButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.productButton.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.productButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.productButton.Location = new System.Drawing.Point(3, 59);
+            this.productButton.MinimumSize = new System.Drawing.Size(1, 1);
+            this.productButton.Name = "productButton";
+            this.productButton.Radius = 20;
+            this.productButton.Size = new System.Drawing.Size(190, 50);
+            this.productButton.TabIndex = 1;
+            this.productButton.Text = "Products";
+            this.productButton.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            // 
+            // expenseSlipButton
+            // 
+            this.expenseSlipButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.expenseSlipButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.expenseSlipButton.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.expenseSlipButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.expenseSlipButton.Location = new System.Drawing.Point(3, 115);
+            this.expenseSlipButton.MinimumSize = new System.Drawing.Size(1, 1);
+            this.expenseSlipButton.Name = "expenseSlipButton";
+            this.expenseSlipButton.Radius = 20;
+            this.expenseSlipButton.Size = new System.Drawing.Size(190, 50);
+            this.expenseSlipButton.TabIndex = 2;
+            this.expenseSlipButton.Text = "ExpenseSlips";
+            this.expenseSlipButton.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            // 
             // uiPanel_Body
             // 
             this.uiPanel_Body.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -128,16 +162,17 @@
             this.uiPanel_Body.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel_Body.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel_Body.Name = "uiPanel_Body";
-            this.uiPanel_Body.Size = new System.Drawing.Size(1278, 1044);
+            this.uiPanel_Body.Size = new System.Drawing.Size(1278, 955);
             this.uiPanel_Body.TabIndex = 4;
             this.uiPanel_Body.Text = "Body";
             this.uiPanel_Body.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiPanel_Body.Click += new System.EventHandler(this.uiPanel_Body_Click);
             // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1478, 1144);
+            this.ClientSize = new System.Drawing.Size(1478, 1055);
             this.Controls.Add(this.uiPanel_Body);
             this.Controls.Add(this.flowLayoutPanel_Menu);
             this.Controls.Add(this.panel_footer);
@@ -167,5 +202,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Menu;
         private Sunny.UI.UISymbolButton uiSymbolButton_Home;
         private Sunny.UI.UIPanel uiPanel_Body;
+        private Sunny.UI.UISymbolButton productButton;
+        private Sunny.UI.UISymbolButton expenseSlipButton;
     }
 }

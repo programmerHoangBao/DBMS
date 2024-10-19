@@ -59,14 +59,14 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             throw new NotImplementedException();
         }
 
-        public List<Suppliers> GetAllSupplier()
+        public List<Supplier> GetAllSupplier()
         {
             throw new NotImplementedException();
         }
 
-        public Suppliers GetSupplierById(string idSupplier)
+        public Supplier GetSupplierById(string idSupplier)
         {
-            Suppliers supplier = new Suppliers();
+            Supplier supplier = new Supplier();
             string sqlQuery = "SELECT * FROM Fn_GetSupplierById(@IdSupplier)";
 
             try
@@ -97,17 +97,17 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             return supplier;
         }
 
-        public bool InsertSupplier(Suppliers supplier)
+        public bool InsertSupplier(Supplier supplier)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateSupplier(Suppliers supplier)
+        public bool UpdateSupplier(Supplier supplier)
         {
             throw new NotImplementedException();
         }
 
-        public Suppliers SearchSupplier(string searchTerm)
+        public Supplier SearchSupplier(string searchTerm)
         {
             throw new NotImplementedException();
         }

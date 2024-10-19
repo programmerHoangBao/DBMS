@@ -9,13 +9,13 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
 {
     internal interface IProductService
     {
-        bool InsertProduct(Products product);
-        bool UpdateProduct(Products product);
+        bool InsertProduct(Product product);
+        bool UpdateProduct(Product product);
         bool DeleteProduct(string idProduct);
-        List<Products> GetAllProduct();
-        Products GetProductById(string idProduct);
+        List<Product> GetAllProduct();
+        Product GetProductById(string idProduct);
 
         //Function tìm kiếm gần đúng sản phẩm bằng thông tin bất kì của sản phẩm trừ ImageProduct
-        Products SearchProducts(string searchTerm);
+        List<Product> SearchProducts(string searchTerm);
     }
 }

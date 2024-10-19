@@ -10,15 +10,15 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
 {
     internal interface ISupplierService
     {
-        bool InsertSupplier(Suppliers supplier);
-        bool UpdateSupplier(Suppliers supplier);
+        bool InsertSupplier(Supplier supplier);
+        bool UpdateSupplier(Supplier supplier);
         bool DeleteSupplier(string idSupplier);
-        List<Suppliers> GetAllSupplier();
-        Suppliers GetSupplierById(string idSupplier);
+        List<Supplier> GetAllSupplier();
+        Supplier GetSupplierById(string idSupplier);
         string GetIdSupplierByPhoneNumber(string phoneNumber);
 
         //Fnction lấy các suppliers bằng cách nhập vào một thông tin bất kì
-        Suppliers SearchSupplier(string searchTerm);
+        Supplier SearchSupplier(string searchTerm);
 
     }
 }

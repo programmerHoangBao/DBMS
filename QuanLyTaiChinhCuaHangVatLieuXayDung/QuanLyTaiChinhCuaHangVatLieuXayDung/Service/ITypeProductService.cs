@@ -10,10 +10,10 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
 {
     internal interface ITypeProductService
     {
-        bool InsertTypeProduct(TypeProducts typeProduct);
-        bool UpdateTypeProduct(TypeProducts typeProduct);
+        bool InsertTypeProduct(TypeProduct typeProduct);
+        bool UpdateTypeProduct(TypeProduct typeProduct);
         bool DeleteTypeProduct(string idTypeProduct);
-        List<TypeProducts> GetAllTypeProdcut();
-        TypeProducts GetTypeProductById(string idTypeProduct);
+        List<TypeProduct> GetAllTypeProdcut();
+        TypeProduct GetTypeProductById(string idTypeProduct);
     }
 }

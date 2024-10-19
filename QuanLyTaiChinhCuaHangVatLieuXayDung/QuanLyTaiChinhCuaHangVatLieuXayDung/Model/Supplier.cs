@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
 {
-    internal class Suppliers
+    internal class Supplier
     {
         private string idSupplier;
         private string nameSupplier;
         private string phoneSupplier;
         private string addressSupplier;
 
-        public Suppliers()
+        public Supplier()
         {
         }
 

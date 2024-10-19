@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
 {
-    internal class TypeProducts
+    internal class TypeProduct
     {
         private string idTypeProduct;
         private string nameTypeProduct;
 
-        public TypeProducts()
+        public TypeProduct()
         {
         }
 
