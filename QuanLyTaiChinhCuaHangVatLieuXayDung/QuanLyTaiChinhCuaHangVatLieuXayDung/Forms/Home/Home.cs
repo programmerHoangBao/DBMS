@@ -44,7 +44,16 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
         }
         private void uiSymbolButton_Home_Click(object sender, EventArgs e)
         {
-
+            MyDatabase myDatabase = new MyDatabase();
+            try
+            {
+                myDatabase.GetConnection().Open();
+                MessageBox.Show("Database connection successful!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Database connection failed!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
