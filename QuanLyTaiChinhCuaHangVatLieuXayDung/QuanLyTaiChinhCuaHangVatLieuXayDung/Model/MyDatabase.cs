@@ -30,8 +30,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
         }
         public static string CreateConnectionString(string filePath)
         {
-            //return $@"Data Source=.;AttachDbFilename=DoAn;Integrated Security=True; Connect Timeout = 5;";
-            return $@"Data Source=localhost;AttachDbFilename=" + @filePath + ";Integrated Security=True; Connect Timeout = 5;";
+            return $@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=DataVLXD;Integrated Security=True; Connect Timeout = 5;";
+            //return $@"Data Source=localhost;AttachDbFilename=" + @filePath + ";Integrated Security=True; Connect Timeout = 5;";
         }
 
         public void OpenConnection()

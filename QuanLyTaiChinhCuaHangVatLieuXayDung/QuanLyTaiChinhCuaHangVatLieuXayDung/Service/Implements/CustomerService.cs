@@ -65,7 +65,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                     customer = new Customer();
                     customer.IdCustomer = reader["IdCustomer"].ToString();
                     customer.NameCustomer = reader["NameCustomer"].ToString();
-                    customer.PhoneCustomer = reader["PhoneNumber"].ToString();
+                    customer.PhoneNumber = reader["PhoneNumber"].ToString();
                     customer.AddressCustomer = reader["AddressCustomer"].ToString();
 
                     //Thêm customer vào list customers
@@ -117,36 +117,36 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             return customer;
         }
 
-        public Customer GetCustomerByPhoneNumber(string phoneNumber)
+        public string GetIdCustomerByPhoneNumber(string phoneNumber)
         {
-            Customer customer = new Customer();
-            string sqlQuery = "SELECT * FROM Fn_GetIdCustomerByPhoneNumber(@PhoneNumber)";
+            string idCustomer = "";
+            string sqlQuery = "SELECT dbo.Fn_GetIdCustomerByPhoneNumber(@PhoneNumber)";
 
             try
             {
                 this.myDatabase.OpenConnection();
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
                 cmd.CommandType = System.Data.CommandType.Text;
+
                 cmd.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
 
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                var result = cmd.ExecuteScalar();
+                if (result != null)
                 {
-                    customer.IdCustomer = reader["IdCustomer"].ToString();
-                    customer.NameCustomer = reader["NameCustomer"].ToString();
+                    idCustomer = result.ToString();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Notification",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 this.myDatabase.CloseConnection();
             }
 
-            return customer;
+            return idCustomer;
         }
 
         public bool InsertCustomer(Customer customer)
@@ -161,6 +161,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@IdCustomer", customer.IdCustomer);
                 cmd.Parameters.AddWithValue("@NameCustomer", customer.NameCustomer);
+                cmd.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
+                cmd.Parameters.AddWithValue("@AddressCustomer", customer.AddressCustomer);
+
 
                 SqlParameter outputParam = new SqlParameter("@Result", System.Data.SqlDbType.Int)
                 {
@@ -184,9 +187,41 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             return result;
         }
 
-        public Products SearchCustomer(string searchTerm)
+        public List<Customer> SearchCustomer(string searchTerm)
         {
-            return null;
+            List<Customer> customers = new List<Customer>();
+            string sqlQuery = "SELECT * FROM Fn_SearchCustomer(@SearchTerm)";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.Parameters.AddWithValue("@SearchTerm", searchTerm);
+                SqlDataReader reader = cmd.ExecuteReader();
+                Customer customer;
+                while (reader.Read())
+                {
+                    customer = new Customer();
+                    customer.IdCustomer = reader["IdCustomer"].ToString();
+                    customer.NameCustomer = reader["NameCustomer"].ToString();
+                    customer.PhoneNumber = reader["PhoneNumber"].ToString();
+                    customer.AddressCustomer = reader["AddressCustomer"].ToString();
+
+                    customers.Add(customer);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return customers;
         }
 
         public bool UpdateCustomer(Customer customer)
@@ -201,6 +236,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@IdCustomer", customer.IdCustomer);
                 cmd.Parameters.AddWithValue("@NameCustomer", customer.NameCustomer);
+                cmd.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
+                cmd.Parameters.AddWithValue("@AddressCustomer", customer.AddressCustomer);
+
 
                 SqlParameter outputParam = new SqlParameter("@Result", System.Data.SqlDbType.Int)
                 {

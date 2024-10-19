@@ -14,10 +14,17 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
         string addressCustomer;
 
         public Customer() { }
+        public Customer(string idCustomer, string nameCustomer, string phoneNumber, string addressCustomer)
+        {
+            IdCustomer = idCustomer;
+            NameCustomer = nameCustomer;
+            PhoneNumber = phoneNumber;
+            AddressCustomer = addressCustomer;
+        }
 
         public string IdCustomer { get => idCustomer; set => idCustomer = value; }
         public string NameCustomer { get => nameCustomer; set => nameCustomer = value; }
-        public string PhoneCustomer { get => phoneNumber; set => phoneNumber = value; }
+        public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public string AddressCustomer { get => addressCustomer; set => addressCustomer = value; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
-using QuanLyTaiChinhCuaHangVatLieuXayDung.Service;
+﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.CustomerViews;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements;
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
         public Home()
         {
             InitializeComponent();
+            dataGridView = new DataGridView();
+            dataGridView.Dock = DockStyle.Fill;
+            this.uiPanel_Body.Controls.Add(dataGridView);
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -53,13 +56,40 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
         private void uiSymbolButton_Customer_Click(object sender, EventArgs e)
         {
             CustomerService customerService = new CustomerService();
-                List<Customer> customers = customerService.GetAllCustomer();
+            List<Customer> customers;
 
-                foreach (Customer customer in customers)
-                {
-                    Console.WriteLine($"Id: {customer.IdCustomer}, Name: {customer.NameCustomer}");
-            }
-            
+            // GetAllCustomers [pass]
+            // customers = customerService.GetAllCustomer();
+            //dataGridView.DataSource = customers;
+
+            // InsertCustomer [pass]
+            //Console.WriteLine(customerService.InsertCustomer(new Customer("10", "Nguyen Van F", "0398311222", "CaLi")));
+            //customers = customerService.GetAllCustomer();
+            //dataGridView.DataSource = customers;
+
+            // UpdateCustomer [pass]
+            //Console.WriteLine(customerService.UpdateCustomer(new Customer("10", "Nguyen Van Z", "0310101010", "CaLi")));
+            //customers = customerService.GetAllCustomer();
+            //dataGridView.DataSource = customers;
+
+            // DeleteCustomer [pass]
+            //Console.WriteLine(customerService.DeleteCustomer("10"));
+            //customers = customerService.GetAllCustomer();
+            //dataGridView.DataSource = customers;
+
+            //GetCustomerByID [pass]
+            //Console.WriteLine(customerService.GetCustomerById("4").NameCustomer);
+
+            //GetCustomerByPhoneNumber [pass]
+            //Console.WriteLine(customerService.GetIdCustomerByPhoneNumber("0398311223"));
+
+            //SearchItem [pass]
+            //customers = customerService.SearchCustomer("Ca Mau");
+            //dataGridView.DataSource = customers;
+
+            FormCustomer formCustomer = new FormCustomer();
+            OpenFormChild(formCustomer);
+
         }
     }
 }
