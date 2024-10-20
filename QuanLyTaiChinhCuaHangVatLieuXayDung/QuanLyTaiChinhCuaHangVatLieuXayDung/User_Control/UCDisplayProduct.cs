@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuanLyTaiChinhCuaHangVatLieuXayDung.User_Control.Products
+namespace QuanLyTaiChinhCuaHangVatLieuXayDung.User_Control
 {
-    public partial class DisplayProdcutInFormImport : UserControl
+    public partial class UCDisplayProduct : UserControl
     {
-        public DisplayProdcutInFormImport()
+        public UCDisplayProduct()
         {
             InitializeComponent();
         }

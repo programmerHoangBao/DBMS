@@ -15,6 +15,33 @@ CREATE TABLE Bills(
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
+--Trigger thực hiện việc không cho dữ liệu truyền vào là trống
+CREATE TRIGGER trg_EmptyBill
+ON Bills
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	IF 
+	(
+		EXISTS
+		(
+			SELECT 1
+			FROM inserted
+			WHERE
+				IdBill = ''
+				OR IdCustomer = ''
+				OR IdSupplier = ''
+				OR DateCreate = ''
+				OR TypeBill = ''
+		)
+	)
+	BEGIN
+		RAISERROR ('Không được phép thêm giá trị rỗng vào bảng Bills.', 16, 1);
+        ROLLBACK 
+	END
+END;
+GO
+
 --Trigger thực hiện việt set giá trị của TypeBill
 CREATE TRIGGER trg_TypeBill
 ON Bills
@@ -42,10 +69,17 @@ CREATE PROCEDURE SP_InsertImportBill
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO Bills(IdBill, IdSupplier, DateCreate, TypeBill)
-		VALUES (@IdBill, @IdSupplier, @DateCreate, @TypeBill);
+		IF (EXISTS(SELECT 1 FROM Bills B WHERE B.IdBill=@IdBill))
+		BEGIN
+			SET @Result = 0;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO Bills(IdBill, IdSupplier, DateCreate, TypeBill)
+			VALUES (@IdBill, @IdSupplier, @DateCreate, @TypeBill);
 
-		SET @Result = 1;
+			SET @Result = 1;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;
@@ -63,10 +97,17 @@ CREATE PROCEDURE SP_InsertExportBill
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO Bills(IdBill, IdCustomer, DateCreate, TypeBill)
-		VALUES (@IdBill, @IdCustomer, @DateCreate, @TypeBill);
+		IF (EXISTS(SELECT 1 FROM Bills B WHERE B.IdBill=@IdBill))
+		BEGIN
+			SET @Result = 0;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO Bills(IdBill, IdCustomer, DateCreate, TypeBill)
+			VALUES (@IdBill, @IdCustomer, @DateCreate, @TypeBill);
 
-		SET @Result = 1;
+			SET @Result = 1;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;

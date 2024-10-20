@@ -12,6 +12,32 @@ CREATE TABLE ExpenseSlips(
 GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
+--Trigger thực hiện việc không cho phép tồn tại giá trị rỗng
+CREATE TRIGGER trg_EmptyExpenseSlip
+ON ExpenseSlips
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	IF 
+	(
+		EXISTS
+		(
+			SELECT 1 
+			FROM ExpenseSlips EX
+			WHERE 
+				EX.IdExpenseSlip = ''
+				OR EX.Content = ''
+				OR EX.DateCreate = ''
+				OR EX.TypeExpenseSlip = ''
+		)
+	)
+	BEGIN
+		RAISERROR ('Không được phép thêm giá trị rỗng vào bảng ExpenseSlips.', 16, 1);
+        ROLLBACK 
+	END
+END;
+GO
+
 
 --Store Procedure thực hiện thêm dữ liệu vào bảng ExpenseSlips
 CREATE PROCEDURE SP_InsertExpenseSlip
@@ -24,10 +50,17 @@ CREATE PROCEDURE SP_InsertExpenseSlip
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO ExpenseSlips(IdExpenseSlip, DateCreate, Content, TypeExpenseSlip, TotalMoney)
-		VALUES (@IdExpenseSlip, @DateCreate, @Content, @TypeExpenseSlip, @TotalMoney);
+		IF (EXISTS(SELECT 1 FROM ExpenseSlips ES WHERE ES.IdExpenseSlip = @IdExpenseSlip))
+		BEGIN
+			SET @Result = 0;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO ExpenseSlips(IdExpenseSlip, DateCreate, Content, TypeExpenseSlip, TotalMoney)
+			VALUES (@IdExpenseSlip, @DateCreate, @Content, @TypeExpenseSlip, @TotalMoney);
 
-		SET @Result = 1;
+			SET @Result = 1;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;
@@ -99,6 +132,7 @@ AS
 		SELECT 
 			EX.IdExpenseSlip,
 			EX.Content,
+			EX.DateCreate,
 			EX.TypeExpenseSlip,
 			EX.TotalMoney
 		FROM ExpenseSlips EX

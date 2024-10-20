@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Form_Home;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung
 {

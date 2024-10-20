@@ -9,6 +9,32 @@ CREATE TABLE Suppliers(
 GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
+--Trigger đảm bảo không tồn tại giá trị rỗng trong bảng Suppliers
+CREATE TRIGGER trg_EmptySupplier
+ON Suppliers
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	IF 
+	(
+		EXISTS
+		(
+			SELECT 1 
+			FROM Suppliers S
+			WHERE 
+				S.IdSupplier = ''
+				OR S.NameSupplier = ''
+				OR S.PhoneNumber = ''
+				OR S.AddressSupplier = ''
+		)
+	)
+	BEGIN
+		RAISERROR ('Không được phép thêm giá trị rỗng vào bảng Suppliers.', 16, 1);
+        ROLLBACK 
+	END 
+END;
+GO
+
 
 -- Trigger kiểm tra NameSupplier là một tên hợp lệ không chứa kí tự số
 CREATE TRIGGER trg_check_namesupplier
@@ -83,10 +109,17 @@ CREATE PROCEDURE SP_InsertSupplier
 AS
 BEGIN
     BEGIN TRY
-        INSERT INTO Suppliers (IdSupplier, NameSupplier, PhoneNumber, AddressSupplier)
-        VALUES (@IdSupplier, @NameSupplier, @PhoneNumber, @AddressSupplier);
+		IF (EXISTS(SELECT 1 FROM Suppliers S WHERE S.IdSupplier = @IdSupplier))
+		BEGIN
+			SET @Result = 0;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO Suppliers (IdSupplier, NameSupplier, PhoneNumber, AddressSupplier)
+			VALUES (@IdSupplier, @NameSupplier, @PhoneNumber, @AddressSupplier);
 
-        SET @Result = 1;
+			SET @Result = 1;
+		END
     END TRY
     BEGIN CATCH
         SET @Result = 0;
@@ -182,7 +215,6 @@ BEGIN
 	RETURN @IdSupplier;
 END;
 GO
-
 
 --Fnction lấy các suppliers bằng cách nhập vào một thông tin bất kì
 CREATE FUNCTION Fn_SearchSupplier (@SearchTerm NVARCHAR(150))

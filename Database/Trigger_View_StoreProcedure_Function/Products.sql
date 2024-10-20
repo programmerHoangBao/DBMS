@@ -18,6 +18,33 @@ CREATE TABLE Products(
 GO
 USE QuanLyTaiChinhCuaHangXayDung
 GO
+--Trigger đảm bảo không tồn tại giá trị rỗng ''
+CREATE TRIGGER trg_EmptyProduct
+ON Products
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	IF 
+	(
+		EXISTS
+		(
+			SELECT 1 
+			FROM Products P
+			WHERE
+				P.IdProduct = ''
+				OR P.NameProduct = ''
+				OR P.Unit = ''
+				OR P.IdTypeProduct =''
+				OR P.IdSupplier = ''
+		)
+	)
+	BEGIN
+		RAISERROR ('Không được phép thêm giá trị rỗng vào bảng Products.', 16, 1);
+        ROLLBACK 
+	END
+END;
+GO
+
 
 --Store Procedure thực hiện việc thêm dữ liệu vào bảng Products 
 CREATE PROCEDURE SP_InsertProduct 
@@ -34,12 +61,19 @@ CREATE PROCEDURE SP_InsertProduct
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO Products (IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
+		IF (EXISTS(SELECT 1 FROM Products P WHERE P.IdProduct = @IdProduct))
+		BEGIN
+			SET @Result = 0;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO Products (IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
 								QuantityProduct, IdTypeProduct, IdSupplier, ImageProduct)
-		VALUES (@IdProduct, @NameProduct, @Unit, @UnitPriceImport, @UnitPriceExport, 
+			VALUES (@IdProduct, @NameProduct, @Unit, @UnitPriceImport, @UnitPriceExport, 
 					@QuantityProduct, @IdTypeProduct, @IdSupplier, @ImageProduct);
 
-		SET @Result = 1;
+			SET @Result = 1;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;

@@ -1,5 +1,4 @@
-﻿namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
-
+﻿namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Form_Home
 {
     partial class Home
     {
@@ -32,13 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.panel_header = new System.Windows.Forms.Panel();
             this.uiLabel_header = new Sunny.UI.UILabel();
-            this.uiImageButton_Hamburger_menu = new Sunny.UI.UIImageButton();
+            this.btnHamburger_menu = new Sunny.UI.UIImageButton();
             this.panel_footer = new System.Windows.Forms.Panel();
             this.flowLayoutPanel_Menu = new System.Windows.Forms.FlowLayoutPanel();
-            this.uiSymbolButton_Home = new Sunny.UI.UISymbolButton();
+            this.btnHome = new Sunny.UI.UISymbolButton();
+            this.btnTypeProdcut = new Sunny.UI.UISymbolButton();
             this.uiPanel_Body = new Sunny.UI.UIPanel();
+            this.btnManagerSupplier = new Sunny.UI.UISymbolButton();
             this.panel_header.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uiImageButton_Hamburger_menu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnHamburger_menu)).BeginInit();
             this.flowLayoutPanel_Menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.panel_header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.panel_header.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_header.Controls.Add(this.uiLabel_header);
-            this.panel_header.Controls.Add(this.uiImageButton_Hamburger_menu);
+            this.panel_header.Controls.Add(this.btnHamburger_menu);
             this.panel_header.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_header.Location = new System.Drawing.Point(0, 0);
             this.panel_header.Margin = new System.Windows.Forms.Padding(5);
@@ -67,19 +68,18 @@
             this.uiLabel_header.TabIndex = 1;
             this.uiLabel_header.Text = "Header";
             // 
-            // uiImageButton_Hamburger_menu
+            // btnHamburger_menu
             // 
-            this.uiImageButton_Hamburger_menu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiImageButton_Hamburger_menu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiImageButton_Hamburger_menu.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Hamburger_menu_01;
-            this.uiImageButton_Hamburger_menu.Location = new System.Drawing.Point(43, -1);
-            this.uiImageButton_Hamburger_menu.Name = "uiImageButton_Hamburger_menu";
-            this.uiImageButton_Hamburger_menu.Size = new System.Drawing.Size(100, 50);
-            this.uiImageButton_Hamburger_menu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.uiImageButton_Hamburger_menu.TabIndex = 0;
-            this.uiImageButton_Hamburger_menu.TabStop = false;
-            this.uiImageButton_Hamburger_menu.Text = null;
-            this.uiImageButton_Hamburger_menu.Click += new System.EventHandler(this.uiImageButton_Hamburger_menu_Click);
+            this.btnHamburger_menu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHamburger_menu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnHamburger_menu.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Hamburger_menu_01;
+            this.btnHamburger_menu.Location = new System.Drawing.Point(43, -1);
+            this.btnHamburger_menu.Name = "btnHamburger_menu";
+            this.btnHamburger_menu.Size = new System.Drawing.Size(100, 57);
+            this.btnHamburger_menu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnHamburger_menu.TabIndex = 0;
+            this.btnHamburger_menu.TabStop = false;
+            this.btnHamburger_menu.Text = null;
             // 
             // panel_footer
             // 
@@ -95,7 +95,9 @@
             // flowLayoutPanel_Menu
             // 
             this.flowLayoutPanel_Menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButton_Home);
+            this.flowLayoutPanel_Menu.Controls.Add(this.btnHome);
+            this.flowLayoutPanel_Menu.Controls.Add(this.btnTypeProdcut);
+            this.flowLayoutPanel_Menu.Controls.Add(this.btnManagerSupplier);
             this.flowLayoutPanel_Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel_Menu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel_Menu.Location = new System.Drawing.Point(0, 50);
@@ -104,21 +106,36 @@
             this.flowLayoutPanel_Menu.Size = new System.Drawing.Size(200, 1044);
             this.flowLayoutPanel_Menu.TabIndex = 3;
             // 
-            // uiSymbolButton_Home
+            // btnHome
             // 
-            this.uiSymbolButton_Home.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton_Home.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSymbolButton_Home.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
-            this.uiSymbolButton_Home.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiSymbolButton_Home.Location = new System.Drawing.Point(3, 3);
-            this.uiSymbolButton_Home.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton_Home.Name = "uiSymbolButton_Home";
-            this.uiSymbolButton_Home.Radius = 20;
-            this.uiSymbolButton_Home.Size = new System.Drawing.Size(190, 50);
-            this.uiSymbolButton_Home.TabIndex = 0;
-            this.uiSymbolButton_Home.Text = "Home";
-            this.uiSymbolButton_Home.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiSymbolButton_Home.Click += new System.EventHandler(this.uiSymbolButton_Home_Click);
+            this.btnHome.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnHome.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHome.Location = new System.Drawing.Point(3, 3);
+            this.btnHome.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Radius = 20;
+            this.btnHome.Size = new System.Drawing.Size(190, 50);
+            this.btnHome.TabIndex = 0;
+            this.btnHome.Text = "Home";
+            this.btnHome.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            // 
+            // btnTypeProdcut
+            // 
+            this.btnTypeProdcut.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTypeProdcut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnTypeProdcut.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.btnTypeProdcut.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTypeProdcut.Location = new System.Drawing.Point(3, 59);
+            this.btnTypeProdcut.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnTypeProdcut.Name = "btnTypeProdcut";
+            this.btnTypeProdcut.Radius = 20;
+            this.btnTypeProdcut.Size = new System.Drawing.Size(190, 50);
+            this.btnTypeProdcut.TabIndex = 0;
+            this.btnTypeProdcut.Text = "Loại sản phẩm";
+            this.btnTypeProdcut.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnTypeProdcut.Click += new System.EventHandler(this.btnTypeProdcut_Click);
             // 
             // uiPanel_Body
             // 
@@ -133,6 +150,22 @@
             this.uiPanel_Body.Text = "Body";
             this.uiPanel_Body.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnManagerSupplier
+            // 
+            this.btnManagerSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnManagerSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnManagerSupplier.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.btnManagerSupplier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnManagerSupplier.Location = new System.Drawing.Point(3, 115);
+            this.btnManagerSupplier.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnManagerSupplier.Name = "btnManagerSupplier";
+            this.btnManagerSupplier.Radius = 20;
+            this.btnManagerSupplier.Size = new System.Drawing.Size(190, 50);
+            this.btnManagerSupplier.TabIndex = 0;
+            this.btnManagerSupplier.Text = "Nhà cung cấp";
+            this.btnManagerSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnManagerSupplier.Click += new System.EventHandler(this.btnManagerSupplier_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 32F);
@@ -143,7 +176,6 @@
             this.Controls.Add(this.panel_footer);
             this.Controls.Add(this.panel_header);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Home";
@@ -152,7 +184,7 @@
             this.Load += new System.EventHandler(this.Home_Load);
             this.panel_header.ResumeLayout(false);
             this.panel_header.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uiImageButton_Hamburger_menu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnHamburger_menu)).EndInit();
             this.flowLayoutPanel_Menu.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -162,10 +194,12 @@
 
         private System.Windows.Forms.Panel panel_header;
         private Sunny.UI.UILabel uiLabel_header;
-        private Sunny.UI.UIImageButton uiImageButton_Hamburger_menu;
+        private Sunny.UI.UIImageButton btnHamburger_menu;
         private System.Windows.Forms.Panel panel_footer;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Menu;
-        private Sunny.UI.UISymbolButton uiSymbolButton_Home;
+        private Sunny.UI.UISymbolButton btnHome;
         private Sunny.UI.UIPanel uiPanel_Body;
+        private Sunny.UI.UISymbolButton btnTypeProdcut;
+        private Sunny.UI.UISymbolButton btnManagerSupplier;
     }
 }

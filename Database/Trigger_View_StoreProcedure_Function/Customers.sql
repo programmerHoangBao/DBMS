@@ -10,6 +10,35 @@ GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
+--trigger không có tồn tại giá trị rỗng ''
+CREATE TRIGGER trg_EmptyCustomer
+ON Customers
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	IF
+	(
+		EXISTS
+		(
+			SELECT 1 
+			FROM inserted
+			WHERE
+			(
+				IdCustomer = ''
+				OR NameCustomer = ''
+				OR PhoneNumber = ''
+				OR AddressCustomer = ''
+			)
+		)
+	)
+	BEGIN
+		RAISERROR ('Không được phép thêm giá trị rỗng vào bảng Customers.', 16, 1);
+        ROLLBACK 
+	END
+END;
+GO
+
+
 --Trigger kiểm tra NameCustomer là một tên hợp lệ không chứa kí tự số
 CREATE TRIGGER trg_check_namecustomer
 ON Customers
@@ -84,10 +113,17 @@ CREATE PROCEDURE SP_InsertCustomer
 AS
 BEGIN
     BEGIN TRY
-        INSERT INTO Customers (IdCustomer, NameCustomer, PhoneNumber, AddressCustomer)
-        VALUES (@IdCustomer, @NameCustomer, @PhoneNumber, @AddressCustomer);
+		IF (EXISTS(SELECT 1 FROM Customers C  WHERE C.IdCustomer = @IdCustomer))
+		BEGIN
+			SET @Result = 0;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO Customers (IdCustomer, NameCustomer, PhoneNumber, AddressCustomer)
+			VALUES (@IdCustomer, @NameCustomer, @PhoneNumber, @AddressCustomer);
 
-        SET @Result = 1;
+			SET @Result = 1;
+		END
     END TRY
     BEGIN CATCH
         SET @Result = 0;

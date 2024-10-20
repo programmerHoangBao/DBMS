@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
 {
-    internal class Products
+    internal class Product
     {
         private string idProduct;
         private string nameProduct;
@@ -15,11 +15,11 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
         private decimal unitPriceImport;
         private decimal unitPriceExport;
         private decimal quantityProduct;
-        private TypeProducts typeProduct;
-        private Suppliers supplier;
+        private TypeProduct typeProduct;
+        private Supplier supplier;
         private byte[] imageProduct;
 
-        public Products()
+        public Product()
         {
         }
 
@@ -30,7 +30,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
         public decimal UnitPriceExport { get => unitPriceExport; set => unitPriceExport = value; }
         public decimal QuantityProduct { get => quantityProduct; set => quantityProduct = value; }
         public byte[] ImageProduct { get => imageProduct; set => imageProduct = value; }
-        internal TypeProducts TypeProduct { get => typeProduct; set => typeProduct = value; }
-        internal Suppliers Supplier { get => supplier; set => supplier = value; }
+        internal TypeProduct TypeProduct { get => typeProduct; set => typeProduct = value; }
+        internal Supplier Supplier { get => supplier; set => supplier = value; }
     }
 }

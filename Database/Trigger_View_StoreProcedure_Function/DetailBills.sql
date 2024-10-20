@@ -13,6 +13,8 @@ GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
+--Trigger thự hiện kiểm tra số lượng sản phẩm khi xuất hàng và thực hiện cập nhật số lượng sản phẩm trong bảng Product
+	--Cập nhật tổng giá trị của bill
 CREATE TRIGGER trg_ImportAndExportBill
 ON DetailBills
 AFTER INSERT, UPDATE
@@ -83,10 +85,25 @@ CREATE PROCEDURE SP_InsertDetailBill
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO DetailBills(IdBill, IdProduct, QuantityProduct)
-		VALUES (@IdBill, @IdProduct, @QuantityProduct);
+		IF 
+		(
+			EXISTS
+				(
+					SELECT 1 
+					FROM DetailBills DB 
+					WHERE DB.IdBill = @IdBill AND DB.IdProduct = @IdProduct
+				)
+		)
+		BEGIN
+			SET @Result = 0;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO DetailBills(IdBill, IdProduct, QuantityProduct)
+			VALUES (@IdBill, @IdProduct, @QuantityProduct);
 
-		SET @Result = 1;
+			SET @Result = 1;
+		END
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;

@@ -9,6 +9,30 @@ GO
 USE QuanLyTaiChinhCuaHangXayDung
 GO
 
+--Trigger đảm bảo trong bảng TypeProducts không có tồn tại giá trị rổng ''
+CREATE TRIGGER trg_EmptyTypeProduct
+ON TypeProducts
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	IF 
+	(
+		EXISTS
+		(
+			SELECT 1 
+			FROM TypeProducts TP
+			WHERE
+				TP.IdTypeProduct = ''
+				OR TP.NameTypeProduct = ''
+		)
+	)
+	BEGIN
+		RAISERROR ('Không được phép thêm giá trị rỗng vào bảng TypeProducts.', 16, 1);
+        ROLLBACK 
+	END
+END;
+GO
+
 --Store Procedure thực hiện việc thêm dữ liệu vào TypeProducts
 CREATE PROCEDURE SP_InsertTypeProduct
 	@IdTypeProduct CHAR(6),
@@ -17,10 +41,18 @@ CREATE PROCEDURE SP_InsertTypeProduct
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO TypeProducts (IdTypeProduct, NameTypeProduct) 
-		VALUES (@IdTypeProduct, @NameTypeProduct);
-		
-		SET @Result = 1;
+		IF (EXISTS(SELECT 1 FROM TypeProducts TP WHERE TP.IdTypeProduct = @IdTypeProduct))
+		BEGIN
+			SET @Result = 0;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO TypeProducts (IdTypeProduct, NameTypeProduct) 
+			VALUES (@IdTypeProduct, @NameTypeProduct);
+
+			SET @Result = 1;
+		END
+
 	END TRY
 	BEGIN CATCH
 		SET @Result = 0;
@@ -85,24 +117,9 @@ RETURNS TABLE
 AS
 	RETURN
 	(
-		SELECT TP.IdTypeProduct AS 'Id', TP.NameTypeProduct AS 'Mã loại sản phẩm'
+		SELECT TP.IdTypeProduct, TP.NameTypeProduct
 		FROM TypeProducts TP
 	);
-GO
-
---Function thực hiện việt lất ra NameTypeProduct của TypeProduct thông qua IdTypeProdcut
-CREATE FUNCTION Fn_GetNameTypeProductById (@IdTypeProduct CHAR(6))
-RETURNS NVARCHAR(100)
-AS
-BEGIN
-	DECLARE @NameTypeProduct NVARCHAR(100);
-
-	SELECT @NameTypeProduct=TP.NameTypeProduct 
-	FROM TypeProducts TP
-	WHERE TP.IdTypeProduct = @IdTypeProduct;
-
-	RETURN @NameTypeProduct;
-END;
 GO
 
 --Function Lấy ra thông tin TypeProduct khi biết IdTypeProduct
