@@ -96,6 +96,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 this.myDatabase.OpenConnection();
 
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = System.Data.CommandType.Text;
+
                 SqlDataReader reader = cmd.ExecuteReader();
                 Supplier supplier;
                 while (reader.Read())
@@ -132,6 +134,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 this.myDatabase.OpenConnection();
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
                 cmd.CommandType = System.Data.CommandType.Text;
+
                 cmd.Parameters.AddWithValue("@IdSupplier", idSupplier);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -166,6 +169,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
 
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@IdSupplier", supplier.IdSupplier);
                 cmd.Parameters.AddWithValue("@NameSupplier", supplier.NameSupplier);
                 cmd.Parameters.AddWithValue("@PhoneNumber", supplier.PhoneNumber);
@@ -203,6 +207,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 this.myDatabase.OpenConnection();
 
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@IdSupplier", supplier.IdSupplier);
                 cmd.Parameters.AddWithValue("@NameSupplier", supplier.NameSupplier);
                 cmd.Parameters.AddWithValue("@PhoneNumber", supplier.PhoneNumber);
@@ -240,6 +246,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 this.myDatabase.OpenConnection();
 
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = System.Data.CommandType.Text;
+
                 cmd.Parameters.AddWithValue("@SearchTerm", searchTerm);
                 SqlDataReader reader = cmd.ExecuteReader();
                 Supplier supplier;

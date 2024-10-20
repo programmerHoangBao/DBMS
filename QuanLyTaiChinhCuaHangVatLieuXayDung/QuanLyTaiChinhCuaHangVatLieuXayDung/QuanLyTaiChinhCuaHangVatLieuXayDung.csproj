@@ -69,22 +69,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Form_Home\Home.cs">
+    <Compile Include="Forms\HomeViews\Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form_Home\Home.Designer.cs">
+    <Compile Include="Forms\HomeViews\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_Supplier\Form_ManagerSupplier.cs">
+    <Compile Include="Forms\SupplierViews\Form_ManagerSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form_Supplier\Form_ManagerSupplier.Designer.cs">
+    <Compile Include="Forms\SupplierViews\Form_ManagerSupplier.Designer.cs">
       <DependentUpon>Form_ManagerSupplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_TypeProduct\Form_ManagerTypeProduct.cs">
+    <Compile Include="Forms\TypeProductViews\Form_ManagerTypeProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form_TypeProduct\Form_ManagerTypeProduct.Designer.cs">
+    <Compile Include="Forms\TypeProductViews\Form_ManagerTypeProduct.Designer.cs">
       <DependentUpon>Form_ManagerTypeProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\MyDatabase.cs" />
@@ -105,13 +105,13 @@
     <Compile Include="User_Control\UCDisplayProduct.Designer.cs">
       <DependentUpon>UCDisplayProduct.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\Form_Home\Home.resx">
+    <EmbeddedResource Include="Forms\HomeViews\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form_Supplier\Form_ManagerSupplier.resx">
+    <EmbeddedResource Include="Forms\SupplierViews\Form_ManagerSupplier.resx">
       <DependentUpon>Form_ManagerSupplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form_TypeProduct\Form_ManagerTypeProduct.resx">
+    <EmbeddedResource Include="Forms\TypeProductViews\Form_ManagerTypeProduct.resx">
       <DependentUpon>Form_ManagerTypeProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
