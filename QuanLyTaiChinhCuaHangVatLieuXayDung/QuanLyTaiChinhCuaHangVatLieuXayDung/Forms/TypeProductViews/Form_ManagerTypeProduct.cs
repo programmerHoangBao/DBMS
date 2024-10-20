@@ -54,7 +54,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
             try
             {
                 this.uiComboBoxIdTypeProduct.Text = this.uiDataGridViewShowTypeProducts.Rows[e.RowIndex].Cells["IdTypeProduct"].Value.ToString().Trim();
-                this.uiTxtNameTypeProduct.Text = this.uiDataGridViewShowTypeProducts.Rows[e.RowIndex].Cells["NameTypeProduct"].Value.ToString();
+                this.uiTextBoxNameTypeProduct.Text = this.uiDataGridViewShowTypeProducts.Rows[e.RowIndex].Cells["NameTypeProduct"].Value.ToString();
             }
             catch 
             {
@@ -71,7 +71,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
 
                 if (!typeProduct.IsNull())
                 {
-                    this.uiTxtNameTypeProduct.Text = typeProduct.NameTypeProduct;
+                    this.uiTextBoxNameTypeProduct.Text = typeProduct.NameTypeProduct;
                 }
                 else
                 {
@@ -89,7 +89,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
             try
             {
                 string idTypeProduct = this.uiComboBoxIdTypeProduct.Text.Trim();
-                string nameTypeProduct = this.uiTxtNameTypeProduct.Text.Trim();
+                string nameTypeProduct = this.uiTextBoxNameTypeProduct.Text.Trim();
                 if (this.typeProductService.InsertTypeProduct(new TypeProduct(idTypeProduct, nameTypeProduct)))
                 {
                     MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -115,7 +115,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
             try
             {
                 string idTypeProduct = this.uiComboBoxIdTypeProduct.Text.Trim();
-                string nameTypeProduct = this.uiTxtNameTypeProduct.Text.Trim();
+                string nameTypeProduct = this.uiTextBoxNameTypeProduct.Text.Trim();
                 if (this.typeProductService.UpdateTypeProduct(new TypeProduct(idTypeProduct, nameTypeProduct)))
                 {
                     MessageBox.Show("Cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -165,6 +165,23 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
                 {
                     MessageBox.Show("Xóa thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void uiButtonRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //biểu diển lại dữ liệu trên uiDataGridViewShowTypeProducts và uiComboBoxIdTypeProduct
+                DisplayTypeProductOnUIDataGridViewAndUIComboBox(this.uiDataGridViewShowTypeProducts, uiComboBoxIdTypeProduct);
+
+                this.uiComboBoxIdTypeProduct.Text = "";
+                this.uiTextBoxNameTypeProduct.Text = "";
             }
             catch (Exception ex)
             {

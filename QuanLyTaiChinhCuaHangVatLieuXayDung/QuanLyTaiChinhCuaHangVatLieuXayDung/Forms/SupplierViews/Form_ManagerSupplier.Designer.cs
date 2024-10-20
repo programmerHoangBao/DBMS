@@ -28,33 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiTitlePanelSupplier = new Sunny.UI.UITitlePanel();
             this.uiPanelSearch = new Sunny.UI.UIPanel();
             this.uiSymbolLabelSearch = new Sunny.UI.UISymbolLabel();
             this.uiLabelSearchTerm = new Sunny.UI.UILabel();
-            this.uiTxtSearchTerm = new Sunny.UI.UITextBox();
+            this.uiTextBoxSearchTerm = new Sunny.UI.UITextBox();
             this.uiPanelInformationSupplier = new Sunny.UI.UIPanel();
             this.uiComboBoxIdSupplier = new Sunny.UI.UIComboBox();
-            this.uiRTxtAddress = new Sunny.UI.UIRichTextBox();
+            this.uiTextBoxAddress = new Sunny.UI.UIRichTextBox();
             this.uiSymbolLabelInformation = new Sunny.UI.UISymbolLabel();
             this.uiLabelNameSupplier = new Sunny.UI.UILabel();
             this.uiLabelIdSupplier = new Sunny.UI.UILabel();
-            this.uiTxtPhoneNumber = new Sunny.UI.UITextBox();
+            this.uiTextBoxPhoneNumber = new Sunny.UI.UITextBox();
             this.uiLabelPhoneNumber = new Sunny.UI.UILabel();
-            this.uiTxtNameSupplier = new Sunny.UI.UITextBox();
+            this.uiTextBoxNameSupplier = new Sunny.UI.UITextBox();
             this.uiLabelAddress = new Sunny.UI.UILabel();
             this.uiPanelButton = new Sunny.UI.UIPanel();
-            this.uiBtnUpdateSupplier = new Sunny.UI.UIButton();
-            this.uiBtnSearchSupplier = new Sunny.UI.UIButton();
-            this.uiBtnDeleteSupplier = new Sunny.UI.UIButton();
-            this.uiBtnInsertSupplier = new Sunny.UI.UIButton();
+            this.uiButtonUpdateSupplier = new Sunny.UI.UIButton();
+            this.uiButtonSearchSupplier = new Sunny.UI.UIButton();
+            this.uiButtonDeleteSupplier = new Sunny.UI.UIButton();
+            this.uiButtonInsertSupplier = new Sunny.UI.UIButton();
             this.uiPanelShowSupplier = new Sunny.UI.UIPanel();
             this.uiDataGridViewSupplier = new Sunny.UI.UIDataGridView();
+            this.uiButtonRefresh = new Sunny.UI.UIButton();
             this.uiTitlePanelSupplier.SuspendLayout();
             this.uiPanelSearch.SuspendLayout();
             this.uiPanelInformationSupplier.SuspendLayout();
@@ -86,14 +87,14 @@
             // 
             this.uiPanelSearch.Controls.Add(this.uiSymbolLabelSearch);
             this.uiPanelSearch.Controls.Add(this.uiLabelSearchTerm);
-            this.uiPanelSearch.Controls.Add(this.uiTxtSearchTerm);
+            this.uiPanelSearch.Controls.Add(this.uiTextBoxSearchTerm);
             this.uiPanelSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiPanelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiPanelSearch.Location = new System.Drawing.Point(0, 366);
             this.uiPanelSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelSearch.Name = "uiPanelSearch";
-            this.uiPanelSearch.Size = new System.Drawing.Size(470, 422);
+            this.uiPanelSearch.Size = new System.Drawing.Size(470, 382);
             this.uiPanelSearch.TabIndex = 4;
             this.uiPanelSearch.Text = null;
             this.uiPanelSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -123,31 +124,31 @@
             this.uiLabelSearchTerm.TabIndex = 1;
             this.uiLabelSearchTerm.Text = "Thông tin tìm kiếm:";
             // 
-            // uiTxtSearchTerm
+            // uiTextBoxSearchTerm
             // 
-            this.uiTxtSearchTerm.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTxtSearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTxtSearchTerm.Location = new System.Drawing.Point(222, 51);
-            this.uiTxtSearchTerm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTxtSearchTerm.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTxtSearchTerm.Name = "uiTxtSearchTerm";
-            this.uiTxtSearchTerm.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTxtSearchTerm.ShowText = false;
-            this.uiTxtSearchTerm.Size = new System.Drawing.Size(244, 29);
-            this.uiTxtSearchTerm.TabIndex = 2;
-            this.uiTxtSearchTerm.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTxtSearchTerm.Watermark = "";
+            this.uiTextBoxSearchTerm.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uiTextBoxSearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiTextBoxSearchTerm.Location = new System.Drawing.Point(222, 51);
+            this.uiTextBoxSearchTerm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTextBoxSearchTerm.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uiTextBoxSearchTerm.Name = "uiTextBoxSearchTerm";
+            this.uiTextBoxSearchTerm.Padding = new System.Windows.Forms.Padding(5);
+            this.uiTextBoxSearchTerm.ShowText = false;
+            this.uiTextBoxSearchTerm.Size = new System.Drawing.Size(244, 29);
+            this.uiTextBoxSearchTerm.TabIndex = 2;
+            this.uiTextBoxSearchTerm.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiTextBoxSearchTerm.Watermark = "";
             // 
             // uiPanelInformationSupplier
             // 
             this.uiPanelInformationSupplier.Controls.Add(this.uiComboBoxIdSupplier);
-            this.uiPanelInformationSupplier.Controls.Add(this.uiRTxtAddress);
+            this.uiPanelInformationSupplier.Controls.Add(this.uiTextBoxAddress);
             this.uiPanelInformationSupplier.Controls.Add(this.uiSymbolLabelInformation);
             this.uiPanelInformationSupplier.Controls.Add(this.uiLabelNameSupplier);
             this.uiPanelInformationSupplier.Controls.Add(this.uiLabelIdSupplier);
-            this.uiPanelInformationSupplier.Controls.Add(this.uiTxtPhoneNumber);
+            this.uiPanelInformationSupplier.Controls.Add(this.uiTextBoxPhoneNumber);
             this.uiPanelInformationSupplier.Controls.Add(this.uiLabelPhoneNumber);
-            this.uiPanelInformationSupplier.Controls.Add(this.uiTxtNameSupplier);
+            this.uiPanelInformationSupplier.Controls.Add(this.uiTextBoxNameSupplier);
             this.uiPanelInformationSupplier.Controls.Add(this.uiLabelAddress);
             this.uiPanelInformationSupplier.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiPanelInformationSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -179,19 +180,19 @@
             this.uiComboBoxIdSupplier.Watermark = "";
             this.uiComboBoxIdSupplier.SelectedIndexChanged += new System.EventHandler(this.uiComboBoxIdSupplier_SelectedIndexChanged);
             // 
-            // uiRTxtAddress
+            // uiTextBoxAddress
             // 
-            this.uiRTxtAddress.FillColor = System.Drawing.Color.White;
-            this.uiRTxtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiRTxtAddress.Location = new System.Drawing.Point(213, 171);
-            this.uiRTxtAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiRTxtAddress.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiRTxtAddress.Name = "uiRTxtAddress";
-            this.uiRTxtAddress.Padding = new System.Windows.Forms.Padding(2);
-            this.uiRTxtAddress.ShowText = false;
-            this.uiRTxtAddress.Size = new System.Drawing.Size(244, 123);
-            this.uiRTxtAddress.TabIndex = 4;
-            this.uiRTxtAddress.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.uiTextBoxAddress.FillColor = System.Drawing.Color.White;
+            this.uiTextBoxAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiTextBoxAddress.Location = new System.Drawing.Point(213, 171);
+            this.uiTextBoxAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTextBoxAddress.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTextBoxAddress.Name = "uiTextBoxAddress";
+            this.uiTextBoxAddress.Padding = new System.Windows.Forms.Padding(2);
+            this.uiTextBoxAddress.ShowText = false;
+            this.uiTextBoxAddress.Size = new System.Drawing.Size(244, 123);
+            this.uiTextBoxAddress.TabIndex = 4;
+            this.uiTextBoxAddress.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
             // 
             // uiSymbolLabelInformation
             // 
@@ -230,20 +231,20 @@
             this.uiLabelIdSupplier.TabIndex = 1;
             this.uiLabelIdSupplier.Text = "Mã nhà cung cấp:";
             // 
-            // uiTxtPhoneNumber
+            // uiTextBoxPhoneNumber
             // 
-            this.uiTxtPhoneNumber.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTxtPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTxtPhoneNumber.Location = new System.Drawing.Point(213, 132);
-            this.uiTxtPhoneNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTxtPhoneNumber.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTxtPhoneNumber.Name = "uiTxtPhoneNumber";
-            this.uiTxtPhoneNumber.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTxtPhoneNumber.ShowText = false;
-            this.uiTxtPhoneNumber.Size = new System.Drawing.Size(244, 29);
-            this.uiTxtPhoneNumber.TabIndex = 2;
-            this.uiTxtPhoneNumber.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTxtPhoneNumber.Watermark = "";
+            this.uiTextBoxPhoneNumber.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uiTextBoxPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiTextBoxPhoneNumber.Location = new System.Drawing.Point(213, 132);
+            this.uiTextBoxPhoneNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTextBoxPhoneNumber.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uiTextBoxPhoneNumber.Name = "uiTextBoxPhoneNumber";
+            this.uiTextBoxPhoneNumber.Padding = new System.Windows.Forms.Padding(5);
+            this.uiTextBoxPhoneNumber.ShowText = false;
+            this.uiTextBoxPhoneNumber.Size = new System.Drawing.Size(244, 29);
+            this.uiTextBoxPhoneNumber.TabIndex = 2;
+            this.uiTextBoxPhoneNumber.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiTextBoxPhoneNumber.Watermark = "";
             // 
             // uiLabelPhoneNumber
             // 
@@ -257,20 +258,20 @@
             this.uiLabelPhoneNumber.TabIndex = 1;
             this.uiLabelPhoneNumber.Text = "Số điện thoại:";
             // 
-            // uiTxtNameSupplier
+            // uiTextBoxNameSupplier
             // 
-            this.uiTxtNameSupplier.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTxtNameSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTxtNameSupplier.Location = new System.Drawing.Point(213, 91);
-            this.uiTxtNameSupplier.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTxtNameSupplier.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTxtNameSupplier.Name = "uiTxtNameSupplier";
-            this.uiTxtNameSupplier.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTxtNameSupplier.ShowText = false;
-            this.uiTxtNameSupplier.Size = new System.Drawing.Size(244, 29);
-            this.uiTxtNameSupplier.TabIndex = 2;
-            this.uiTxtNameSupplier.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTxtNameSupplier.Watermark = "";
+            this.uiTextBoxNameSupplier.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uiTextBoxNameSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiTextBoxNameSupplier.Location = new System.Drawing.Point(213, 91);
+            this.uiTextBoxNameSupplier.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTextBoxNameSupplier.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uiTextBoxNameSupplier.Name = "uiTextBoxNameSupplier";
+            this.uiTextBoxNameSupplier.Padding = new System.Windows.Forms.Padding(5);
+            this.uiTextBoxNameSupplier.ShowText = false;
+            this.uiTextBoxNameSupplier.Size = new System.Drawing.Size(244, 29);
+            this.uiTextBoxNameSupplier.TabIndex = 2;
+            this.uiTextBoxNameSupplier.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiTextBoxNameSupplier.Watermark = "";
             // 
             // uiLabelAddress
             // 
@@ -286,77 +287,78 @@
             // 
             // uiPanelButton
             // 
-            this.uiPanelButton.Controls.Add(this.uiBtnUpdateSupplier);
-            this.uiPanelButton.Controls.Add(this.uiBtnSearchSupplier);
-            this.uiPanelButton.Controls.Add(this.uiBtnDeleteSupplier);
-            this.uiPanelButton.Controls.Add(this.uiBtnInsertSupplier);
+            this.uiPanelButton.Controls.Add(this.uiButtonUpdateSupplier);
+            this.uiPanelButton.Controls.Add(this.uiButtonSearchSupplier);
+            this.uiPanelButton.Controls.Add(this.uiButtonRefresh);
+            this.uiPanelButton.Controls.Add(this.uiButtonDeleteSupplier);
+            this.uiPanelButton.Controls.Add(this.uiButtonInsertSupplier);
             this.uiPanelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiPanelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelButton.Location = new System.Drawing.Point(0, 788);
+            this.uiPanelButton.Location = new System.Drawing.Point(0, 748);
             this.uiPanelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelButton.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelButton.Name = "uiPanelButton";
             this.uiPanelButton.Radius = 1;
-            this.uiPanelButton.Size = new System.Drawing.Size(470, 200);
+            this.uiPanelButton.Size = new System.Drawing.Size(470, 240);
             this.uiPanelButton.TabIndex = 0;
             this.uiPanelButton.Text = null;
             this.uiPanelButton.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiBtnUpdateSupplier
+            // uiButtonUpdateSupplier
             // 
-            this.uiBtnUpdateSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiBtnUpdateSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiBtnUpdateSupplier.Location = new System.Drawing.Point(262, 21);
-            this.uiBtnUpdateSupplier.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiBtnUpdateSupplier.Name = "uiBtnUpdateSupplier";
-            this.uiBtnUpdateSupplier.Radius = 35;
-            this.uiBtnUpdateSupplier.Size = new System.Drawing.Size(150, 50);
-            this.uiBtnUpdateSupplier.TabIndex = 0;
-            this.uiBtnUpdateSupplier.Text = "Cập nhật";
-            this.uiBtnUpdateSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiBtnUpdateSupplier.Click += new System.EventHandler(this.uiBtnUpdateSupplier_Click);
+            this.uiButtonUpdateSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonUpdateSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonUpdateSupplier.Location = new System.Drawing.Point(262, 21);
+            this.uiButtonUpdateSupplier.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonUpdateSupplier.Name = "uiButtonUpdateSupplier";
+            this.uiButtonUpdateSupplier.Radius = 35;
+            this.uiButtonUpdateSupplier.Size = new System.Drawing.Size(150, 50);
+            this.uiButtonUpdateSupplier.TabIndex = 0;
+            this.uiButtonUpdateSupplier.Text = "Cập nhật";
+            this.uiButtonUpdateSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonUpdateSupplier.Click += new System.EventHandler(this.uiBtnUpdateSupplier_Click);
             // 
-            // uiBtnSearchSupplier
+            // uiButtonSearchSupplier
             // 
-            this.uiBtnSearchSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiBtnSearchSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiBtnSearchSupplier.Location = new System.Drawing.Point(262, 105);
-            this.uiBtnSearchSupplier.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiBtnSearchSupplier.Name = "uiBtnSearchSupplier";
-            this.uiBtnSearchSupplier.Radius = 35;
-            this.uiBtnSearchSupplier.Size = new System.Drawing.Size(150, 50);
-            this.uiBtnSearchSupplier.TabIndex = 0;
-            this.uiBtnSearchSupplier.Text = "Tìm kiếm";
-            this.uiBtnSearchSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiBtnSearchSupplier.Click += new System.EventHandler(this.uiBtnSearchSupplier_Click);
+            this.uiButtonSearchSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonSearchSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonSearchSupplier.Location = new System.Drawing.Point(262, 105);
+            this.uiButtonSearchSupplier.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonSearchSupplier.Name = "uiButtonSearchSupplier";
+            this.uiButtonSearchSupplier.Radius = 35;
+            this.uiButtonSearchSupplier.Size = new System.Drawing.Size(150, 50);
+            this.uiButtonSearchSupplier.TabIndex = 0;
+            this.uiButtonSearchSupplier.Text = "Tìm kiếm";
+            this.uiButtonSearchSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonSearchSupplier.Click += new System.EventHandler(this.uiBtnSearchSupplier_Click);
             // 
-            // uiBtnDeleteSupplier
+            // uiButtonDeleteSupplier
             // 
-            this.uiBtnDeleteSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiBtnDeleteSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiBtnDeleteSupplier.Location = new System.Drawing.Point(38, 105);
-            this.uiBtnDeleteSupplier.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiBtnDeleteSupplier.Name = "uiBtnDeleteSupplier";
-            this.uiBtnDeleteSupplier.Radius = 35;
-            this.uiBtnDeleteSupplier.Size = new System.Drawing.Size(150, 50);
-            this.uiBtnDeleteSupplier.TabIndex = 0;
-            this.uiBtnDeleteSupplier.Text = "Xóa";
-            this.uiBtnDeleteSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiBtnDeleteSupplier.Click += new System.EventHandler(this.uiBtnDeleteSupplier_Click);
+            this.uiButtonDeleteSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonDeleteSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonDeleteSupplier.Location = new System.Drawing.Point(38, 105);
+            this.uiButtonDeleteSupplier.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonDeleteSupplier.Name = "uiButtonDeleteSupplier";
+            this.uiButtonDeleteSupplier.Radius = 35;
+            this.uiButtonDeleteSupplier.Size = new System.Drawing.Size(150, 50);
+            this.uiButtonDeleteSupplier.TabIndex = 0;
+            this.uiButtonDeleteSupplier.Text = "Xóa";
+            this.uiButtonDeleteSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonDeleteSupplier.Click += new System.EventHandler(this.uiBtnDeleteSupplier_Click);
             // 
-            // uiBtnInsertSupplier
+            // uiButtonInsertSupplier
             // 
-            this.uiBtnInsertSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiBtnInsertSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiBtnInsertSupplier.Location = new System.Drawing.Point(38, 21);
-            this.uiBtnInsertSupplier.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiBtnInsertSupplier.Name = "uiBtnInsertSupplier";
-            this.uiBtnInsertSupplier.Radius = 35;
-            this.uiBtnInsertSupplier.Size = new System.Drawing.Size(150, 50);
-            this.uiBtnInsertSupplier.TabIndex = 0;
-            this.uiBtnInsertSupplier.Text = "Thêm";
-            this.uiBtnInsertSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiBtnInsertSupplier.Click += new System.EventHandler(this.btnInsertSupplier_Click);
+            this.uiButtonInsertSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonInsertSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonInsertSupplier.Location = new System.Drawing.Point(38, 21);
+            this.uiButtonInsertSupplier.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonInsertSupplier.Name = "uiButtonInsertSupplier";
+            this.uiButtonInsertSupplier.Radius = 35;
+            this.uiButtonInsertSupplier.Size = new System.Drawing.Size(150, 50);
+            this.uiButtonInsertSupplier.TabIndex = 0;
+            this.uiButtonInsertSupplier.Text = "Thêm";
+            this.uiButtonInsertSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonInsertSupplier.Click += new System.EventHandler(this.btnInsertSupplier_Click);
             // 
             // uiPanelShowSupplier
             // 
@@ -374,52 +376,66 @@
             // 
             // uiDataGridViewSupplier
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiDataGridViewSupplier.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridViewSupplier.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.uiDataGridViewSupplier.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.uiDataGridViewSupplier.BackgroundColor = System.Drawing.Color.White;
             this.uiDataGridViewSupplier.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridViewSupplier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridViewSupplier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.uiDataGridViewSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridViewSupplier.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridViewSupplier.DefaultCellStyle = dataGridViewCellStyle3;
             this.uiDataGridViewSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridViewSupplier.EnableHeadersVisualStyles = false;
             this.uiDataGridViewSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiDataGridViewSupplier.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.uiDataGridViewSupplier.Location = new System.Drawing.Point(0, 0);
             this.uiDataGridViewSupplier.Name = "uiDataGridViewSupplier";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridViewSupplier.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridViewSupplier.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.uiDataGridViewSupplier.RowHeadersWidth = 62;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiDataGridViewSupplier.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiDataGridViewSupplier.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.uiDataGridViewSupplier.RowTemplate.Height = 28;
             this.uiDataGridViewSupplier.SelectedIndex = -1;
             this.uiDataGridViewSupplier.Size = new System.Drawing.Size(786, 988);
             this.uiDataGridViewSupplier.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridViewSupplier.TabIndex = 0;
             this.uiDataGridViewSupplier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.uiDataGridViewSupplier_CellClick);
+            // 
+            // uiButtonRefresh
+            // 
+            this.uiButtonRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonRefresh.Location = new System.Drawing.Point(38, 178);
+            this.uiButtonRefresh.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonRefresh.Name = "uiButtonRefresh";
+            this.uiButtonRefresh.Radius = 35;
+            this.uiButtonRefresh.Size = new System.Drawing.Size(150, 50);
+            this.uiButtonRefresh.TabIndex = 0;
+            this.uiButtonRefresh.Text = "Làm mới";
+            this.uiButtonRefresh.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonRefresh.Click += new System.EventHandler(this.uiButtonRefresh_Click);
             // 
             // Form_ManagerSupplier
             // 
@@ -449,25 +465,26 @@
 
         private Sunny.UI.UITitlePanel uiTitlePanelSupplier;
         private Sunny.UI.UIPanel uiPanelButton;
-        private Sunny.UI.UIButton uiBtnUpdateSupplier;
-        private Sunny.UI.UIButton uiBtnInsertSupplier;
+        private Sunny.UI.UIButton uiButtonUpdateSupplier;
+        private Sunny.UI.UIButton uiButtonInsertSupplier;
         private Sunny.UI.UIPanel uiPanelShowSupplier;
         private Sunny.UI.UIDataGridView uiDataGridViewSupplier;
         private Sunny.UI.UILabel uiLabelIdSupplier;
-        private Sunny.UI.UIButton uiBtnSearchSupplier;
-        private Sunny.UI.UIButton uiBtnDeleteSupplier;
+        private Sunny.UI.UIButton uiButtonSearchSupplier;
+        private Sunny.UI.UIButton uiButtonDeleteSupplier;
         private Sunny.UI.UILabel uiLabelAddress;
         private Sunny.UI.UILabel uiLabelPhoneNumber;
         private Sunny.UI.UILabel uiLabelNameSupplier;
-        private Sunny.UI.UITextBox uiTxtPhoneNumber;
-        private Sunny.UI.UITextBox uiTxtNameSupplier;
+        private Sunny.UI.UITextBox uiTextBoxPhoneNumber;
+        private Sunny.UI.UITextBox uiTextBoxNameSupplier;
         private Sunny.UI.UIPanel uiPanelInformationSupplier;
         private Sunny.UI.UISymbolLabel uiSymbolLabelInformation;
-        private Sunny.UI.UIRichTextBox uiRTxtAddress;
+        private Sunny.UI.UIRichTextBox uiTextBoxAddress;
         private Sunny.UI.UIPanel uiPanelSearch;
         private Sunny.UI.UISymbolLabel uiSymbolLabelSearch;
         private Sunny.UI.UILabel uiLabelSearchTerm;
-        private Sunny.UI.UITextBox uiTxtSearchTerm;
+        private Sunny.UI.UITextBox uiTextBoxSearchTerm;
         private Sunny.UI.UIComboBox uiComboBoxIdSupplier;
+        private Sunny.UI.UIButton uiButtonRefresh;
     }
 }

@@ -1,4 +1,5 @@
-﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews;
+﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.CustomerViews;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Service;
@@ -50,6 +51,12 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
         {
             Form_ManagerSupplier form_ManagerSupplier = new Form_ManagerSupplier();
             OpenFormChild(form_ManagerSupplier);
+        }
+
+        private void uiSBtnBtnCustomer_Click(object sender, EventArgs e)
+        {
+            Form_ManagerCustomer form_ManagerCustomer = new Form_ManagerCustomer();
+            OpenFormChild(form_ManagerCustomer);
         }
     }
 }

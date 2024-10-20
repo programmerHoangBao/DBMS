@@ -35,8 +35,9 @@
             this.panel_footer = new System.Windows.Forms.Panel();
             this.flowLayoutPanel_Menu = new System.Windows.Forms.FlowLayoutPanel();
             this.uiSBtnHome = new Sunny.UI.UISymbolButton();
-            this.uiSBtnTypeProdcut = new Sunny.UI.UISymbolButton();
-            this.uiSBtnManagerSupplier = new Sunny.UI.UISymbolButton();
+            this.uiSymbolButtonTypeProdcut = new Sunny.UI.UISymbolButton();
+            this.uiSymbolButtonManagerSupplier = new Sunny.UI.UISymbolButton();
+            this.uiSymbolButtonCustomer = new Sunny.UI.UISymbolButton();
             this.uiPanel_Body = new Sunny.UI.UIPanel();
             this.panel_header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHamburger_menu)).BeginInit();
@@ -96,8 +97,9 @@
             // 
             this.flowLayoutPanel_Menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSBtnHome);
-            this.flowLayoutPanel_Menu.Controls.Add(this.uiSBtnTypeProdcut);
-            this.flowLayoutPanel_Menu.Controls.Add(this.uiSBtnManagerSupplier);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonTypeProdcut);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonManagerSupplier);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonCustomer);
             this.flowLayoutPanel_Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel_Menu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel_Menu.Location = new System.Drawing.Point(0, 50);
@@ -121,37 +123,53 @@
             this.uiSBtnHome.Text = "Home";
             this.uiSBtnHome.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             // 
-            // uiSBtnTypeProdcut
+            // uiSymbolButtonTypeProdcut
             // 
-            this.uiSBtnTypeProdcut.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSBtnTypeProdcut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSBtnTypeProdcut.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
-            this.uiSBtnTypeProdcut.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiSBtnTypeProdcut.Location = new System.Drawing.Point(3, 59);
-            this.uiSBtnTypeProdcut.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSBtnTypeProdcut.Name = "uiSBtnTypeProdcut";
-            this.uiSBtnTypeProdcut.Radius = 20;
-            this.uiSBtnTypeProdcut.Size = new System.Drawing.Size(190, 50);
-            this.uiSBtnTypeProdcut.TabIndex = 0;
-            this.uiSBtnTypeProdcut.Text = "Loại sản phẩm";
-            this.uiSBtnTypeProdcut.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiSBtnTypeProdcut.Click += new System.EventHandler(this.btnTypeProdcut_Click);
+            this.uiSymbolButtonTypeProdcut.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButtonTypeProdcut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButtonTypeProdcut.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButtonTypeProdcut.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButtonTypeProdcut.Location = new System.Drawing.Point(3, 59);
+            this.uiSymbolButtonTypeProdcut.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButtonTypeProdcut.Name = "uiSymbolButtonTypeProdcut";
+            this.uiSymbolButtonTypeProdcut.Radius = 20;
+            this.uiSymbolButtonTypeProdcut.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButtonTypeProdcut.TabIndex = 0;
+            this.uiSymbolButtonTypeProdcut.Text = "Loại sản phẩm";
+            this.uiSymbolButtonTypeProdcut.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButtonTypeProdcut.Click += new System.EventHandler(this.btnTypeProdcut_Click);
             // 
-            // uiSBtnManagerSupplier
+            // uiSymbolButtonManagerSupplier
             // 
-            this.uiSBtnManagerSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSBtnManagerSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSBtnManagerSupplier.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
-            this.uiSBtnManagerSupplier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiSBtnManagerSupplier.Location = new System.Drawing.Point(3, 115);
-            this.uiSBtnManagerSupplier.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSBtnManagerSupplier.Name = "uiSBtnManagerSupplier";
-            this.uiSBtnManagerSupplier.Radius = 20;
-            this.uiSBtnManagerSupplier.Size = new System.Drawing.Size(190, 50);
-            this.uiSBtnManagerSupplier.TabIndex = 0;
-            this.uiSBtnManagerSupplier.Text = "Nhà cung cấp";
-            this.uiSBtnManagerSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiSBtnManagerSupplier.Click += new System.EventHandler(this.btnManagerSupplier_Click);
+            this.uiSymbolButtonManagerSupplier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButtonManagerSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButtonManagerSupplier.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButtonManagerSupplier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButtonManagerSupplier.Location = new System.Drawing.Point(3, 115);
+            this.uiSymbolButtonManagerSupplier.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButtonManagerSupplier.Name = "uiSymbolButtonManagerSupplier";
+            this.uiSymbolButtonManagerSupplier.Radius = 20;
+            this.uiSymbolButtonManagerSupplier.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButtonManagerSupplier.TabIndex = 0;
+            this.uiSymbolButtonManagerSupplier.Text = "Nhà cung cấp";
+            this.uiSymbolButtonManagerSupplier.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButtonManagerSupplier.Click += new System.EventHandler(this.btnManagerSupplier_Click);
+            // 
+            // uiSymbolButtonCustomer
+            // 
+            this.uiSymbolButtonCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButtonCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButtonCustomer.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButtonCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButtonCustomer.Location = new System.Drawing.Point(3, 171);
+            this.uiSymbolButtonCustomer.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButtonCustomer.Name = "uiSymbolButtonCustomer";
+            this.uiSymbolButtonCustomer.Radius = 20;
+            this.uiSymbolButtonCustomer.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButtonCustomer.TabIndex = 0;
+            this.uiSymbolButtonCustomer.Text = "Khánh Hàng";
+            this.uiSymbolButtonCustomer.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButtonCustomer.Click += new System.EventHandler(this.uiSBtnBtnCustomer_Click);
             // 
             // uiPanel_Body
             // 
@@ -199,7 +217,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Menu;
         private Sunny.UI.UISymbolButton uiSBtnHome;
         private Sunny.UI.UIPanel uiPanel_Body;
-        private Sunny.UI.UISymbolButton uiSBtnTypeProdcut;
-        private Sunny.UI.UISymbolButton uiSBtnManagerSupplier;
+        private Sunny.UI.UISymbolButton uiSymbolButtonTypeProdcut;
+        private Sunny.UI.UISymbolButton uiSymbolButtonManagerSupplier;
+        private Sunny.UI.UISymbolButton uiSymbolButtonCustomer;
     }
 }

@@ -28,22 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiTitlePanelFunction = new Sunny.UI.UITitlePanel();
             this.uiComboBoxIdTypeProduct = new Sunny.UI.UIComboBox();
-            this.uiTxtNameTypeProduct = new Sunny.UI.UITextBox();
-            this.labelNameTypeProduct = new Sunny.UI.UILabel();
-            this.labelIdTypeProduct = new Sunny.UI.UILabel();
+            this.uiTextBoxNameTypeProduct = new Sunny.UI.UITextBox();
+            this.uiLabelNameTypeProduct = new Sunny.UI.UILabel();
+            this.uiLabelIdTypeProduct = new Sunny.UI.UILabel();
             this.uiPanelButton = new Sunny.UI.UIPanel();
-            this.btnDeleteTypeProduct = new Sunny.UI.UIButton();
-            this.btnUpdateTypeProduct = new Sunny.UI.UIButton();
-            this.btnInsertTypeProduct = new Sunny.UI.UIButton();
+            this.uiButtonDeleteTypeProduct = new Sunny.UI.UIButton();
+            this.uiButtonUpdateTypeProduct = new Sunny.UI.UIButton();
+            this.uiButtonInsertTypeProduct = new Sunny.UI.UIButton();
             this.uiPanelShowTypeProduct = new Sunny.UI.UIPanel();
             this.uiDataGridViewShowTypeProducts = new Sunny.UI.UIDataGridView();
+            this.uiButtonRefresh = new Sunny.UI.UIButton();
             this.uiTitlePanelFunction.SuspendLayout();
             this.uiPanelButton.SuspendLayout();
             this.uiPanelShowTypeProduct.SuspendLayout();
@@ -53,9 +54,9 @@
             // uiTitlePanelFunction
             // 
             this.uiTitlePanelFunction.Controls.Add(this.uiComboBoxIdTypeProduct);
-            this.uiTitlePanelFunction.Controls.Add(this.uiTxtNameTypeProduct);
-            this.uiTitlePanelFunction.Controls.Add(this.labelNameTypeProduct);
-            this.uiTitlePanelFunction.Controls.Add(this.labelIdTypeProduct);
+            this.uiTitlePanelFunction.Controls.Add(this.uiTextBoxNameTypeProduct);
+            this.uiTitlePanelFunction.Controls.Add(this.uiLabelNameTypeProduct);
+            this.uiTitlePanelFunction.Controls.Add(this.uiLabelIdTypeProduct);
             this.uiTitlePanelFunction.Controls.Add(this.uiPanelButton);
             this.uiTitlePanelFunction.Dock = System.Windows.Forms.DockStyle.Right;
             this.uiTitlePanelFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -89,46 +90,47 @@
             this.uiComboBoxIdTypeProduct.Watermark = "";
             this.uiComboBoxIdTypeProduct.SelectedIndexChanged += new System.EventHandler(this.uiComboBoxIdTypeProduct_SelectedIndexChanged);
             // 
-            // uiTxtNameTypeProduct
+            // uiTextBoxNameTypeProduct
             // 
-            this.uiTxtNameTypeProduct.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTxtNameTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTxtNameTypeProduct.Location = new System.Drawing.Point(240, 81);
-            this.uiTxtNameTypeProduct.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTxtNameTypeProduct.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTxtNameTypeProduct.Name = "uiTxtNameTypeProduct";
-            this.uiTxtNameTypeProduct.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTxtNameTypeProduct.ShowText = false;
-            this.uiTxtNameTypeProduct.Size = new System.Drawing.Size(213, 29);
-            this.uiTxtNameTypeProduct.TabIndex = 2;
-            this.uiTxtNameTypeProduct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTxtNameTypeProduct.Watermark = "";
+            this.uiTextBoxNameTypeProduct.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uiTextBoxNameTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiTextBoxNameTypeProduct.Location = new System.Drawing.Point(240, 81);
+            this.uiTextBoxNameTypeProduct.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTextBoxNameTypeProduct.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uiTextBoxNameTypeProduct.Name = "uiTextBoxNameTypeProduct";
+            this.uiTextBoxNameTypeProduct.Padding = new System.Windows.Forms.Padding(5);
+            this.uiTextBoxNameTypeProduct.ShowText = false;
+            this.uiTextBoxNameTypeProduct.Size = new System.Drawing.Size(213, 29);
+            this.uiTextBoxNameTypeProduct.TabIndex = 2;
+            this.uiTextBoxNameTypeProduct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiTextBoxNameTypeProduct.Watermark = "";
             // 
-            // labelNameTypeProduct
+            // uiLabelNameTypeProduct
             // 
-            this.labelNameTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.labelNameTypeProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.labelNameTypeProduct.Location = new System.Drawing.Point(3, 81);
-            this.labelNameTypeProduct.Name = "labelNameTypeProduct";
-            this.labelNameTypeProduct.Size = new System.Drawing.Size(230, 29);
-            this.labelNameTypeProduct.TabIndex = 1;
-            this.labelNameTypeProduct.Text = " Tên loại sản phẩm:";
+            this.uiLabelNameTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiLabelNameTypeProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiLabelNameTypeProduct.Location = new System.Drawing.Point(3, 81);
+            this.uiLabelNameTypeProduct.Name = "uiLabelNameTypeProduct";
+            this.uiLabelNameTypeProduct.Size = new System.Drawing.Size(230, 29);
+            this.uiLabelNameTypeProduct.TabIndex = 1;
+            this.uiLabelNameTypeProduct.Text = " Tên loại sản phẩm:";
             // 
-            // labelIdTypeProduct
+            // uiLabelIdTypeProduct
             // 
-            this.labelIdTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.labelIdTypeProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.labelIdTypeProduct.Location = new System.Drawing.Point(3, 42);
-            this.labelIdTypeProduct.Name = "labelIdTypeProduct";
-            this.labelIdTypeProduct.Size = new System.Drawing.Size(230, 29);
-            this.labelIdTypeProduct.TabIndex = 1;
-            this.labelIdTypeProduct.Text = " Mã loại sản phẩm:";
+            this.uiLabelIdTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiLabelIdTypeProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiLabelIdTypeProduct.Location = new System.Drawing.Point(3, 42);
+            this.uiLabelIdTypeProduct.Name = "uiLabelIdTypeProduct";
+            this.uiLabelIdTypeProduct.Size = new System.Drawing.Size(230, 29);
+            this.uiLabelIdTypeProduct.TabIndex = 1;
+            this.uiLabelIdTypeProduct.Text = " Mã loại sản phẩm:";
             // 
             // uiPanelButton
             // 
-            this.uiPanelButton.Controls.Add(this.btnDeleteTypeProduct);
-            this.uiPanelButton.Controls.Add(this.btnUpdateTypeProduct);
-            this.uiPanelButton.Controls.Add(this.btnInsertTypeProduct);
+            this.uiPanelButton.Controls.Add(this.uiButtonDeleteTypeProduct);
+            this.uiPanelButton.Controls.Add(this.uiButtonUpdateTypeProduct);
+            this.uiPanelButton.Controls.Add(this.uiButtonRefresh);
+            this.uiPanelButton.Controls.Add(this.uiButtonInsertTypeProduct);
             this.uiPanelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiPanelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiPanelButton.Location = new System.Drawing.Point(0, 772);
@@ -140,47 +142,47 @@
             this.uiPanelButton.Text = null;
             this.uiPanelButton.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnDeleteTypeProduct
+            // uiButtonDeleteTypeProduct
             // 
-            this.btnDeleteTypeProduct.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDeleteTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnDeleteTypeProduct.Location = new System.Drawing.Point(324, 28);
-            this.btnDeleteTypeProduct.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnDeleteTypeProduct.Name = "btnDeleteTypeProduct";
-            this.btnDeleteTypeProduct.Radius = 40;
-            this.btnDeleteTypeProduct.Size = new System.Drawing.Size(130, 50);
-            this.btnDeleteTypeProduct.TabIndex = 1;
-            this.btnDeleteTypeProduct.Text = "Xóa";
-            this.btnDeleteTypeProduct.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnDeleteTypeProduct.Click += new System.EventHandler(this.btnDeleteTypeProduct_Click);
+            this.uiButtonDeleteTypeProduct.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonDeleteTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonDeleteTypeProduct.Location = new System.Drawing.Point(324, 28);
+            this.uiButtonDeleteTypeProduct.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonDeleteTypeProduct.Name = "uiButtonDeleteTypeProduct";
+            this.uiButtonDeleteTypeProduct.Radius = 40;
+            this.uiButtonDeleteTypeProduct.Size = new System.Drawing.Size(130, 50);
+            this.uiButtonDeleteTypeProduct.TabIndex = 1;
+            this.uiButtonDeleteTypeProduct.Text = "Xóa";
+            this.uiButtonDeleteTypeProduct.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonDeleteTypeProduct.Click += new System.EventHandler(this.btnDeleteTypeProduct_Click);
             // 
-            // btnUpdateTypeProduct
+            // uiButtonUpdateTypeProduct
             // 
-            this.btnUpdateTypeProduct.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUpdateTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnUpdateTypeProduct.Location = new System.Drawing.Point(169, 28);
-            this.btnUpdateTypeProduct.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnUpdateTypeProduct.Name = "btnUpdateTypeProduct";
-            this.btnUpdateTypeProduct.Radius = 40;
-            this.btnUpdateTypeProduct.Size = new System.Drawing.Size(130, 50);
-            this.btnUpdateTypeProduct.TabIndex = 1;
-            this.btnUpdateTypeProduct.Text = "Cập nhật";
-            this.btnUpdateTypeProduct.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnUpdateTypeProduct.Click += new System.EventHandler(this.btnUpdateTypeProduct_Click);
+            this.uiButtonUpdateTypeProduct.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonUpdateTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonUpdateTypeProduct.Location = new System.Drawing.Point(169, 28);
+            this.uiButtonUpdateTypeProduct.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonUpdateTypeProduct.Name = "uiButtonUpdateTypeProduct";
+            this.uiButtonUpdateTypeProduct.Radius = 40;
+            this.uiButtonUpdateTypeProduct.Size = new System.Drawing.Size(130, 50);
+            this.uiButtonUpdateTypeProduct.TabIndex = 1;
+            this.uiButtonUpdateTypeProduct.Text = "Cập nhật";
+            this.uiButtonUpdateTypeProduct.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonUpdateTypeProduct.Click += new System.EventHandler(this.btnUpdateTypeProduct_Click);
             // 
-            // btnInsertTypeProduct
+            // uiButtonInsertTypeProduct
             // 
-            this.btnInsertTypeProduct.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInsertTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnInsertTypeProduct.Location = new System.Drawing.Point(8, 28);
-            this.btnInsertTypeProduct.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnInsertTypeProduct.Name = "btnInsertTypeProduct";
-            this.btnInsertTypeProduct.Radius = 40;
-            this.btnInsertTypeProduct.Size = new System.Drawing.Size(130, 50);
-            this.btnInsertTypeProduct.TabIndex = 1;
-            this.btnInsertTypeProduct.Text = "Thêm";
-            this.btnInsertTypeProduct.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnInsertTypeProduct.Click += new System.EventHandler(this.btnInsertTypeProduct_Click);
+            this.uiButtonInsertTypeProduct.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonInsertTypeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonInsertTypeProduct.Location = new System.Drawing.Point(8, 28);
+            this.uiButtonInsertTypeProduct.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonInsertTypeProduct.Name = "uiButtonInsertTypeProduct";
+            this.uiButtonInsertTypeProduct.Radius = 40;
+            this.uiButtonInsertTypeProduct.Size = new System.Drawing.Size(130, 50);
+            this.uiButtonInsertTypeProduct.TabIndex = 1;
+            this.uiButtonInsertTypeProduct.Text = "Thêm";
+            this.uiButtonInsertTypeProduct.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonInsertTypeProduct.Click += new System.EventHandler(this.btnInsertTypeProduct_Click);
             // 
             // uiPanelShowTypeProduct
             // 
@@ -198,52 +200,66 @@
             // 
             // uiDataGridViewShowTypeProducts
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiDataGridViewShowTypeProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridViewShowTypeProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.uiDataGridViewShowTypeProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.uiDataGridViewShowTypeProducts.BackgroundColor = System.Drawing.Color.White;
             this.uiDataGridViewShowTypeProducts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridViewShowTypeProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridViewShowTypeProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.uiDataGridViewShowTypeProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridViewShowTypeProducts.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridViewShowTypeProducts.DefaultCellStyle = dataGridViewCellStyle3;
             this.uiDataGridViewShowTypeProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridViewShowTypeProducts.EnableHeadersVisualStyles = false;
             this.uiDataGridViewShowTypeProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiDataGridViewShowTypeProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.uiDataGridViewShowTypeProducts.Location = new System.Drawing.Point(0, 0);
             this.uiDataGridViewShowTypeProducts.Name = "uiDataGridViewShowTypeProducts";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridViewShowTypeProducts.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridViewShowTypeProducts.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.uiDataGridViewShowTypeProducts.RowHeadersWidth = 62;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiDataGridViewShowTypeProducts.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiDataGridViewShowTypeProducts.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.uiDataGridViewShowTypeProducts.RowTemplate.Height = 28;
             this.uiDataGridViewShowTypeProducts.SelectedIndex = -1;
             this.uiDataGridViewShowTypeProducts.Size = new System.Drawing.Size(790, 988);
             this.uiDataGridViewShowTypeProducts.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridViewShowTypeProducts.TabIndex = 0;
             this.uiDataGridViewShowTypeProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewShowTypeProducts_CellClick);
+            // 
+            // uiButtonRefresh
+            // 
+            this.uiButtonRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButtonRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButtonRefresh.Location = new System.Drawing.Point(8, 98);
+            this.uiButtonRefresh.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButtonRefresh.Name = "uiButtonRefresh";
+            this.uiButtonRefresh.Radius = 40;
+            this.uiButtonRefresh.Size = new System.Drawing.Size(130, 50);
+            this.uiButtonRefresh.TabIndex = 1;
+            this.uiButtonRefresh.Text = "Làm mới";
+            this.uiButtonRefresh.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonRefresh.Click += new System.EventHandler(this.uiButtonRefresh_Click);
             // 
             // Form_ManagerTypeProduct
             // 
@@ -271,12 +287,13 @@
         private Sunny.UI.UIPanel uiPanelButton;
         private Sunny.UI.UIPanel uiPanelShowTypeProduct;
         private Sunny.UI.UIDataGridView uiDataGridViewShowTypeProducts;
-        private Sunny.UI.UITextBox uiTxtNameTypeProduct;
-        private Sunny.UI.UILabel labelNameTypeProduct;
-        private Sunny.UI.UILabel labelIdTypeProduct;
-        private Sunny.UI.UIButton btnDeleteTypeProduct;
-        private Sunny.UI.UIButton btnUpdateTypeProduct;
-        private Sunny.UI.UIButton btnInsertTypeProduct;
+        private Sunny.UI.UITextBox uiTextBoxNameTypeProduct;
+        private Sunny.UI.UILabel uiLabelNameTypeProduct;
+        private Sunny.UI.UILabel uiLabelIdTypeProduct;
+        private Sunny.UI.UIButton uiButtonDeleteTypeProduct;
+        private Sunny.UI.UIButton uiButtonUpdateTypeProduct;
+        private Sunny.UI.UIButton uiButtonInsertTypeProduct;
         private Sunny.UI.UIComboBox uiComboBoxIdTypeProduct;
+        private Sunny.UI.UIButton uiButtonRefresh;
     }
 }

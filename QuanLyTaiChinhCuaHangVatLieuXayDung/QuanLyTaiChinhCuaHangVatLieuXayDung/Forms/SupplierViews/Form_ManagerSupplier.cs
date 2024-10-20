@@ -28,6 +28,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews
         private void Form_ManagerSupplier_Load(object sender, EventArgs e)
         {
             DisplaySuppliersOnUIDataGridViewAndUiComboBox(this.uiDataGridViewSupplier, this.uiComboBoxIdSupplier);
+            SetupPlaceholderText(this.uiTextBoxSearchTerm, "Nhập thông tin bất kì: ");
         }
 
         //Lấy dữ liệu từ Data truyền vào UIDataGridView và UIComboBox
@@ -52,14 +53,47 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews
             }
         }
 
+        //Tạo thuộc tính placeholder cho textBox
+        void SetupPlaceholderText(UITextBox textBox, string placeholder)
+        {
+            textBox.Text = placeholder;
+            textBox.ForeColor = Color.Gray;
+
+            textBox.Enter += (sender, e) =>
+            {
+                if (textBox.Text == placeholder)
+                {
+                    textBox.Text = "";
+                    textBox.ForeColor = Color.Black;
+                }
+            };
+
+            textBox.Leave += (sender, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = placeholder;
+                    textBox.ForeColor = Color.Gray;
+                }
+            };
+
+            textBox.TextChanged += (sender, e) =>
+            {
+                if (textBox.Text != placeholder)
+                {
+                    textBox.ForeColor = Color.Black;
+                }
+            };
+        }
+
         private void uiDataGridViewSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 this.uiComboBoxIdSupplier.Text = this.uiDataGridViewSupplier.Rows[e.RowIndex].Cells["IdSupplier"].Value.ToString();
-                this.uiTxtNameSupplier.Text = this.uiDataGridViewSupplier.Rows[e.RowIndex].Cells["NameSupplier"].Value.ToString();
-                this.uiTxtPhoneNumber.Text = this.uiDataGridViewSupplier.Rows[e.RowIndex].Cells["PhoneNumber"].Value.ToString();
-                this.uiRTxtAddress.Text = this.uiDataGridViewSupplier.Rows[e.RowIndex].Cells["AddressSupplier"].Value.ToString();
+                this.uiTextBoxNameSupplier.Text = this.uiDataGridViewSupplier.Rows[e.RowIndex].Cells["NameSupplier"].Value.ToString();
+                this.uiTextBoxPhoneNumber.Text = this.uiDataGridViewSupplier.Rows[e.RowIndex].Cells["PhoneNumber"].Value.ToString();
+                this.uiTextBoxAddress.Text = this.uiDataGridViewSupplier.Rows[e.RowIndex].Cells["AddressSupplier"].Value.ToString();
             }
             catch
             {
@@ -73,9 +107,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews
                 Supplier supplier = this.supplierService.GetSupplierById(this.uiComboBoxIdSupplier.SelectedItem.ToString());
                 if (!supplier.IsNull())
                 {
-                    this.uiTxtNameSupplier.Text = supplier.NameSupplier;
-                    this.uiTxtPhoneNumber.Text = supplier.PhoneNumber;
-                    this.uiRTxtAddress.Text = supplier.AddressSupplier;
+                    this.uiTextBoxNameSupplier.Text = supplier.NameSupplier;
+                    this.uiTextBoxPhoneNumber.Text = supplier.PhoneNumber;
+                    this.uiTextBoxAddress.Text = supplier.AddressSupplier;
                 }
                 else
                 {
@@ -94,9 +128,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews
             try
             {
                 string idSupplier = this.uiComboBoxIdSupplier.Text.Trim();
-                string nameSupplier = this.uiTxtNameSupplier.Text.Trim();
-                string phoneNumber = this.uiTxtPhoneNumber.Text.Trim();
-                string address = this.uiRTxtAddress.Text.Trim();
+                string nameSupplier = this.uiTextBoxNameSupplier.Text.Trim();
+                string phoneNumber = this.uiTextBoxPhoneNumber.Text.Trim();
+                string address = this.uiTextBoxAddress.Text.Trim();
 
                 if (this.supplierService.InsertSupplier(new Supplier(idSupplier, nameSupplier, phoneNumber, address)))
                 {
@@ -122,9 +156,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews
             try
             {
                 string idSupplier = this.uiComboBoxIdSupplier.Text.Trim();
-                string nameSupplier = this.uiTxtNameSupplier.Text.Trim();
-                string phoneNumber = this.uiTxtPhoneNumber.Text.Trim();
-                string address = this.uiRTxtAddress.Text.Trim();
+                string nameSupplier = this.uiTextBoxNameSupplier.Text.Trim();
+                string phoneNumber = this.uiTextBoxPhoneNumber.Text.Trim();
+                string address = this.uiTextBoxAddress.Text.Trim();
 
                 if (this.supplierService.UpdateSupplier(new Supplier(idSupplier, nameSupplier, phoneNumber, address)))
                 {
@@ -185,7 +219,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews
         {
             try
             {
-                string searchTerm = this.uiTxtSearchTerm.Text.Trim();
+                string searchTerm = this.uiTextBoxSearchTerm.Text.Trim();
 
                 List<Supplier> suppliers = this.supplierService.SearchSupplier(searchTerm);
 
@@ -206,6 +240,32 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Notification",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void uiButtonRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //biểu diển lại dữ liệu trên uiDataGridViewShowTypeProducts và uiComboBoxIdTypeProduct
+                DisplaySuppliersOnUIDataGridViewAndUiComboBox(this.uiDataGridViewSupplier, uiComboBoxIdSupplier);
+
+                //Xét các textBox về gí trị ban đầu
+                foreach (Control control in this.uiPanelInformationSupplier.Controls)
+                {
+                    if ( !((control is UILabel) || (control is UISymbolLabel)) )
+                    {
+                        control.Text = "";
+                    }
+                }
+
+                this.uiTextBoxSearchTerm.Text = "";
+                this.uiTextBoxSearchTerm.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
