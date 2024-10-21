@@ -49,7 +49,36 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
 
         public List<TypeProduct> GetAllTypeProdcut()
         {
-            throw new NotImplementedException();
+            List<TypeProduct> typeProducts = new List<TypeProduct>();
+            string sqlQuery = "SELECT * FROM Fn_GetAllTypeProduct()";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                SqlDataReader reader = cmd.ExecuteReader();
+                TypeProduct typeProduct;
+                while (reader.Read())
+                {
+                    typeProduct = new TypeProduct();
+                    typeProduct.IdTypeProduct = reader["IdTypeProduct"].ToString();
+                    typeProduct.NameTypeProduct = reader["NameTypeProduct"].ToString();
+
+                    typeProducts.Add(typeProduct);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return typeProducts;
         }
 
         public TypeProduct GetTypeProductById(string idTypeProduct)

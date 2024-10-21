@@ -69,6 +69,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\ExpenseSlipView\Form_ExpenseSlipManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExpenseSlipView\Form_ExpenseSlipManager.Designer.cs">
+      <DependentUpon>Form_ExpenseSlipManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProductView\Form_ManagerProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProductView\Form_ManagerProduct.Designer.cs">
+      <DependentUpon>Form_ManagerProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ExpenseSlip.cs" />
+    <Compile Include="Service\IExpenseSlipService.cs" />
+    <Compile Include="Service\Implements\ExpenseSlipService.cs" />
     <Compile Include="User_Control\Products\DisplayProdcutInFormImport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -93,6 +108,12 @@
     <Compile Include="Service\IProductService.cs" />
     <Compile Include="Service\ISupplierService.cs" />
     <Compile Include="Service\ITypeProductService.cs" />
+    <EmbeddedResource Include="Forms\ExpenseSlipView\Form_ExpenseSlipManager.resx">
+      <DependentUpon>Form_ExpenseSlipManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProductView\Form_ManagerProduct.resx">
+      <DependentUpon>Form_ManagerProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User_Control\Products\DisplayProdcutInFormImport.resx">
       <DependentUpon>DisplayProdcutInFormImport.cs</DependentUpon>
     </EmbeddedResource>
@@ -145,7 +166,13 @@
     <None Include="Resources\import.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Products\" />
+    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>QuanLyTaiChinhCuaHangXayDung.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -159,14 +186,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>QuanLyTaiChinhCuaHangXayDung.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

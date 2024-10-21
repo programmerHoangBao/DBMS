@@ -61,7 +61,38 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
 
         public List<Supplier> GetAllSupplier()
         {
-            throw new NotImplementedException();
+            List<Supplier> suppliers = new List<Supplier>();
+            string sqlQuery = "SELECT * FROM Fn_GetAllSupplier()";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                SqlDataReader reader = cmd.ExecuteReader();
+                Supplier supplier;
+                while (reader.Read())
+                {
+                    supplier = new Supplier();
+                    supplier.IdSupplier = reader["IdSupplier"].ToString();
+                    supplier.NameSupplier = reader["NameSupplier"].ToString();
+                    supplier.PhoneSupplier = reader["PhoneNumber"].ToString();
+                    supplier.AddressSupplier = reader["AddressSupplier"].ToString();
+
+                    suppliers.Add(supplier);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return suppliers;
         }
 
         public Supplier GetSupplierById(string idSupplier)

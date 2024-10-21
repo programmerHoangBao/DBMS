@@ -1,4 +1,6 @@
-﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
+﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ExpenseSlipView;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Service;
 using System;
 using System.Collections.Generic;
@@ -59,6 +61,19 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.Home
         private void uiPanel_Body_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void productButton_Click(object sender, EventArgs e)
+        {
+            Form_ManagerProduct form_Product = new Form_ManagerProduct();
+            OpenFormChild(form_Product);
+            
+        }
+
+        private void expenseSlipButton_Click(object sender, EventArgs e)
+        {
+            Form_ExpenseSlipManager form = new Form_ExpenseSlipManager();
+            OpenFormChild(form);
         }
     }
 }
