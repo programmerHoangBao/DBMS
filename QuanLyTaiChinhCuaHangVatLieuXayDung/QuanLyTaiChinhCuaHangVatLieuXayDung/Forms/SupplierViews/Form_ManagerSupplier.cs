@@ -104,16 +104,12 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews
         {
             try
             {
-                Supplier supplier = this.supplierService.GetSupplierById(this.uiComboBoxIdSupplier.SelectedItem.ToString());
+                Supplier supplier = this.supplierService.GetSupplierById(this.uiComboBoxIdSupplier.Text.ToString());
                 if (!supplier.IsNull())
                 {
                     this.uiTextBoxNameSupplier.Text = supplier.NameSupplier;
                     this.uiTextBoxPhoneNumber.Text = supplier.PhoneNumber;
                     this.uiTextBoxAddress.Text = supplier.AddressSupplier;
-                }
-                else
-                {
-                    MessageBox.Show("Nhà cung cấp không tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)

@@ -1,4 +1,8 @@
-﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.CustomerViews;
+﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.CustomerViews;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.DetailBillViews;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.RevenueViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
@@ -57,6 +61,30 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
         {
             Form_ManagerCustomer form_ManagerCustomer = new Form_ManagerCustomer();
             OpenFormChild(form_ManagerCustomer);
+        }
+
+        private void uiSymbolButtonRevenue_Click(object sender, EventArgs e)
+        {
+            Form_ShowRevenue form_showRevenue = new Form_ShowRevenue();
+            OpenFormChild(form_showRevenue);
+        }
+
+        private void uiSymbolButtonProduct_Click(object sender, EventArgs e)
+        {
+            Form_ManagerProduct form_ManagerProduct = new Form_ManagerProduct();
+            OpenFormChild(form_ManagerProduct);
+        }
+
+        private void uiSymbolButtonBill_Click(object sender, EventArgs e)
+        {
+            Form_ManagerBill form_ManagerBill = new Form_ManagerBill();
+            OpenFormChild(form_ManagerBill);
+        }
+
+        private void uiSymbolButtonDetailBill_Click(object sender, EventArgs e)
+        {
+            Form_ManagerDetailBill form_ManagerDetail = new Form_ManagerDetailBill();
+            OpenFormChild(form_ManagerDetail);
         }
     }
 }

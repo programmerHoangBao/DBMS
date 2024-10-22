@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|d:\\he_quan_tri_co_so_du_lieu\\do_an_cuoi_ky_nhom_5\\quanlytaichinhcuahangvatlieuxaydung\\quanlytaichinhcuahangvatlieuxaydung\\forms\\customerviews\\form_managercustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|solutionrelative:quanlytaichinhcuahangvatlieuxaydung\\forms\\customerviews\\form_managercustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|d:\\he_quan_tri_co_so_du_lieu\\do_an_cuoi_ky_nhom_5\\quanlytaichinhcuahangvatlieuxaydung\\quanlytaichinhcuahangvatlieuxaydung\\forms\\billviews\\form_managerbill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{220AFDEA-8205-4ED7-A010-E66E5053E585}|QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung.csproj|solutionrelative:quanlytaichinhcuahangvatlieuxaydung\\forms\\billviews\\form_managerbill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,13 +27,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Form_ManagerCustomer.cs [Design]",
-              "DocumentMoniker": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung\\Forms\\CustomerViews\\Form_ManagerCustomer.cs",
-              "RelativeDocumentMoniker": "QuanLyTaiChinhCuaHangVatLieuXayDung\\Forms\\CustomerViews\\Form_ManagerCustomer.cs",
-              "ToolTip": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung\\Forms\\CustomerViews\\Form_ManagerCustomer.cs [Design]",
-              "RelativeToolTip": "QuanLyTaiChinhCuaHangVatLieuXayDung\\Forms\\CustomerViews\\Form_ManagerCustomer.cs [Design]",
+              "Title": "Form_ManagerBIll.cs [Design]",
+              "DocumentMoniker": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung\\Forms\\BillViews\\Form_ManagerBIll.cs",
+              "RelativeDocumentMoniker": "QuanLyTaiChinhCuaHangVatLieuXayDung\\Forms\\BillViews\\Form_ManagerBIll.cs",
+              "ToolTip": "D:\\He_Quan_Tri_Co_So_Du_Lieu\\Do_An_Cuoi_Ky_Nhom_5\\QuanLyTaiChinhCuaHangVatLieuXayDung\\QuanLyTaiChinhCuaHangVatLieuXayDung\\Forms\\BillViews\\Form_ManagerBIll.cs [Design]",
+              "RelativeToolTip": "QuanLyTaiChinhCuaHangVatLieuXayDung\\Forms\\BillViews\\Form_ManagerBIll.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T17:15:00.807Z",
+              "WhenOpened": "2024-10-22T12:22:14.891Z",
               "EditorCaption": " [Design]"
             }
           ]

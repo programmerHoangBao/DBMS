@@ -23,7 +23,38 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
 
         public bool DeleteProduct(string idProduct)
         {
-            throw new NotImplementedException();
+            bool isDeleted = false;
+            string sqlQuery = "SP_DeleteProduct";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@IdProduct", idProduct);
+
+                SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
+                cmd.Parameters.Add(resultParam);
+
+                cmd.ExecuteNonQuery();
+
+                isDeleted = (int)resultParam.Value == 1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return isDeleted;
         }
 
         public List<Product> GetAllProduct()
@@ -52,7 +83,6 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                     product.Supplier = this.supplierService.GetSupplierById(reader["IdSupplier"].ToString());
                     product.ImageProduct = reader["ImageProduct"] as byte[];
 
-                    //Thêm product vào list products
                     products.Add(product);
                 }
             }
@@ -71,22 +101,183 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
 
         public Product GetProductById(string idProduct)
         {
-            throw new NotImplementedException();
+            Product product = new Product();
+            string sqlQuery = "SELECT * From Fn_GetProductById(@IdProduct)";
+            try
+            {
+                this.myDatabase.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = CommandType.Text;
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    product = new Product
+                    {
+                        IdProduct = reader["IdProduct"].ToString(),
+                        NameProduct = reader["NameProduct"].ToString(),
+                        Unit = reader["Unit"].ToString(),
+                        UnitPriceImport = Convert.ToDecimal(reader["UnitPriceImport"]),
+                        UnitPriceExport = Convert.ToDecimal(reader["UnitPriceExport"]),
+                        QuantityProduct = Convert.ToInt32(reader["QuantityProduct"]),
+                        TypeProduct = this.typeProductService.GetTypeProductById(reader["IdTypeProduct"].ToString()),
+                        Supplier = this.supplierService.GetSupplierById(reader["IdSupplier"].ToString()),
+                        ImageProduct = reader["ImageProduct"] as byte[] // assuming it's a binary data
+                    };
+                }
+                reader.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return product;
         }
 
         public bool InsertProduct(Product product)
         {
-            throw new NotImplementedException();
-        }
+            bool isInserted = false;
+            string sqlQuery = "SP_InsertProduct";
 
-        public List<Product> SearchProducts(string searchTerm)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@IdProduct", product.IdProduct);
+                cmd.Parameters.AddWithValue("@NameProduct", product.NameProduct);
+                cmd.Parameters.AddWithValue("@Unit", product.Unit);
+                cmd.Parameters.AddWithValue("@UnitPriceImport", product.UnitPriceImport);
+                cmd.Parameters.AddWithValue("@UnitPriceExport", product.UnitPriceExport);
+                cmd.Parameters.AddWithValue("@QuantityProduct", product.QuantityProduct);
+                cmd.Parameters.AddWithValue("@IdTypeProduct", product.TypeProduct.IdTypeProduct);
+                cmd.Parameters.AddWithValue("@IdSupplier", product.Supplier.IdSupplier);
+                //cmd.Parameters.AddWithValue("@ImageProduct", (object)product.ImageProduct ?? DBNull.Value);
+
+                SqlParameter imageParam = new SqlParameter("@ImageProduct", SqlDbType.VarBinary);
+                if (product.ImageProduct != null)
+                {
+                    imageParam.Value = product.ImageProduct;
+                }
+                else
+                {
+                    imageParam.Value = DBNull.Value;
+                }
+                cmd.Parameters.Add(imageParam);
+
+                SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
+                cmd.Parameters.Add(resultParam);
+
+                cmd.ExecuteNonQuery();
+
+                isInserted = (int)resultParam.Value == 1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return isInserted;
         }
 
         public bool UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            bool isUpdated = false;
+            string sqlQuery = "SP_UpdateProduct";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@IdProduct", product.IdProduct);
+                cmd.Parameters.AddWithValue("@NameProduct", product.NameProduct);
+                cmd.Parameters.AddWithValue("@Unit", product.Unit);
+                cmd.Parameters.AddWithValue("@UnitPriceImport", product.UnitPriceImport);
+                cmd.Parameters.AddWithValue("@UnitPriceExport", product.UnitPriceExport);
+                cmd.Parameters.AddWithValue("@QuantityProduct", product.QuantityProduct);
+                cmd.Parameters.AddWithValue("@IdTypeProduct", product.TypeProduct.IdTypeProduct);
+                cmd.Parameters.AddWithValue("@IdSupplier", product.Supplier.IdSupplier);
+                cmd.Parameters.AddWithValue("@ImageProduct", product.ImageProduct);
+
+                SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int);
+                resultParam.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(resultParam);
+
+                cmd.ExecuteNonQuery();
+
+                isUpdated = (int)resultParam.Value == 1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return isUpdated;
+        }
+
+        public List<Product> SearchProducts(string searchTerm)
+        {
+            List<Product> products = new List<Product>();
+            string sqlQuery = "SELECT * FROM Fn_SearchProducts(@SearchTerm)";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.AddWithValue("@SearchTerm", searchTerm);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Product product = new Product
+                    {
+                        IdProduct = reader["IdProduct"].ToString(),
+                        NameProduct = reader["NameProduct"].ToString(),
+                        Unit = reader["Unit"].ToString(),
+                        UnitPriceImport = Convert.ToDecimal(reader["UnitPriceImport"]),
+                        UnitPriceExport = Convert.ToDecimal(reader["UnitPriceExport"]),
+                        QuantityProduct = Convert.ToDecimal(reader["QuantityProduct"]),
+                        TypeProduct = this.typeProductService.GetTypeProductById(reader["IdTypeProduct"].ToString()),
+                        Supplier = this.supplierService.GetSupplierById(reader["IdSupplier"].ToString()),
+                        ImageProduct = reader["ImageProduct"] as byte[] // assuming it's binary data
+                    };
+
+                    products.Add(product);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return products;
         }
     }
 }

@@ -38,7 +38,11 @@
             this.uiSymbolButtonTypeProdcut = new Sunny.UI.UISymbolButton();
             this.uiSymbolButtonManagerSupplier = new Sunny.UI.UISymbolButton();
             this.uiSymbolButtonCustomer = new Sunny.UI.UISymbolButton();
+            this.uiSymbolButtonProduct = new Sunny.UI.UISymbolButton();
+            this.uiSymbolButtonRevenue = new Sunny.UI.UISymbolButton();
             this.uiPanel_Body = new Sunny.UI.UIPanel();
+            this.uiSymbolButtonBill = new Sunny.UI.UISymbolButton();
+            this.uiSymbolButtonDetailBill = new Sunny.UI.UISymbolButton();
             this.panel_header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHamburger_menu)).BeginInit();
             this.flowLayoutPanel_Menu.SuspendLayout();
@@ -100,6 +104,10 @@
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonTypeProdcut);
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonManagerSupplier);
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonCustomer);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonProduct);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonBill);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonDetailBill);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonRevenue);
             this.flowLayoutPanel_Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel_Menu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel_Menu.Location = new System.Drawing.Point(0, 50);
@@ -171,6 +179,38 @@
             this.uiSymbolButtonCustomer.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.uiSymbolButtonCustomer.Click += new System.EventHandler(this.uiSBtnBtnCustomer_Click);
             // 
+            // uiSymbolButtonProduct
+            // 
+            this.uiSymbolButtonProduct.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButtonProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButtonProduct.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButtonProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButtonProduct.Location = new System.Drawing.Point(3, 227);
+            this.uiSymbolButtonProduct.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButtonProduct.Name = "uiSymbolButtonProduct";
+            this.uiSymbolButtonProduct.Radius = 20;
+            this.uiSymbolButtonProduct.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButtonProduct.TabIndex = 0;
+            this.uiSymbolButtonProduct.Text = "Sản Phẩm";
+            this.uiSymbolButtonProduct.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButtonProduct.Click += new System.EventHandler(this.uiSymbolButtonProduct_Click);
+            // 
+            // uiSymbolButtonRevenue
+            // 
+            this.uiSymbolButtonRevenue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButtonRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButtonRevenue.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButtonRevenue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButtonRevenue.Location = new System.Drawing.Point(3, 395);
+            this.uiSymbolButtonRevenue.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButtonRevenue.Name = "uiSymbolButtonRevenue";
+            this.uiSymbolButtonRevenue.Radius = 20;
+            this.uiSymbolButtonRevenue.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButtonRevenue.TabIndex = 0;
+            this.uiSymbolButtonRevenue.Text = "Doanh thu";
+            this.uiSymbolButtonRevenue.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButtonRevenue.Click += new System.EventHandler(this.uiSymbolButtonRevenue_Click);
+            // 
             // uiPanel_Body
             // 
             this.uiPanel_Body.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -183,6 +223,38 @@
             this.uiPanel_Body.TabIndex = 4;
             this.uiPanel_Body.Text = "Body";
             this.uiPanel_Body.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiSymbolButtonBill
+            // 
+            this.uiSymbolButtonBill.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButtonBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButtonBill.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButtonBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButtonBill.Location = new System.Drawing.Point(3, 283);
+            this.uiSymbolButtonBill.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButtonBill.Name = "uiSymbolButtonBill";
+            this.uiSymbolButtonBill.Radius = 20;
+            this.uiSymbolButtonBill.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButtonBill.TabIndex = 0;
+            this.uiSymbolButtonBill.Text = "Hóa Đơn";
+            this.uiSymbolButtonBill.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButtonBill.Click += new System.EventHandler(this.uiSymbolButtonBill_Click);
+            // 
+            // uiSymbolButtonDetailBill
+            // 
+            this.uiSymbolButtonDetailBill.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButtonDetailBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButtonDetailBill.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButtonDetailBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButtonDetailBill.Location = new System.Drawing.Point(3, 339);
+            this.uiSymbolButtonDetailBill.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButtonDetailBill.Name = "uiSymbolButtonDetailBill";
+            this.uiSymbolButtonDetailBill.Radius = 20;
+            this.uiSymbolButtonDetailBill.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButtonDetailBill.TabIndex = 0;
+            this.uiSymbolButtonDetailBill.Text = "Chi tiết bill";
+            this.uiSymbolButtonDetailBill.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButtonDetailBill.Click += new System.EventHandler(this.uiSymbolButtonDetailBill_Click);
             // 
             // Home
             // 
@@ -220,5 +292,9 @@
         private Sunny.UI.UISymbolButton uiSymbolButtonTypeProdcut;
         private Sunny.UI.UISymbolButton uiSymbolButtonManagerSupplier;
         private Sunny.UI.UISymbolButton uiSymbolButtonCustomer;
+        private Sunny.UI.UISymbolButton uiSymbolButtonRevenue;
+        private Sunny.UI.UISymbolButton uiSymbolButtonProduct;
+        private Sunny.UI.UISymbolButton uiSymbolButtonBill;
+        private Sunny.UI.UISymbolButton uiSymbolButtonDetailBill;
     }
 }

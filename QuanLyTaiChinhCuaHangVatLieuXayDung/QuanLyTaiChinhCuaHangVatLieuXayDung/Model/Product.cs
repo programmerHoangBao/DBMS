@@ -15,8 +15,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
         private decimal unitPriceImport;
         private decimal unitPriceExport;
         private decimal quantityProduct;
-        private TypeProduct typeProduct;
-        private Supplier supplier;
+        private TypeProduct typeProduct = new TypeProduct();
+        private Supplier supplier = new Supplier();
         private byte[] imageProduct;
 
         public Product()
@@ -32,5 +32,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
         public byte[] ImageProduct { get => imageProduct; set => imageProduct = value; }
         internal TypeProduct TypeProduct { get => typeProduct; set => typeProduct = value; }
         internal Supplier Supplier { get => supplier; set => supplier = value; }
+
+
     }
 }

@@ -38,13 +38,14 @@ BEGIN
 END;
 GO
 
-
+DROP PROCEDURE SP_InsertExpenseSlip;
+DROP PROCEDURE SP_UpdateExpenseSlip;
 --Store Procedure thực hiện thêm dữ liệu vào bảng ExpenseSlips
 CREATE PROCEDURE SP_InsertExpenseSlip
 	@IdExpenseSlip CHAR(6),
 	@DateCreate DATE,
 	@Content NVARCHAR(MAX),
-	@TypeExpenseSlip CHAR(15),
+	@TypeExpenseSlip NVARCHAR(10),
 	@TotalMoney DECIMAL(18, 2),
 	@Result INT OUTPUT
 AS
@@ -73,7 +74,7 @@ CREATE PROCEDURE SP_UpdateExpenseSlip
 	@IdExpenseSlip CHAR(6),
 	@DateCreate DATE,
 	@Content NVARCHAR(MAX),
-	@TypeExpenseSlip CHAR(15),
+	@TypeExpenseSlip NVARCHAR(10),
 	@TotalMoney DECIMAL(18, 2),
 	@Result INT OUTPUT
 AS
@@ -123,6 +124,7 @@ BEGIN
 END;
 GO
 
+DROP FUNCTION Fn_GetAllExpenseSlip;
 --Function lấy ra tất cả các ExpenseSlip
 CREATE FUNCTION Fn_GetAllExpenseSlip()
 RETURNS TABLE
@@ -225,6 +227,7 @@ AS
 	(
 		SELECT DISTINCT 
 			EX.IdExpenseSlip,
+			EX.DateCreate, 
 			EX.Content,
 			EX.TypeExpenseSlip,
 			EX.TotalMoney

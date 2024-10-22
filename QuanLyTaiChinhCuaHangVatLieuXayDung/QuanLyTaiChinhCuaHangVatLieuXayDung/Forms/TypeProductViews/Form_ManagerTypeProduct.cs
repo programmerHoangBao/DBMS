@@ -66,16 +66,12 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
         {
             try
             {
-                string idTypeProduct = this.uiComboBoxIdTypeProduct.SelectedItem.ToString();
+                string idTypeProduct = this.uiComboBoxIdTypeProduct.Text.Trim();
                 TypeProduct typeProduct = this.typeProductService.GetTypeProductById(idTypeProduct);
 
                 if (!typeProduct.IsNull())
                 {
                     this.uiTextBoxNameTypeProduct.Text = typeProduct.NameTypeProduct;
-                }
-                else
-                {
-                    MessageBox.Show("Loại sản phẩm không tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
