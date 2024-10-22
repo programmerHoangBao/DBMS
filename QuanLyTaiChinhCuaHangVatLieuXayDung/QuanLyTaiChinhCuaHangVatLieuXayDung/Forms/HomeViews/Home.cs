@@ -1,6 +1,7 @@
 ﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.CustomerViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.SupplierViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Model;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Service;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements;
@@ -57,6 +58,12 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
         {
             Form_ManagerCustomer form_ManagerCustomer = new Form_ManagerCustomer();
             OpenFormChild(form_ManagerCustomer);
+        }
+
+        private void uiSymbolButton1_Click(object sender, EventArgs e)
+        {
+            Form_ManagerBIll form_ManagerBill = new Form_ManagerBIll();
+            OpenFormChild(form_ManagerBill);
         }
     }
 }

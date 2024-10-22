@@ -39,6 +39,7 @@
             this.uiSymbolButtonManagerSupplier = new Sunny.UI.UISymbolButton();
             this.uiSymbolButtonCustomer = new Sunny.UI.UISymbolButton();
             this.uiPanel_Body = new Sunny.UI.UIPanel();
+            this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             this.panel_header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHamburger_menu)).BeginInit();
             this.flowLayoutPanel_Menu.SuspendLayout();
@@ -54,7 +55,7 @@
             this.panel_header.Location = new System.Drawing.Point(0, 0);
             this.panel_header.Margin = new System.Windows.Forms.Padding(5);
             this.panel_header.Name = "panel_header";
-            this.panel_header.Size = new System.Drawing.Size(1478, 50);
+            this.panel_header.Size = new System.Drawing.Size(1370, 50);
             this.panel_header.TabIndex = 1;
             // 
             // uiLabel_header
@@ -63,9 +64,9 @@
             this.uiLabel_header.AutoSize = true;
             this.uiLabel_header.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uiLabel_header.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel_header.Location = new System.Drawing.Point(710, 4);
+            this.uiLabel_header.Location = new System.Drawing.Point(656, 4);
             this.uiLabel_header.Name = "uiLabel_header";
-            this.uiLabel_header.Size = new System.Drawing.Size(165, 52);
+            this.uiLabel_header.Size = new System.Drawing.Size(111, 36);
             this.uiLabel_header.TabIndex = 1;
             this.uiLabel_header.Text = "Header";
             // 
@@ -87,10 +88,10 @@
             this.panel_footer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.panel_footer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_footer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_footer.Location = new System.Drawing.Point(0, 1094);
+            this.panel_footer.Location = new System.Drawing.Point(0, 699);
             this.panel_footer.Margin = new System.Windows.Forms.Padding(5);
             this.panel_footer.Name = "panel_footer";
-            this.panel_footer.Size = new System.Drawing.Size(1478, 50);
+            this.panel_footer.Size = new System.Drawing.Size(1370, 50);
             this.panel_footer.TabIndex = 2;
             // 
             // flowLayoutPanel_Menu
@@ -100,12 +101,13 @@
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonTypeProdcut);
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonManagerSupplier);
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonCustomer);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButton1);
             this.flowLayoutPanel_Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel_Menu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel_Menu.Location = new System.Drawing.Point(0, 50);
             this.flowLayoutPanel_Menu.Margin = new System.Windows.Forms.Padding(5);
             this.flowLayoutPanel_Menu.Name = "flowLayoutPanel_Menu";
-            this.flowLayoutPanel_Menu.Size = new System.Drawing.Size(200, 1044);
+            this.flowLayoutPanel_Menu.Size = new System.Drawing.Size(200, 649);
             this.flowLayoutPanel_Menu.TabIndex = 3;
             // 
             // uiSBtnHome
@@ -179,16 +181,32 @@
             this.uiPanel_Body.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel_Body.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel_Body.Name = "uiPanel_Body";
-            this.uiPanel_Body.Size = new System.Drawing.Size(1278, 1044);
+            this.uiPanel_Body.Size = new System.Drawing.Size(1170, 649);
             this.uiPanel_Body.TabIndex = 4;
             this.uiPanel_Body.Text = "Body";
             this.uiPanel_Body.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiSymbolButton1
+            // 
+            this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButton1.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButton1.Location = new System.Drawing.Point(3, 227);
+            this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButton1.Name = "uiSymbolButton1";
+            this.uiSymbolButton1.Radius = 20;
+            this.uiSymbolButton1.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButton1.TabIndex = 1;
+            this.uiSymbolButton1.Text = "Hóa đơn";
+            this.uiSymbolButton1.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButton1.Click += new System.EventHandler(this.uiSymbolButton1_Click);
+            // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1478, 1144);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.uiPanel_Body);
             this.Controls.Add(this.flowLayoutPanel_Menu);
             this.Controls.Add(this.panel_footer);
@@ -220,5 +238,6 @@
         private Sunny.UI.UISymbolButton uiSymbolButtonTypeProdcut;
         private Sunny.UI.UISymbolButton uiSymbolButtonManagerSupplier;
         private Sunny.UI.UISymbolButton uiSymbolButtonCustomer;
+        private Sunny.UI.UISymbolButton uiSymbolButton1;
     }
 }
