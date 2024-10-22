@@ -114,7 +114,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
                             if (!detailBillService.InsertDetailBill(detailBill))
                             {
                                 MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                if (billService.CheckExistBillInD(txt_idBill.Text))
+                                if (!billService.CheckExistBillInD(txt_idBill.Text))
                                 {
                                     billService.DeleteBill(txt_idBill.Text);
                                 }
@@ -140,7 +140,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
                         foreach (DetailBill detailBill in listAddDetailBill)
                         {
                             MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            if (billService.CheckExistBillInD(txt_idBill.Text))
+                            if (!billService.CheckExistBillInD(txt_idBill.Text))
                             {
                                 billService.DeleteBill(txt_idBill.Text);
                             }
@@ -300,6 +300,63 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
         private void uiButtonUpdateBill_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void uiButtonSearchBill_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string searchTerm = this.uiTextBoxSearchTerm.Text.Trim();
+
+                if (cbb_selectTypeBill.SelectedIndex == 0)
+                {
+                    List<Bill> bills = this.billService.SearchImportBill(searchTerm);
+
+                    if (bills.Count > 0)
+                    {
+                        MessageBox.Show("Tìm thấy " + bills.Count.ToString() + " hóa đơn!", "Thông Báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.dgv_listbill.DataSource = bills;
+                        this.txt_idBill.Text = bills[0].IdBill;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy bất kì hóa đơn nào!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    List<Bill> bills = this.billService.SearchExportBill(searchTerm);
+
+                    if (bills.Count > 0)
+                    {
+                        MessageBox.Show("Tìm thấy " + bills.Count.ToString() + " hóa đơn!", "Thông Báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.dgv_listbill.DataSource = bills;
+                        this.txt_idBill.Text = bills[0].IdBill;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy bất kì hóa đơn nào!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void uiButtonRefresh_Click(object sender, EventArgs e)
+        {
+            DisplaySuppliersOnUIDataGridViewAndUiComboBox(this.dgv_listbill, this.cbb_selectTypeBill, this.cbb_typeBill);
+            detailBills = new List<DetailBill>();
+            txt_idBill.Text = "";
+            txt_idSupOrCus.Text = "";
+            uiListBox1.Items.Clear();
         }
     }
 }

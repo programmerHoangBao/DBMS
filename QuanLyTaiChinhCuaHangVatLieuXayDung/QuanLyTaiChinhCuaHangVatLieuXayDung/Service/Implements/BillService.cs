@@ -18,32 +18,37 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
         public bool CheckExistBillInD(string idBill)
         {
             bool result = false;
-            string sqlQuery = "Fn_CheckExistBillInDetaBill(@IdBill)";
+            string sqlQuery = "SELECT dbo.Fn_CheckExistBillInDetaBill(@IdBill)";  // Dùng SELECT để gọi function
 
             try
             {
+                // Mở kết nối tới cơ sở dữ liệu
                 this.myDatabase.OpenConnection();
+
+                // Tạo SqlCommand với câu lệnh SQL
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
-                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Thêm tham số cho function
                 cmd.Parameters.AddWithValue("@IdBill", idBill);
 
-                SqlParameter outputParam = new SqlParameter("@Result", SqlDbType.Int)
-                {
-                    Direction = ParameterDirection.Output
-                };
-                cmd.Parameters.Add(outputParam);
+                // Thực thi câu lệnh và lấy kết quả
+                object scalarResult = cmd.ExecuteScalar();
 
-                cmd.ExecuteNonQuery();
-                result = (int)outputParam.Value == 1;
+                // Kiểm tra kết quả trả về
+                if (scalarResult != null && scalarResult != DBNull.Value)
+                {
+                    result = Convert.ToInt32(scalarResult) == 1;
+                }
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("An error occurred: " + ex.Message);
+                // Xử lý ngoại lệ
                 MessageBox.Show("An error occurred: " + ex.Message, "Notification",
                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
+                // Đóng kết nối sau khi thực thi
                 this.myDatabase.CloseConnection();
             }
 
@@ -373,7 +378,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 {
                     bill = new Bill();
                     bill.IdBill = reader["IdBill"].ToString();
-                    bill.IdCustomer = reader["IdCustomer"].ToString();
+                    bill.IdSupplier = reader["IdSupplier"].ToString();
                     bill.DateCreate = (DateTime)reader["DateCreate"];
                     bill.TypeBill = reader["TypeBill"].ToString();
                     bill.Total = (decimal)reader["Total"];
