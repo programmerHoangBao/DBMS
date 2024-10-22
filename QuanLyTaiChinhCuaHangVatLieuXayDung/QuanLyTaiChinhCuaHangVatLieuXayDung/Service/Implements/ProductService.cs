@@ -145,7 +145,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 this.myDatabase.OpenConnection();
 
                 SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@IdProduct", product.IdProduct);
                 cmd.Parameters.AddWithValue("@NameProduct", product.NameProduct);
@@ -155,7 +155,18 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 cmd.Parameters.AddWithValue("@QuantityProduct", product.QuantityProduct);
                 cmd.Parameters.AddWithValue("@IdTypeProduct", product.TypeProduct.IdTypeProduct);
                 cmd.Parameters.AddWithValue("@IdSupplier", product.Supplier.IdSupplier);
-                cmd.Parameters.AddWithValue("@ImageProduct", product.ImageProduct);
+                //cmd.Parameters.AddWithValue("@ImageProduct", (object)product.ImageProduct ?? DBNull.Value);
+
+                SqlParameter imageParam = new SqlParameter("@ImageProduct", SqlDbType.VarBinary);
+                if (product.ImageProduct != null)
+                {
+                    imageParam.Value = product.ImageProduct;
+                }
+                else
+                {
+                    imageParam.Value = DBNull.Value;
+                }
+                cmd.Parameters.Add(imageParam);
 
                 SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int)
                 {

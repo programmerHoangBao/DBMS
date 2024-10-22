@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiPanelFunction = new Sunny.UI.UIPanel();
             this.buttonDelete = new Sunny.UI.UIButton();
             this.buttonRefresh = new Sunny.UI.UIButton();
@@ -54,13 +59,13 @@
             this.uiLabel3 = new Sunny.UI.UILabel();
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiLabel1 = new Sunny.UI.UILabel();
-            this.dataGridViewProduct = new System.Windows.Forms.DataGridView();
             this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.dataGridViewProduct = new Sunny.UI.UIDataGridView();
             this.uiPanelFunction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduct)).BeginInit();
             this.uiPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduct)).BeginInit();
             this.SuspendLayout();
             // 
             // uiPanelFunction
@@ -92,11 +97,11 @@
             this.uiPanelFunction.Controls.Add(this.uiLabel1);
             this.uiPanelFunction.Dock = System.Windows.Forms.DockStyle.Right;
             this.uiPanelFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelFunction.Location = new System.Drawing.Point(847, 0);
+            this.uiPanelFunction.Location = new System.Drawing.Point(835, 0);
             this.uiPanelFunction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelFunction.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelFunction.Name = "uiPanelFunction";
-            this.uiPanelFunction.Size = new System.Drawing.Size(370, 712);
+            this.uiPanelFunction.Size = new System.Drawing.Size(382, 712);
             this.uiPanelFunction.TabIndex = 0;
             this.uiPanelFunction.Text = null;
             this.uiPanelFunction.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -431,19 +436,6 @@
             this.uiLabel1.TabIndex = 20;
             this.uiLabel1.Text = "ID Sản phẩm:";
             // 
-            // dataGridViewProduct
-            // 
-            this.dataGridViewProduct.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewProduct.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewProduct.Name = "dataGridViewProduct";
-            this.dataGridViewProduct.RowHeadersWidth = 51;
-            this.dataGridViewProduct.RowTemplate.Height = 24;
-            this.dataGridViewProduct.Size = new System.Drawing.Size(847, 712);
-            this.dataGridViewProduct.TabIndex = 2;
-            this.dataGridViewProduct.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProduct_CellDoubleClick);
-            // 
             // uiContextMenuStrip1
             // 
             this.uiContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -461,10 +453,59 @@
             this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
-            this.uiPanel1.Size = new System.Drawing.Size(847, 712);
+            this.uiPanel1.Size = new System.Drawing.Size(835, 712);
             this.uiPanel1.TabIndex = 1;
             this.uiPanel1.Text = "uiPanel1";
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dataGridViewProduct
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.dataGridViewProduct.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewProduct.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewProduct.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewProduct.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewProduct.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewProduct.EnableHeadersVisualStyles = false;
+            this.dataGridViewProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.dataGridViewProduct.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.dataGridViewProduct.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewProduct.Name = "dataGridViewProduct";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewProduct.RowHeadersWidth = 51;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.dataGridViewProduct.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewProduct.RowTemplate.Height = 24;
+            this.dataGridViewProduct.SelectedIndex = -1;
+            this.dataGridViewProduct.Size = new System.Drawing.Size(835, 712);
+            this.dataGridViewProduct.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.dataGridViewProduct.TabIndex = 0;
+            this.dataGridViewProduct.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProduct_CellClick);
             // 
             // Form_ManagerProduct
             // 
@@ -478,15 +519,14 @@
             this.Load += new System.EventHandler(this.Form_ManagerProduct_Load);
             this.uiPanelFunction.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduct)).EndInit();
             this.uiPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduct)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private Sunny.UI.UIPanel uiPanelFunction;
-        private System.Windows.Forms.DataGridView dataGridViewProduct;
         private Sunny.UI.UIButton buttonUploadImage;
         private Sunny.UI.UIButton buttonAdd;
         private Sunny.UI.UIComboBox comboBoxNhaCungCap;
@@ -514,5 +554,6 @@
         private Sunny.UI.UIButton buttonRefresh;
         private Sunny.UI.UIPanel uiPanel1;
         private Sunny.UI.UIButton buttonDelete;
+        private Sunny.UI.UIDataGridView dataGridViewProduct;
     }
 }

@@ -106,15 +106,6 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ExpenseSlipView
             }
         }
 
-        private void dataGridViewExpenseSlip_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            textBoxID.Text = dataGridViewExpenseSlip.CurrentRow.Cells[0].Value.ToString();
-            dataGridViewExpenseSlip.Text = dataGridViewExpenseSlip.CurrentRow.Cells[1].Value.ToString();
-            textBoxContent.Text = dataGridViewExpenseSlip.CurrentRow.Cells[2].Value.ToString();
-            comBoBoxTypeExpenseSlip.Text = dataGridViewExpenseSlip.CurrentRow.Cells[3].Value.ToString();
-            textBoxTotalMoney.Text = dataGridViewExpenseSlip.CurrentRow.Cells[4].Value.ToString();
-        }
-
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             try
@@ -220,6 +211,15 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ExpenseSlipView
             decimal totalMoney = expenseslipservice.CalculateTotalMoneyExpenseSlipSpend();
             labelTotalMoney.Visible = true;
             labelTotalMoney.Text = labelTotalMoney.Text + totalMoney.ToString();
+        }
+
+        private void dataGridViewExpenseSlip_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            textBoxID.Text = dataGridViewExpenseSlip.CurrentRow.Cells[0].Value.ToString();
+            dataGridViewExpenseSlip.Text = dataGridViewExpenseSlip.CurrentRow.Cells[1].Value.ToString();
+            textBoxContent.Text = dataGridViewExpenseSlip.CurrentRow.Cells[2].Value.ToString();
+            comBoBoxTypeExpenseSlip.Text = dataGridViewExpenseSlip.CurrentRow.Cells[3].Value.ToString();
+            textBoxTotalMoney.Text = dataGridViewExpenseSlip.CurrentRow.Cells[4].Value.ToString();
         }
     }
 }

@@ -94,10 +94,24 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
             dataGridViewProduct.Columns["ImageProduct"].HeaderText = "Hình ảnh";
         }
 
+        private byte[] ImageToByteArray(PictureBox pictureBox)
+        {
+            if (pictureBox.Image != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    pictureBox.Image.Save(ms, pictureBox.Image.RawFormat);
+                    return ms.ToArray();
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            MemoryStream pic = new MemoryStream();
-            pictureBox1.Image.Save(pic, pictureBox1.Image.RawFormat);
             Model.Product product = new Model.Product();
             try
             {
@@ -111,7 +125,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
                 product.TypeProduct.IdTypeProduct = comboBoxLoaiSP.SelectedValue.ToString();
                 product.Supplier = new Supplier();
                 product.Supplier.IdSupplier = comboBoxNhaCungCap.SelectedValue.ToString();
-                product.ImageProduct = pic.ToArray();
+                product.ImageProduct = ImageToByteArray(this.pictureBox1);
                 if (productservice.InsertProduct(product))
                 {
                     MessageBox.Show("Sản phẩm đã được thêm", "Thêm sản phẩm", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -238,7 +252,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
             }
         }
 
-        private void dataGridViewProduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewProduct_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             textBoxID.Text = dataGridViewProduct.CurrentRow.Cells[0].Value.ToString();
             textBoxTenSP.Text = dataGridViewProduct.CurrentRow.Cells[1].Value.ToString();
@@ -281,6 +295,5 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
                 pictureBox1.Image = null;
             }
         }
-
     }
 }
