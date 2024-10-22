@@ -16,7 +16,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
     {
 
         IProductService productService = new ProductService();
-        public List<DetailBill> detailBills;
+        public List<DetailBill> detailBills = new List<DetailBill>();
         List<Product> products = new List<Product>();
 
         public Form_SelectProduct()

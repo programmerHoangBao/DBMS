@@ -15,6 +15,41 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
     {
         private MyDatabase myDatabase = new MyDatabase();
 
+        public bool CheckExistBillInD(string idBill)
+        {
+            bool result = false;
+            string sqlQuery = "Fn_CheckExistBillInDetaBill(@IdBill)";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdBill", idBill);
+
+                SqlParameter outputParam = new SqlParameter("@Result", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
+                cmd.Parameters.Add(outputParam);
+
+                cmd.ExecuteNonQuery();
+                result = (int)outputParam.Value == 1;
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("An error occurred: " + ex.Message);
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return result;
+        }
+
         public bool DeleteBill(string idBill)
         {
             bool result = false;
@@ -372,7 +407,42 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
 
         public bool UpdateBill(Bill bill)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            string sqlQuery = "SP_UpdateBill";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdBill", bill.IdBill);
+                cmd.Parameters.AddWithValue("@IdCustomer", bill.IdCustomer);
+                cmd.Parameters.AddWithValue("@IdSupplier", bill.IdSupplier);
+                cmd.Parameters.AddWithValue("@DateCreate", bill.DateCreate);
+                cmd.Parameters.AddWithValue("@TypeBill", bill.TypeBill);
+                cmd.Parameters.AddWithValue("@Total", bill.Total);
+
+
+                SqlParameter outputParam = new SqlParameter("@Result", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
+                cmd.Parameters.Add(outputParam);
+
+                cmd.ExecuteNonQuery();
+                result = (int)outputParam.Value == 1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return result;
         }
 
         

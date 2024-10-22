@@ -20,6 +20,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
         private IBillService billService = new BillService();
         IDetailBillService detailBillService = new DetailBillService();
         List<DetailBill> detailBills;
+        List<DetailBill> listAddDetailBill;
         public Form_ManagerBill()
         {
             InitializeComponent();
@@ -104,13 +105,20 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
                     string typeBill = "Hóa đơn nhập hàng";
                     string idSupplier = txt_idSupOrCus.Text.Trim();
 
+
+
                     if (this.billService.InsertImportBill(new Bill(idBill, idSupplier, dateCreate, typeBill)))
                     {
-                        foreach(DetailBill detailBill in detailBills)
+                        foreach(DetailBill detailBill in listAddDetailBill)
                         {
                             if (!detailBillService.InsertDetailBill(detailBill))
                             {
                                 MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                if (billService.CheckExistBillInD(txt_idBill.Text))
+                                {
+                                    billService.DeleteBill(txt_idBill.Text);
+                                }
+                                return;
                             }
                         }
                         MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -129,12 +137,14 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
 
                     if (this.billService.InsertExportBill(new Bill(idBill, idCustomer, dateCreate, typeBill)))
                     {
-                        foreach (DetailBill detailBill in detailBills)
+                        foreach (DetailBill detailBill in listAddDetailBill)
                         {
-                            if (!detailBillService.InsertDetailBill(detailBill))
+                            MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            if (billService.CheckExistBillInD(txt_idBill.Text))
                             {
-                                MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                billService.DeleteBill(txt_idBill.Text);
                             }
+                            return;
                         }
 
                         MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -176,9 +186,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
             {
                 Form_SelectProduct form = new Form_SelectProduct();
                 form.txt_idBill.Text = txt_idBill.Text;
-                form.detailBills = detailBills;
                 form.ShowDialog();
-                detailBills = form.detailBills;
+                listAddDetailBill = form.detailBills;
+                detailBills.AddRange(listAddDetailBill);
                 addDetailBilltoListBox();
             }
         }
@@ -231,12 +241,36 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
                 return;
             if (cbb_selectTypeBill.SelectedIndex == 0)
             {
+                List<Product> products = billService.GetListProductImportBill(txt_idBill.Text);
+                detailBills.Clear();
+                DetailBill detailBill;
+                foreach (Product product in products)
+                {
+                    detailBill = new DetailBill();
+                    detailBill.IdBill = txt_idBill.Text;
+                    detailBill.IdProduct = product.IdProduct;
+                    detailBill.QuantityProduct = product.QuantityProduct;
+                    detailBills.Add(detailBill);
+                }
+                addDetailBilltoListBox();
                 cbb_typeBill.SelectedIndex = 0;
                 txt_idBill.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString();
                 txt_idSupOrCus.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdSupplier"].Value.ToString();
             }
             else
             {
+                List<Product> products = billService.GetListProductExportBill(txt_idBill.Text);
+                detailBills.Clear();
+                DetailBill detailBill;
+                foreach (Product product in products)
+                {
+                    detailBill = new DetailBill();
+                    detailBill.IdBill = txt_idBill.Text;
+                    detailBill.IdProduct = product.IdProduct;
+                    detailBill.QuantityProduct = product.QuantityProduct;
+                    detailBills.Add(detailBill);
+                }
+                addDetailBilltoListBox();
                 cbb_typeBill.SelectedIndex = 1;
                 txt_idBill.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString();
                 txt_idSupOrCus.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdCustomer"].Value.ToString();
@@ -261,6 +295,11 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
                     MessageBox.Show("Xóa không thành công");
                 }
             }
+        }
+
+        private void uiButtonUpdateBill_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
