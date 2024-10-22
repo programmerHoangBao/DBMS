@@ -442,9 +442,9 @@
         private Sunny.UI.UISymbolLabel uiSymbolLabelSearch;
         private Sunny.UI.UILabel uiLabelSearchTerm;
         private Sunny.UI.UITextBox uiTextBoxSearchTerm;
-        private Sunny.UI.UIDataGridView dgv_listDetailBill;
         private Sunny.UI.UIPanel uiPanel1;
         private Sunny.UI.UIComboBox cbb_idBill;
         private System.Windows.Forms.NumericUpDown numeric_quantity;
+        public Sunny.UI.UIDataGridView dgv_listDetailBill;
     }
 }

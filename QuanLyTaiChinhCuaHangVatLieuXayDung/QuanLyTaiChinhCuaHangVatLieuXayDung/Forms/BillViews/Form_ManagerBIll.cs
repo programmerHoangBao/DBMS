@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.DetailBillViews;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
 {
@@ -188,6 +189,77 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
             foreach (DetailBill detailBill in detailBills)
             {
                 uiListBox1.Items.Add(detailBill.ToString());
+            }
+        }
+
+        private void dgv_listbill_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            Form_ManagerDetailBill form = new Form_ManagerDetailBill();
+            if (cbb_selectTypeBill.SelectedIndex == 0)
+            {
+                form.dgv_listDetailBill.DataSource = billService.GetListProductImportBill(dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString().Trim());
+                form.dgv_listDetailBill.Columns["IdProduct"].HeaderText = "Mã sản phẩm";
+                form.dgv_listDetailBill.Columns["NameProduct"].HeaderText = "Tên sản phẩm";
+                form.dgv_listDetailBill.Columns["UnitPriceImport"].Visible = true;
+                form.dgv_listDetailBill.Columns["Unit"].HeaderText = "Đơn vị";
+                form.dgv_listDetailBill.Columns["UnitPriceImport"].HeaderText = "Giá nhập";
+                form.dgv_listDetailBill.Columns["QuantityProduct"].HeaderText = "Số lượng";
+                form.dgv_listDetailBill.Columns["ImageProduct"].HeaderText = "Hình ảnh";
+                form.dgv_listDetailBill.Columns["UnitPriceExport"].Visible = false;
+
+            }
+            else
+            {
+                form.dgv_listDetailBill.DataSource = billService.GetListProductExportBill(dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString().Trim());
+                form.dgv_listDetailBill.Columns["IdProduct"].HeaderText = "Mã sản phẩm";
+                form.dgv_listDetailBill.Columns["NameProduct"].HeaderText = "Tên sản phẩm";
+                form.dgv_listDetailBill.Columns["UnitPriceExport"].Visible = true;
+                form.dgv_listDetailBill.Columns["Unit"].HeaderText = "Đơn vị";
+                form.dgv_listDetailBill.Columns["UnitPriceExport"].HeaderText = "Giá bán";
+                form.dgv_listDetailBill.Columns["QuantityProduct"].HeaderText = "Số lượng";
+                form.dgv_listDetailBill.Columns["ImageProduct"].HeaderText = "Hình ảnh";
+                form.dgv_listDetailBill.Columns["UnitPriceImport"].Visible = false;
+            }
+            form.ShowDialog();
+        }
+
+        private void dgv_listbill_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            if (cbb_selectTypeBill.SelectedIndex == 0)
+            {
+                cbb_typeBill.SelectedIndex = 0;
+                txt_idBill.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString();
+                txt_idSupOrCus.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdSupplier"].Value.ToString();
+            }
+            else
+            {
+                cbb_typeBill.SelectedIndex = 1;
+                txt_idBill.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString();
+                txt_idSupOrCus.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdCustomer"].Value.ToString();
+            }
+        }
+
+        private void uiButtonDeleteBill_Click(object sender, EventArgs e)
+        {
+            if (dgv_listbill.SelectedRows.Count == -1)
+            {
+                MessageBox.Show("Vui lòng chọn dòng để xóa");
+            }
+            else
+            {
+                if (billService.DeleteBill(dgv_listbill.Rows[dgv_listbill.SelectedIndex].Cells["IdBill"].Value.ToString()))
+                {
+                    MessageBox.Show("Xóa thành công");
+                    DisplaySuppliersOnUIDataGridViewAndUiComboBox(dgv_listbill, cbb_selectTypeBill, cbb_typeBill);
+                }
+                else
+                {
+                    MessageBox.Show("Xóa không thành công");
+                }
             }
         }
     }
