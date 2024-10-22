@@ -1,6 +1,6 @@
 ﻿namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
 {
-    partial class Form_ManagerBIll
+    partial class Form_ManagerBill
     {
         /// <summary>
         /// Required designer variable.
@@ -110,7 +110,7 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.dgv_listbill.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_listbill.SelectedIndex = -1;
-            this.dgv_listbill.Size = new System.Drawing.Size(591, 493);
+            this.dgv_listbill.Size = new System.Drawing.Size(430, 493);
             this.dgv_listbill.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.dgv_listbill.TabIndex = 0;
             // 
@@ -124,7 +124,7 @@
             this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
-            this.uiPanel1.Size = new System.Drawing.Size(591, 545);
+            this.uiPanel1.Size = new System.Drawing.Size(430, 545);
             this.uiPanel1.TabIndex = 1;
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -253,6 +253,7 @@
             this.uiButton1.TabIndex = 5;
             this.uiButton1.Text = "Chọn sản phẩm";
             this.uiButton1.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
             // 
             // cbb_typeBill
             // 
@@ -455,7 +456,7 @@
             this.uiTitlePanelSupplier.Controls.Add(this.uiPanelButton);
             this.uiTitlePanelSupplier.Controls.Add(this.uiPanelSearch);
             this.uiTitlePanelSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTitlePanelSupplier.Location = new System.Drawing.Point(598, 2);
+            this.uiTitlePanelSupplier.Location = new System.Drawing.Point(478, 0);
             this.uiTitlePanelSupplier.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanelSupplier.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanelSupplier.Name = "uiTitlePanelSupplier";
@@ -471,14 +472,14 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Form_ManagerBill
+            // Form_ManagerBIll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 545);
+            this.ClientSize = new System.Drawing.Size(1087, 545);
             this.Controls.Add(this.uiTitlePanelSupplier);
             this.Controls.Add(this.uiPanel1);
-            this.Name = "Form_ManagerBill";
+            this.Name = "Form_ManagerBIll";
             this.Text = "Form_ManagerBill";
             this.Load += new System.EventHandler(this.Form_ManagerBill_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_listbill)).EndInit();

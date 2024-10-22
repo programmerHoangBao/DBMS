@@ -53,3 +53,5 @@ D:\UTE\K1N3\HQTCSDL\DBMS\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHa
 D:\UTE\K1N3\HQTCSDL\DBMS\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHangVatLieuXayDung\bin\Debug\SunnyUI.Common.dll
 D:\UTE\K1N3\HQTCSDL\DBMS\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHangVatLieuXayDung\bin\Debug\SunnyUI.dll
 D:\UTE\K1N3\HQTCSDL\DBMS\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHangVatLieuXayDung\obj\Debug\QuanLyTa.A0C16E1D.Up2Date
+D:\UTE\K1N3\HQTCSDL\DBMS\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHangVatLieuXayDung\obj\Debug\QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews.Form_SelectProduct.resources
+D:\UTE\K1N3\HQTCSDL\DBMS\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHangVatLieuXayDung\obj\Debug\QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.DetailBillViews.Form_ManagerDetailBill.resources

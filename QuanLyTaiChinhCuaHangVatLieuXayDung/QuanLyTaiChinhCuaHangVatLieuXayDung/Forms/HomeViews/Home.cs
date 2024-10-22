@@ -15,6 +15,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.DetailBillViews;
+using Sunny.UI.Win32;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
 {
@@ -62,8 +64,14 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
-            Form_ManagerBIll form_ManagerBill = new Form_ManagerBIll();
+            Form_ManagerBill form_ManagerBill = new Form_ManagerBill();
             OpenFormChild(form_ManagerBill);
+        }
+
+        private void uiSymbolButton2_Click(object sender, EventArgs e)
+        {
+            Form_ManagerDetailBill form_ManagerDetail = new Form_ManagerDetailBill();
+            OpenFormChild(form_ManagerDetail);
         }
     }
 }

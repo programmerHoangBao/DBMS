@@ -14,12 +14,15 @@ using System.Windows.Forms;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
 {
-    public partial class Form_ManagerBIll : Form
+    public partial class Form_ManagerBill : Form
     {
         private IBillService billService = new BillService();
-        public Form_ManagerBIll()
+        IDetailBillService detailBillService = new DetailBillService();
+        List<DetailBill> detailBills;
+        public Form_ManagerBill()
         {
             InitializeComponent();
+            detailBills = new List<DetailBill>();
         }
 
         private void Form_ManagerBill_Load(object sender, EventArgs e)
@@ -102,6 +105,13 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
 
                     if (this.billService.InsertImportBill(new Bill(idBill, idSupplier, dateCreate, typeBill)))
                     {
+                        foreach(DetailBill detailBill in detailBills)
+                        {
+                            if (!detailBillService.InsertDetailBill(detailBill))
+                            {
+                                MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
                         MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         cbb_selectTypeBill.SelectedIndex = 0;
@@ -118,6 +128,14 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
 
                     if (this.billService.InsertExportBill(new Bill(idBill, idCustomer, dateCreate, typeBill)))
                     {
+                        foreach (DetailBill detailBill in detailBills)
+                        {
+                            if (!detailBillService.InsertDetailBill(detailBill))
+                            {
+                                MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+
                         MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         cbb_selectTypeBill.SelectedIndex = 1;
@@ -144,6 +162,32 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
             else
             {
                 lbl_idSupOrCus.Text = "Mã khách hàng:";
+            }
+        }
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            if (txt_idBill.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập mã đơn hàng","Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                Form_SelectProduct form = new Form_SelectProduct();
+                form.txt_idBill.Text = txt_idBill.Text;
+                form.detailBills = detailBills;
+                form.ShowDialog();
+                detailBills = form.detailBills;
+                addDetailBilltoListBox();
+            }
+        }
+
+        private void addDetailBilltoListBox()
+        {
+            uiListBox1.Items.Clear();
+            foreach (DetailBill detailBill in detailBills)
+            {
+                uiListBox1.Items.Add(detailBill.ToString());
             }
         }
     }
