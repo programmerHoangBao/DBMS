@@ -38,8 +38,6 @@ BEGIN
 END;
 GO
 
-DROP PROCEDURE SP_InsertExpenseSlip;
-DROP PROCEDURE SP_UpdateExpenseSlip;
 --Store Procedure thực hiện thêm dữ liệu vào bảng ExpenseSlips
 CREATE PROCEDURE SP_InsertExpenseSlip
 	@IdExpenseSlip CHAR(6),
@@ -51,20 +49,27 @@ CREATE PROCEDURE SP_InsertExpenseSlip
 AS
 BEGIN
 	BEGIN TRY
-		IF (EXISTS(SELECT 1 FROM ExpenseSlips ES WHERE ES.IdExpenseSlip = @IdExpenseSlip))
-		BEGIN
-			SET @Result = 0;
-		END
-		ELSE
-		BEGIN
-			INSERT INTO ExpenseSlips(IdExpenseSlip, DateCreate, Content, TypeExpenseSlip, TotalMoney)
-			VALUES (@IdExpenseSlip, @DateCreate, @Content, @TypeExpenseSlip, @TotalMoney);
+		BEGIN TRANSACTION
 
-			SET @Result = 1;
-		END
+			IF (EXISTS(SELECT 1 FROM ExpenseSlips ES WHERE ES.IdExpenseSlip = @IdExpenseSlip))
+			BEGIN
+				SET @Result = 0;
+			END
+			ELSE
+			BEGIN
+				INSERT INTO ExpenseSlips(IdExpenseSlip, DateCreate, Content, TypeExpenseSlip, TotalMoney)
+				VALUES (@IdExpenseSlip, @DateCreate, @Content, @TypeExpenseSlip, @TotalMoney);
+
+				SET @Result = 1;
+			END
+
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION
 		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
 END;
 GO
@@ -80,22 +85,29 @@ CREATE PROCEDURE SP_UpdateExpenseSlip
 AS
 BEGIN
 	BEGIN TRY
-		IF ( EXISTS(SELECT 1 FROM ExpenseSlips WHERE IdExpenseSlip=@IdExpenseSlip) )
-		BEGIN
-			UPDATE ExpenseSlips
-			SET DateCreate=@DateCreate, Content=@Content, 
-			TypeExpenseSlip=@TypeExpenseSlip, TotalMoney=@TotalMoney 
-			WHERE IdExpenseSlip=@IdExpenseSlip;
+		BEGIN TRANSACTION
 
-			SET @Result = 1;
-		END
-		ELSE
-		BEGIN
-			SET @Result = 0;
-		END;
+			IF ( EXISTS(SELECT 1 FROM ExpenseSlips WHERE IdExpenseSlip=@IdExpenseSlip) )
+			BEGIN
+				UPDATE ExpenseSlips
+				SET DateCreate=@DateCreate, Content=@Content, 
+				TypeExpenseSlip=@TypeExpenseSlip, TotalMoney=@TotalMoney 
+				WHERE IdExpenseSlip=@IdExpenseSlip;
+
+				SET @Result = 1;
+			END
+			ELSE
+			BEGIN
+				SET @Result = 0;
+			END;
+
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION
 		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
 END;
 GO
@@ -124,8 +136,6 @@ BEGIN
 END;
 GO
 
-DROP FUNCTION Fn_GetAllExpenseSlip;
---Function lấy ra tất cả các ExpenseSlip
 CREATE FUNCTION Fn_GetAllExpenseSlip()
 RETURNS TABLE
 AS

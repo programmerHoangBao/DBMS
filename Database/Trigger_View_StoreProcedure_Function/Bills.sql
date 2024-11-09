@@ -11,7 +11,7 @@ CREATE TABLE Bills(
 	CHECK (TypeBill IN (N'Hóa Đơn Nhập Hàng', N'Hóa Đơn Xuất Hàng'))
 );
 */
-
+GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
@@ -69,20 +69,26 @@ CREATE PROCEDURE SP_InsertImportBill
 AS
 BEGIN
 	BEGIN TRY
-		IF (EXISTS(SELECT 1 FROM Bills B WHERE B.IdBill=@IdBill))
-		BEGIN
-			SET @Result = 0;
-		END
-		ELSE
-		BEGIN
-			INSERT INTO Bills(IdBill, IdSupplier, DateCreate, TypeBill)
-			VALUES (@IdBill, @IdSupplier, @DateCreate, @TypeBill);
+		BEGIN TRANSACTION 
+			IF (EXISTS(SELECT 1 FROM Bills B WHERE B.IdBill=@IdBill))
+			BEGIN
+				SET @Result = 0;
+			END
+			ELSE
+			BEGIN
+				INSERT INTO Bills(IdBill, IdSupplier, DateCreate, TypeBill)
+				VALUES (@IdBill, @IdSupplier, @DateCreate, @TypeBill);
 
-			SET @Result = 1;
-		END
+				SET @Result = 1;
+			END
+
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION
 		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
 END;
 GO
@@ -97,20 +103,25 @@ CREATE PROCEDURE SP_InsertExportBill
 AS
 BEGIN
 	BEGIN TRY
+		BEGIN TRANSACTION 
 		IF (EXISTS(SELECT 1 FROM Bills B WHERE B.IdBill=@IdBill))
 		BEGIN
 			SET @Result = 0;
 		END
 		ELSE
 		BEGIN
-			INSERT INTO Bills(IdBill, IdCustomer, DateCreate, TypeBill)
-			VALUES (@IdBill, @IdCustomer, @DateCreate, @TypeBill);
+			INSERT INTO Bills(IdBill, IdCustomer, DateCreate, TypeBill, Total)
+			VALUES (@IdBill, @IdCustomer, @DateCreate, @TypeBill, 0);
 
 			SET @Result = 1;
 		END
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION
 		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
 END;
 GO
@@ -127,22 +138,29 @@ CREATE PROCEDURE SP_UpdateBill
 AS
 BEGIN
 	BEGIN TRY
-		IF(EXISTS(SELECT 1 FROM Bills WHERE Bills.IdBill=@IdBill))
-		BEGIN
-			UPDATE Bills 
-			SET IdCustomer=@IdCustomer, IdSupplier=@IdSupplier, 
-			DateCreate=@DateCreate, TypeBill=@TypeBill, Total=@Total 
-			WHERE IdBill = @IdBill;
+		BEGIN TRANSACTION
 
-			SET @Result = 1;
-		END
-		ELSE
-		BEGIN
-			SET @Result = 0;
-		END
+			IF(EXISTS(SELECT 1 FROM Bills WHERE Bills.IdBill=@IdBill))
+			BEGIN
+				UPDATE Bills 
+				SET IdCustomer=@IdCustomer, IdSupplier=@IdSupplier, 
+				DateCreate=@DateCreate, TypeBill=@TypeBill, Total=@Total 
+				WHERE IdBill = @IdBill;
+
+				SET @Result = 1;
+			END
+			ELSE
+			BEGIN
+				SET @Result = 0;
+			END
+
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION
 		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
 END;
 GO
@@ -171,6 +189,7 @@ BEGIN
 END;
 GO
 
+
 --Function thực hiện việc tính tổng giá trị hóa đơn nhập hàng khi có mã hóa đơn xác định
 CREATE FUNCTION Fn_TotalImportBill (@IdBill CHAR(6))
 RETURNS DECIMAL(18, 2)
@@ -187,7 +206,7 @@ BEGIN
 
 	IF (@TotalBill IS NULL)
 	BEGIN
-		SET @TotalBill=-1;
+		SET @TotalBill=0;
 	END
 	RETURN @TotalBill;
 END;
@@ -199,6 +218,7 @@ RETURNS DECIMAL(18, 2)
 AS
 BEGIN
 	DECLARE @TotalBill DECIMAL(18, 2);
+	SET @TotalBill = 0;
 
 	SELECT @TotalBill=SUM(Products.UnitPriceExport * DetailBills.QuantityProduct) 
 	FROM (DetailBills INNER JOIN Products 
@@ -209,7 +229,7 @@ BEGIN
 
 	IF (@TotalBill IS NULL)
 	BEGIN
-		SET @TotalBill=-1;
+		SET @TotalBill=0;
 	END
 	RETURN @TotalBill;
 END;
@@ -263,7 +283,7 @@ AS
 	RETURN
 	(
 		SELECT Products.IdProduct, Products.NameProduct, Products.Unit, 
-				Products.UnitPriceImport, DetailBills.QuantityProduct,
+				Products.UnitPriceExport, DetailBills.QuantityProduct,
 				Products.ImageProduct
 		FROM ((Bills INNER JOIN DetailBills 
 				ON Bills.IdBill = DetailBills.IdBill) 
@@ -306,6 +326,33 @@ AS
 			OR S.AddressSupplier LIKE '%' + @SearchTerm + '%'
 		) AND B.TypeBill = N'Hóa Đơn Nhập Hàng'
 	);
+GO
+
+--Function Kiem tra Bills Co ton tai khong
+CREATE FUNCTION Fn_CheckExistBillInDetaBill  (@IdBill CHAR(6))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @Check INT;
+	IF
+	(
+		EXISTS
+		(
+			SELECT 1
+			FROM DetailBills DB
+			WHERE DB.IdBill = @IdBill
+		)
+	)
+	BEGIN
+		SET @Check = 1;
+	END
+	ELSE
+	BEGIN
+		SET @Check = 0;
+	END
+
+	RETURN @Check;
+END;
 GO
 
 --Function thực hiện tìm hóa đơn xuất hàng khi biết thông tin bất kì của hóa đơn xuất hàng

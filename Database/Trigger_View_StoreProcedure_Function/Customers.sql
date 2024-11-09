@@ -82,9 +82,8 @@ BEGIN
 END;
 GO
 
-
 --Trigger kiểm tra PhoneNumber là chuổi số điện thoại Việt Nam
-CREATE TRIGGER trg_checkPhoneNumberCustomers
+CREATE TRIGGER trg_PhoneNumberISVietNam
 ON Customers
 AFTER INSERT, UPDATE
 AS
@@ -103,17 +102,37 @@ BEGIN
 END;
 GO
 
+--View thực hiện việc lấy ra các khách hàng cùng với tổng giá trị hóa đơn mà khách hàng đã mua
+CREATE VIEW View_CustomerBillSummary AS
+SELECT 
+	C.IdCustomer,
+	C.NameCustomer,
+	C.PhoneNumber,
+	C.AddressCustomer,
+	SUM(B.Total) AS TotalSpent
+FROM 
+	Customers C INNER JOIN Bills B
+		ON C.IdCustomer = B.IdCustomer
+GROUP BY
+	C.IdCustomer,
+	C.NameCustomer,
+	C.PhoneNumber,
+	C.AddressCustomer
+GO
+
 --Store Procedure thưc hiện việc thêm dữ liệu vào bảng Customers
 CREATE PROCEDURE SP_InsertCustomer
     @IdCustomer CHAR(6),
     @NameCustomer NVARCHAR(100),
     @PhoneNumber CHAR(10),
     @AddressCustomer NVARCHAR(150),
-    @Result INT OUTPUT
+	@Result INT OUTPUT
 AS
 BEGIN
     BEGIN TRY
-		IF (EXISTS(SELECT 1 FROM Customers C  WHERE C.IdCustomer = @IdCustomer))
+        BEGIN TRANSACTION
+
+        IF ( EXISTS( SELECT 1 FROM Customers C WHERE C.IdCustomer = @IdCustomer) )
 		BEGIN
 			SET @Result = 0;
 		END
@@ -124,9 +143,14 @@ BEGIN
 
 			SET @Result = 1;
 		END
+
+        COMMIT TRANSACTION
     END TRY
     BEGIN CATCH
-        SET @Result = 0;
+        ROLLBACK TRANSACTION
+		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
@@ -141,21 +165,31 @@ CREATE PROCEDURE SP_UpdateCustomer
 AS
 BEGIN
     BEGIN TRY
-        IF (EXISTS(SELECT 1 FROM Customers WHERE Customers.IdCustomer=@IdCustomer))
-		BEGIN
-			UPDATE Customers 
-			SET NameCustomer=@NameCustomer, PhoneNumber=@PhoneNumber, AddressCustomer=@AddressCustomer
-			WHERE IdCustomer=@IdCustomer;
+		BEGIN TRANSACTION
+			IF (
+					EXISTS
+					(
+						SELECT 1 FROM Customers C WHERE C.IdCustomer = @IdCustomer
+					)
+				)
+			BEGIN
+				UPDATE Customers 
+				SET NameCustomer=@NameCustomer, PhoneNumber=@PhoneNumber, AddressCustomer=@AddressCustomer
+				WHERE IdCustomer=@IdCustomer;
 
-			SET @Result=1; 
-		END
-		ELSE
-		BEGIN
-			SET @Result=0;
-		END
+				SET @Result=1;
+			END
+			ELSE
+			BEGIN
+				SET @Result = 0;
+			END
+		COMMIT TRANSACTION
     END TRY
     BEGIN CATCH
-        SET @Result = 0;
+        ROLLBACK TRANSACTION
+		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
@@ -181,6 +215,14 @@ BEGIN
 	BEGIN CATCH
 		SET @Result=0
 	END CATCH;
+END;
+GO
+
+--Store Procedure thực hiện lấy ra danh sách khách hàng được sắp xếp giảm giần theo tổng giá trị hóa đơn của khách hàng
+CREATE PROCEDURE SP_SortDescendingCustomerBillSummary
+AS
+BEGIN
+	SELECT * FROM View_CustomerBillSummary ORDER BY TotalSpent DESC
 END;
 GO
 

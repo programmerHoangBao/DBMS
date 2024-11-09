@@ -61,25 +61,28 @@ CREATE PROCEDURE SP_InsertProduct
 AS
 BEGIN
 	BEGIN TRY
-		IF (EXISTS(SELECT 1 FROM Products P WHERE P.IdProduct = @IdProduct))
-		BEGIN
-			SET @Result = 0;
-		END
-		ELSE
-		BEGIN
-			INSERT INTO Products (IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
+		BEGIN TRANSACTION
+			IF (EXISTS(SELECT 1 FROM Products P WHERE P.IdProduct = @IdProduct))
+			BEGIN
+				SET @Result = 0;
+			END
+			ELSE
+			BEGIN
+				INSERT INTO Products (IdProduct, NameProduct, Unit, UnitPriceImport, UnitPriceExport, 
 								QuantityProduct, IdTypeProduct, IdSupplier, ImageProduct)
-			VALUES (@IdProduct, @NameProduct, @Unit, @UnitPriceImport, @UnitPriceExport, 
+				VALUES (@IdProduct, @NameProduct, @Unit, @UnitPriceImport, @UnitPriceExport, 
 					@QuantityProduct, @IdTypeProduct, @IdSupplier, @ImageProduct);
 
-			SET @Result = 1;
-		END
+				SET @Result = 1;
+			END
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+        ROLLBACK TRANSACTION
 		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
-
-	RETURN @Result;
 END;
 GO
 
@@ -98,26 +101,30 @@ CREATE PROCEDURE SP_UpdateProduct
 AS
 BEGIN
 	BEGIN TRY
-		IF (EXISTS(SELECT 1 FROM Products WHERE IdProduct=@IdProduct))
-		BEGIN
-			UPDATE Products
-			SET NameProduct=@NameProduct, Unit=@Unit, UnitPriceImport=@UnitPriceImport, 
-				UnitPriceExport=@UnitPriceExport, QuantityProduct=@QuantityProduct, 
-				IdTypeProduct=@IdTypeProduct, IdSupplier=@IdSupplier, ImageProduct=@ImageProduct 
-			WHERE IdProduct=@IdProduct;
+		BEGIN TRANSACTION 
+			IF (EXISTS(SELECT 1 FROM Products WHERE IdProduct=@IdProduct))
+			BEGIN
+				UPDATE Products
+				SET NameProduct=@NameProduct, Unit=@Unit, UnitPriceImport=@UnitPriceImport, 
+					UnitPriceExport=@UnitPriceExport, QuantityProduct=@QuantityProduct, 
+					IdTypeProduct=@IdTypeProduct, IdSupplier=@IdSupplier, ImageProduct=@ImageProduct 
+				WHERE IdProduct=@IdProduct;
 
-			SET @Result=1;
-		END
-		ELSE
-		BEGIN
-			SET @Result = 0;
-		END
+				SET @Result=1;
+			END
+			ELSE
+			BEGIN
+				SET @Result = 0;
+			END
+
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
-		SET @Result=0;
+		ROLLBACK TRANSACTION
+		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
-
-	RETURN @Result;
 END;
 GO
 

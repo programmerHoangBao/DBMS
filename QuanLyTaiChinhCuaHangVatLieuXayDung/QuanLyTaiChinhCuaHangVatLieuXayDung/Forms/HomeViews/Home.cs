@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
 {
@@ -86,5 +87,15 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
             Form_ManagerDetailBill form_ManagerDetail = new Form_ManagerDetailBill();
             OpenFormChild(form_ManagerDetail);
         }
+
+        private void uiSBtnHome_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Email không tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Chờ xác nhận từ Admin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Mã OTP không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+        }
+
     }
 }

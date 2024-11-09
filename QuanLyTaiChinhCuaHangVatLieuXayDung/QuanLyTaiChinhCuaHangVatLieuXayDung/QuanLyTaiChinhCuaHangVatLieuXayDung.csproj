@@ -154,7 +154,7 @@
     <Compile Include="Service\IRevenueService.cs" />
     <Compile Include="Service\ISupplierService.cs" />
     <Compile Include="Service\ITypeProductService.cs" />
-    <Compile Include="Service\RevenueService.cs" />
+    <Compile Include="Service\Implements\RevenueService.cs" />
     <Compile Include="User_Control\UCDisplayProduct.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -240,13 +240,6 @@
     <None Include="Resources\import.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>QuanLyTaiChinhCuaHangXayDung.mdf</DependentUpon>
-    </Content>
     <None Include="Resources\transaction_Export_32.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +253,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>QuanLyTaiChinhCuaHangXayDung.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

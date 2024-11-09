@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +15,31 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
     internal class BillService : IBillService
     {
         private MyDatabase myDatabase = new MyDatabase();
+
+        public bool CheckBillHasProducts(string idBill)
+        {
+            bool result = false;
+            string sqlQuery = "SELECT dbo.Fn_CheckExistBillInD(@IdBill)";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.Parameters.AddWithValue("@IdBill", idBill);
+
+                result = ((int)cmd.ExecuteScalar() != 0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return result;
+        }
 
         public bool DeleteBill(string idBill)
         {

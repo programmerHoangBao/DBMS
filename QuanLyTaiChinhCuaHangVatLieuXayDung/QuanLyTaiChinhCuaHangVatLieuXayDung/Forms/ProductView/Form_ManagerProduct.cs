@@ -254,7 +254,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
 
         private void dataGridViewProduct_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            textBoxID.Text = dataGridViewProduct.CurrentRow.Cells[0].Value.ToString();
+            this.textBoxID.Text = dataGridViewProduct.CurrentRow.Cells[0].Value.ToString();
             textBoxTenSP.Text = dataGridViewProduct.CurrentRow.Cells[1].Value.ToString();
             textBoxDonViTinh.Text = dataGridViewProduct.CurrentRow.Cells[2].Value.ToString();
             textBoxGiaNhap.Text = dataGridViewProduct.CurrentRow.Cells[3].Value.ToString();

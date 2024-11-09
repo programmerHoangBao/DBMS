@@ -41,21 +41,27 @@ CREATE PROCEDURE SP_InsertTypeProduct
 AS
 BEGIN
 	BEGIN TRY
-		IF (EXISTS(SELECT 1 FROM TypeProducts TP WHERE TP.IdTypeProduct = @IdTypeProduct))
-		BEGIN
-			SET @Result = 0;
-		END
-		ELSE
-		BEGIN
-			INSERT INTO TypeProducts (IdTypeProduct, NameTypeProduct) 
-			VALUES (@IdTypeProduct, @NameTypeProduct);
+		BEGIN TRANSACTION
 
-			SET @Result = 1;
-		END
+			IF ( EXISTS(SELECT 1 FROM TypeProducts TP WHERE TP.IdTypeProduct = @IdTypeProduct) )
+			BEGIN
+				SET @Result = 0;
+			END
+			ELSE
+			BEGIN
+				INSERT INTO TypeProducts (IdTypeProduct, NameTypeProduct) 
+				VALUES (@IdTypeProduct, @NameTypeProduct);
 
+				SET @Result = 1;
+			END
+
+			COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION
 		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
 END;
 GO
@@ -68,6 +74,8 @@ CREATE PROCEDURE SP_UpdateTypeProduct
 AS
 BEGIN
 	BEGIN TRY
+		BEGIN TRANSACTION
+
 		IF (EXISTS(SELECT 1 FROM TypeProducts WHERE IdTypeProduct=@IdTypeProduct))
 		BEGIN
 			UPDATE TypeProducts 
@@ -80,9 +88,14 @@ BEGIN
 		BEGIN 
 			SET @Result=0;
 		END
+
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION
 		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
 	END CATCH
 END;
 GO

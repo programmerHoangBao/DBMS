@@ -18,6 +18,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
         {
             string filePath = GetCurrentFolderPath() + @"\Database\QuanLyTaiChinhCuaHangXayDung.mdf";
             this.connectionString = CreateConnectionString(filePath);
+            //this.connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\He_Quan_Tri_Co_So_Du_Lieu\Do_An_Cuoi_Ky_Nhom_5\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHangVatLieuXayDung\Database\QuanLyTaiChinhCuaHangXayDung.mdf;Integrated Security=True";
             this.connection = new SqlConnection(this.connectionString);
         }
 

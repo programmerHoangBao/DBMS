@@ -99,30 +99,55 @@ BEGIN
 END;
 GO
 
+--View thực hiện việc lấy ra các nhà cung cấp cùng với tổng giá trị hóa đơn mà họ đã cung cấp
+CREATE VIEW View_SupplierBillSummary AS
+SELECT 
+	S.IdSupplier,
+	S.NameSupplier,
+	S.PhoneNumber,
+	S.AddressSupplier,
+	SUM(B.Total) AS TotalSpent
+FROM 
+	Suppliers S INNER JOIN Bills B
+		ON S.IdSupplier = B.IdSupplier
+GROUP BY
+	S.IdSupplier,
+	S.NameSupplier,
+	S.PhoneNumber,
+	S.AddressSupplier
+GO
+
 -- Store Procedure thực hiện việc thêm dữ liệu vào bảng Suppliers
 CREATE PROCEDURE SP_InsertSupplier
     @IdSupplier CHAR(6),
     @NameSupplier NVARCHAR(100),
     @PhoneNumber CHAR(10),
     @AddressSupplier NVARCHAR(150),
-    @Result INT OUTPUT
+	@Result INT OUTPUT
 AS
 BEGIN
     BEGIN TRY
-		IF (EXISTS(SELECT 1 FROM Suppliers S WHERE S.IdSupplier = @IdSupplier))
+        BEGIN TRANSACTION
+
+		IF ( EXISTS( SELECT 1 FROM Suppliers S WHERE S.IdSupplier = @IdSupplier) )
 		BEGIN
 			SET @Result = 0;
 		END
-		ELSE
+        ELSE
 		BEGIN
 			INSERT INTO Suppliers (IdSupplier, NameSupplier, PhoneNumber, AddressSupplier)
 			VALUES (@IdSupplier, @NameSupplier, @PhoneNumber, @AddressSupplier);
 
 			SET @Result = 1;
 		END
+
+        COMMIT TRANSACTION
     END TRY
     BEGIN CATCH
-        SET @Result = 0;
+        ROLLBACK TRANSACTION
+		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
@@ -133,25 +158,35 @@ CREATE PROCEDURE SP_UpdateSupplier
     @NameSupplier NVARCHAR(100),
     @PhoneNumber CHAR(10),
     @AddressSupplier NVARCHAR(150),
-    @Result INT OUTPUT
+	@Result INT OUTPUT
 AS
 BEGIN
     BEGIN TRY
-		IF (EXISTS(SELECT 1 FROM Suppliers WHERE Suppliers.IdSupplier=@IdSupplier))
-		BEGIN
-			UPDATE Suppliers
-			SET NameSupplier=@NameSupplier, PhoneNumber=@PhoneNumber, AddressSupplier=@AddressSupplier
-			WHERE IdSupplier=@IdSupplier;
+		BEGIN TRANSACTION
+			IF (
+					EXISTS
+					(
+						SELECT 1 FROM Suppliers S WHERE S.IdSupplier = @IdSupplier
+					)
+				)
+			BEGIN
+				UPDATE Suppliers
+				SET NameSupplier=@NameSupplier, PhoneNumber=@PhoneNumber, AddressSupplier=@AddressSupplier
+				WHERE IdSupplier=@IdSupplier;
 
-			SET @Result = 1;
-		END
-		ELSE
-		BEGIN
-			SET @Result=0;
-		END
+				SET @Result=1;
+			END
+			ELSE
+			BEGIN
+				SET @Result = 0;
+			END
+		COMMIT TRANSACTION
     END TRY
     BEGIN CATCH
-        SET @Result = 0;
+        ROLLBACK TRANSACTION
+		SET @Result = 0;
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
@@ -177,6 +212,14 @@ BEGIN
 	BEGIN CATCH
 		SET @Result=0;
 	END CATCH;
+END;
+GO
+
+--Store Procedure thực hiện lấy ra danh sách nhà cung cấp được sắp xếp giảm giần theo tổng giá trị hóa đơn của nhà cung cấp
+CREATE PROCEDURE SP_SortDescendingSupplierBillSummary
+AS
+BEGIN
+	SELECT * FROM View_SupplierBillSummary ORDER BY TotalSpent DESC
 END;
 GO
 

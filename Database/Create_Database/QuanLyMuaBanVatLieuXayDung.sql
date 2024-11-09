@@ -4,6 +4,17 @@ GO
 USE QuanLyTaiChinhCuaHangXayDung;
 GO
 
+--Bảng Tài khoản
+CREATE TABLE Accounts(
+	IdAccount CHAR(6) PRIMARY KEY,
+	Username NVARCHAR(50) UNIQUE NOT NULL,
+	PasswordUser NVARCHAR(15) NOT NULL,
+	Email NVARCHAR(100) NOT NULL, 
+	RoleUser NVARCHAR(10) NOT NULL,
+	CONSTRAINT Check_Role CHECK(RoleUser IN (N'Quản Lý', N'Nhân Viên'))
+);
+GO
+
 --Bảng khách hàng
 CREATE TABLE Customers(
 	IdCustomer CHAR(6) PRIMARY KEY,
@@ -41,7 +52,7 @@ CREATE TABLE Products(
 	IdSupplier CHAR(6),
 	ImageProduct VARBINARY(MAX),
 	CONSTRAINT FK_TypeProduct FOREIGN KEY (IdTypeProduct) REFERENCES TypeProducts(IdTypeProduct) ON DELETE CASCADE,
-	CONSTRAINT FK_Supplier FOREIGN KEY (IdSupplier) REFERENCES Suppliers(IdSupplier) ON DELETE SET NULL,
+	CONSTRAINT FK_Supplier FOREIGN KEY (IdSupplier) REFERENCES Suppliers(IdSupplier),
 	CONSTRAINT Check_Product CHECK (UnitPriceImport > 0 AND UnitPriceImport > 0 AND QuantityProduct >= 0) 
 );
 GO

@@ -112,13 +112,19 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
                                 MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
-                        MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        cbb_selectTypeBill.SelectedIndex = 0;
+                        //cbb_selectTypeBill.SelectedIndex = 0;
                     }
                     else
                     {
                         MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    if (this.billService.CheckBillHasProducts(idBill))
+                    {
+                        MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        this.billService.DeleteBill(idBill);
                     }
                 }
                 else

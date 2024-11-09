@@ -38,5 +38,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
 
         //Hàm tìm hóa đơn xuất hàng khi biết thông tin bất kì của hóa đơn
         List<Bill> SearchExportBill(string searchTerm);
+
+        //Function kiểm tra bill có sản phẩm nào không
+        bool CheckBillHasProducts(string idBill);
     }
 }
