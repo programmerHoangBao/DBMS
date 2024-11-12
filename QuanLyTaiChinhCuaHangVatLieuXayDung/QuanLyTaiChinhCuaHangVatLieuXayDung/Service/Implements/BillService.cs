@@ -284,7 +284,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 {
                     bill = new Bill();
                     bill.IdBill = reader["IdBill"].ToString();
-                    bill.IdCustomer = reader["IdCustomer"].ToString();
+                    bill.IdSupplier = reader["IdSupplier"].ToString();
                     bill.DateCreate = (DateTime)reader["DateCreate"];
                     bill.TypeBill = reader["TypeBill"].ToString();
                     bill.Total = (decimal)reader["Total"];
@@ -304,6 +304,86 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             }
 
             return bills;
+        }
+
+        public List<Product> GetListProductExportBill(string idBill)
+        {
+            List<Product> products = new List<Product>();
+            string sqlQuery = "SELECT * FROM Fn_GetListProductExportBill(@IdBill)";
+            try
+            {
+                this.myDatabase.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdBill", idBill);
+                SqlDataReader reader = cmd.ExecuteReader();
+                Product product;
+
+                while (reader.Read())
+                {
+                    product = new Product();
+                    product.IdProduct = reader["IdProduct"].ToString();
+                    product.NameProduct = reader["NameProduct"].ToString();
+                    product.Unit = reader["Unit"].ToString();
+                    product.UnitPriceExport = (Decimal)reader["UnitPriceExport"];
+                    product.QuantityProduct = (Decimal)reader["QuantityProduct"];
+                    product.ImageProduct = reader["ImageProduct"] as byte[];
+
+                    //Thêm bill vào list bills
+                    products.Add(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return products;
+        }
+
+        public List<Product> GetListProductImportBill(string idBill)
+        {
+            List<Product> products = new List<Product>();
+            string sqlQuery = "SELECT * FROM Fn_GetListProductImportBill(@IdBill)";
+            try
+            {
+                this.myDatabase.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sqlQuery, this.myDatabase.GetConnection());
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdBill", idBill);
+                SqlDataReader reader = cmd.ExecuteReader();
+                Product product;
+
+                while (reader.Read())
+                {
+                    product = new Product();
+                    product.IdProduct = reader["IdProduct"].ToString();
+                    product.NameProduct = reader["NameProduct"].ToString();
+                    product.Unit = reader["Unit"].ToString();
+                    product.UnitPriceImport = (Decimal)reader["UnitPriceImport"];
+                    product.QuantityProduct = (Decimal)reader["QuantityProduct"];
+                    product.ImageProduct = reader["ImageProduct"] as byte[];
+
+                    //Thêm bill vào list bills
+                    products.Add(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return products;
         }
 
         public decimal TotalExportBillById(string idBill)
