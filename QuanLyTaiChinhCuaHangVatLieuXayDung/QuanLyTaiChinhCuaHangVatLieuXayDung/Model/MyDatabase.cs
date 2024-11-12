@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sunny.UI.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -16,23 +17,53 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Model
 
         public MyDatabase()
         {
-            string filePath = GetCurrentFolderPath() + @"\Database\QuanLyTaiChinhCuaHangXayDung.mdf";
-            this.connectionString = CreateConnectionString(filePath);
-            //this.connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\He_Quan_Tri_Co_So_Du_Lieu\Do_An_Cuoi_Ky_Nhom_5\QuanLyTaiChinhCuaHangVatLieuXayDung\QuanLyTaiChinhCuaHangVatLieuXayDung\Database\QuanLyTaiChinhCuaHangXayDung.mdf;Integrated Security=True";
+            string filePath = GetCurrentFolderPath() + @"\Database\role.txt";
+            string content = File.ReadAllText(filePath).Trim();
+            string serverName = "(LocalDB)\\MSSQLLocalDB";
+            string databaseName = @"QuanLyTaiChinhCuaHangXayDung"; 
+            string userName = ""; 
+            string password = "";
+            if (content.Equals("Manager"))
+            {
+                userName = "ManagerLogin";
+                password = "123";
+                this.connectionString = ConnectionSqlAuthentication(serverName, databaseName, userName, password);
+            }
+            else if (content.Equals("Employee"))
+            {
+                userName = "EmployeeLogin";
+                password = "123";
+                this.connectionString = ConnectionSqlAuthentication(serverName, databaseName, userName, password);
+            }
+            else
+            {
+                this.connectionString = ConnectionWindowAuthentication(serverName, databaseName);
+            }
             this.connection = new SqlConnection(this.connectionString);
         }
 
         //Lấy đường dẫn đến database
-        public static string GetCurrentFolderPath()
+        private string GetCurrentFolderPath()
         {
             string filePath = Assembly.GetExecutingAssembly().Location;
             return Path.GetDirectoryName(filePath);
         }
-        public static string CreateConnectionString(string filePath)
+        private string CreateConnectionString(string filePath)
         {
             return $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @filePath + ";Integrated Security=True";
         }
 
+        //Tạo đường dẫn  SQL Authentication
+        private string ConnectionSqlAuthentication(string server, string database, string user, string pass)
+        {
+            return $"Server={server};Database={database};User Id={user};Password={pass};";
+        }
+
+        private String ConnectionWindowAuthentication(string server, string database)
+        {
+            return $"Server={server};Database={database};Integrated Security=True;";
+        }
+        
         public void OpenConnection()
         {
             this.connection.Open();

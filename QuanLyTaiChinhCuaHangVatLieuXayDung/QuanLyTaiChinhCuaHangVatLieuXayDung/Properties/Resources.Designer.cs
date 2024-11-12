@@ -123,6 +123,16 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Password {
+            get {
+                object obj = ResourceManager.GetObject("Password", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Trang_Chu_01 {
             get {
                 object obj = ResourceManager.GetObject("Trang_Chu_01", resourceCulture);
@@ -136,6 +146,56 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Properties {
         internal static System.Drawing.Bitmap transaction_Export_32 {
             get {
                 object obj = ResourceManager.GetObject("transaction_Export_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user {
+            get {
+                object obj = ResourceManager.GetObject("user", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Visibility {
+            get {
+                object obj = ResourceManager.GetObject("Visibility", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Visibility_Off {
+            get {
+                object obj = ResourceManager.GetObject("Visibility_Off", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Visibility_Off1 {
+            get {
+                object obj = ResourceManager.GetObject("Visibility_Off1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Visibility_Off2 {
+            get {
+                object obj = ResourceManager.GetObject("Visibility_Off2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

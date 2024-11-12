@@ -1,4 +1,5 @@
-﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews;
+﻿using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.AccountView;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.CustomerViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.DetailBillViews;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView;
@@ -14,7 +15,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,7 +27,6 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
 {
     public partial class Home : Form
     {
-        private MyDatabase myDatabase = new MyDatabase();
         private Form formChild;     //Form con
         public Home()
         {
@@ -45,7 +47,11 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
             this.formChild.FormBorderStyle = FormBorderStyle.None;
             this.formChild.Show();
         }
-
+        private string GetCurrentFolderPath()
+        {
+            string filePath = Assembly.GetExecutingAssembly().Location;
+            return Path.GetDirectoryName(filePath);
+        }
         private void btnTypeProdcut_Click(object sender, EventArgs e)
         {
             Form_ManagerTypeProduct form_ManagerTypeProduct = new Form_ManagerTypeProduct();
@@ -87,15 +93,21 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews
             Form_ManagerDetailBill form_ManagerDetail = new Form_ManagerDetailBill();
             OpenFormChild(form_ManagerDetail);
         }
+        private void uiSymbolButtonAccount_Click(object sender, EventArgs e)
+        {
+            Form_ManagerAccount form_ManagerAccount = new Form_ManagerAccount();
+            OpenFormChild(form_ManagerAccount);
+        }
 
         private void uiSBtnHome_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Email không tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            MessageBox.Show("Chờ xác nhận từ Admin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show("Mã OTP không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
 
         }
 
+        private void Home_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string filePath = GetCurrentFolderPath() + @"\Database\role.txt";
+            File.WriteAllText(filePath, string.Empty);
+        }
     }
 }

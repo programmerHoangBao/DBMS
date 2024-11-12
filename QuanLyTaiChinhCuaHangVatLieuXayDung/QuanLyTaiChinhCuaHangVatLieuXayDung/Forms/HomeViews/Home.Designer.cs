@@ -43,6 +43,7 @@
             this.uiSymbolButtonDetailBill = new Sunny.UI.UISymbolButton();
             this.uiSymbolButtonRevenue = new Sunny.UI.UISymbolButton();
             this.uiPanel_Body = new Sunny.UI.UIPanel();
+            this.uiSymbolButtonAccount = new Sunny.UI.UISymbolButton();
             this.panel_header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHamburger_menu)).BeginInit();
             this.flowLayoutPanel_Menu.SuspendLayout();
@@ -108,6 +109,7 @@
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonBill);
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonDetailBill);
             this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonRevenue);
+            this.flowLayoutPanel_Menu.Controls.Add(this.uiSymbolButtonAccount);
             this.flowLayoutPanel_Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel_Menu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel_Menu.Location = new System.Drawing.Point(0, 50);
@@ -257,6 +259,22 @@
             this.uiPanel_Body.Text = "Body";
             this.uiPanel_Body.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiSymbolButtonAccount
+            // 
+            this.uiSymbolButtonAccount.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButtonAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButtonAccount.Image = global::QuanLyTaiChinhCuaHangVatLieuXayDung.Properties.Resources.Home_01;
+            this.uiSymbolButtonAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButtonAccount.Location = new System.Drawing.Point(3, 451);
+            this.uiSymbolButtonAccount.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButtonAccount.Name = "uiSymbolButtonAccount";
+            this.uiSymbolButtonAccount.Radius = 20;
+            this.uiSymbolButtonAccount.Size = new System.Drawing.Size(190, 50);
+            this.uiSymbolButtonAccount.TabIndex = 0;
+            this.uiSymbolButtonAccount.Text = "Tài khoản";
+            this.uiSymbolButtonAccount.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButtonAccount.Click += new System.EventHandler(this.uiSymbolButtonAccount_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 32F);
@@ -272,6 +290,7 @@
             this.Name = "Home";
             this.Text = "Home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Home_FormClosing);
             this.Load += new System.EventHandler(this.Home_Load);
             this.panel_header.ResumeLayout(false);
             this.panel_header.PerformLayout();
@@ -297,5 +316,6 @@
         private Sunny.UI.UISymbolButton uiSymbolButtonProduct;
         private Sunny.UI.UISymbolButton uiSymbolButtonBill;
         private Sunny.UI.UISymbolButton uiSymbolButtonDetailBill;
+        private Sunny.UI.UISymbolButton uiSymbolButtonAccount;
     }
 }
