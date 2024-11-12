@@ -25,9 +25,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, this.myDatabase.GetConnection());
                 adapter.Fill(dtAnnualRevenue);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                MessageBox.Show("Bạn không có quyền", "Notification",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -52,9 +52,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 adapter.SelectCommand.Parameters.AddWithValue("@Year", year);
                 adapter.Fill(dtDailyRevenue);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                MessageBox.Show("Bạn không có quyền", "Notification",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -77,6 +77,30 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 adapter.SelectCommand.Parameters.AddWithValue("@Year", year);
                 adapter.Fill(dtMonthlyRevenue);
             }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Bạn không có quyền", "Notification",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return dtMonthlyRevenue;
+        }
+        public DataTable CalculateTopCellingProduct()
+        {
+            DataTable dtDailyRevenue = new DataTable();
+            string sqlQuery = "SELECT * FROM Fn_GetTopSellingProductPerType()";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, this.myDatabase.GetConnection());
+                adapter.Fill(dtDailyRevenue);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Notification",
@@ -87,7 +111,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 this.myDatabase.CloseConnection();
             }
 
-            return dtMonthlyRevenue;
+            return dtDailyRevenue;
         }
     }
 }

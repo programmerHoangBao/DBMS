@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.DetailBillViews;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
 {
@@ -96,6 +97,12 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
         {
             try
             {
+                if (detailBills.Count == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn sản phẩm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 string idBill = txt_idBill.Text.Trim();
                 DateTime dateCreate = DateTime.Now;
                 if (cbb_typeBill.SelectedIndex == 0)
@@ -110,21 +117,16 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
                             if (!detailBillService.InsertDetailBill(detailBill))
                             {
                                 MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                this.billService.DeleteBill(idBill);
+                                return;
                             }
                         }
-                        //cbb_selectTypeBill.SelectedIndex = 0;
+                        MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
                     }
                     else
                     {
                         MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    if (this.billService.CheckBillHasProducts(idBill))
-                    {
-                        MessageBox.Show("Thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        this.billService.DeleteBill(idBill);
                     }
                 }
                 else
@@ -139,6 +141,8 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
                             if (!detailBillService.InsertDetailBill(detailBill))
                             {
                                 MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                this.billService.DeleteBill(idBill);
+                                return;
                             }
                         }
 
@@ -176,16 +180,20 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
             if (txt_idBill.Text.Trim() == "")
             {
                 MessageBox.Show("Vui lòng nhập mã đơn hàng","Lỗi",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            else
+            if (txt_idSupOrCus.Text.Trim() == "")
             {
+                MessageBox.Show("Vui lòng nhập mã người xuất/nhập", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
                 Form_SelectProduct form = new Form_SelectProduct();
                 form.txt_idBill.Text = txt_idBill.Text;
                 form.detailBills = detailBills;
                 form.ShowDialog();
                 detailBills = form.detailBills;
                 addDetailBilltoListBox();
-            }
         }
 
         private void addDetailBilltoListBox()
@@ -195,6 +203,120 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.BillViews
             {
                 uiListBox1.Items.Add(detailBill.ToString());
             }
+        }
+
+        private void uiButtonRefresh_Click(object sender, EventArgs e)
+        {
+            DisplaySuppliersOnUIDataGridViewAndUiComboBox(this.dgv_listbill, this.cbb_selectTypeBill, this.cbb_typeBill);
+            txt_idBill.Text = "";
+            txt_idSupOrCus.Text = "";
+            detailBills = new List<DetailBill>();
+            uiTextBoxSearchTerm.Text = "";
+            uiListBox1.Items.Clear();
+        }
+
+        private void uiPanelSelect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiButtonSearchBill_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string searchTerm = this.uiTextBoxSearchTerm.Text.Trim();
+
+                if (cbb_selectTypeBill.SelectedIndex == 0)
+                {
+                    List<Bill> bills = this.billService.SearchImportBill(searchTerm);
+
+                    if (bills.Count > 0)
+                    {
+                        MessageBox.Show("Tìm thấy " + bills.Count.ToString() + " hóa đơn!", "Thông Báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.dgv_listbill.DataSource = bills;
+                        this.txt_idBill.Text = bills[0].IdBill;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy bất kì hóa đơn nào!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    List<Bill> bills = this.billService.SearchExportBill(searchTerm);
+
+                    if (bills.Count > 0)
+                    {
+                        MessageBox.Show("Tìm thấy " + bills.Count.ToString() + " hóa đơn!", "Thông Báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.dgv_listbill.DataSource = bills;
+                        this.txt_idBill.Text = bills[0].IdBill;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy bất kì hóa đơn nào!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgv_listbill_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            if (cbb_selectTypeBill.SelectedIndex == 0)
+            {
+                cbb_typeBill.SelectedIndex = 0;
+                txt_idBill.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString();
+                txt_idSupOrCus.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdSupplier"].Value.ToString();
+            }
+            else
+            {
+                cbb_typeBill.SelectedIndex = 1;
+                txt_idBill.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString();
+                txt_idSupOrCus.Text = dgv_listbill.Rows[e.RowIndex].Cells["IdCustomer"].Value.ToString();
+            }
+        }
+
+        private void dgv_listbill_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            Form_ManagerDetailBill form = new Form_ManagerDetailBill();
+            if (cbb_selectTypeBill.SelectedIndex == 0)
+            {
+                form.dgv_listDetailBill.DataSource = billService.GetListProductImportBill(dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString().Trim());
+                form.dgv_listDetailBill.Columns["IdProduct"].HeaderText = "Mã sản phẩm";
+                form.dgv_listDetailBill.Columns["NameProduct"].HeaderText = "Tên sản phẩm";
+                form.dgv_listDetailBill.Columns["UnitPriceImport"].Visible = true;
+                form.dgv_listDetailBill.Columns["Unit"].HeaderText = "Đơn vị";
+                form.dgv_listDetailBill.Columns["UnitPriceImport"].HeaderText = "Giá nhập";
+                form.dgv_listDetailBill.Columns["QuantityProduct"].HeaderText = "Số lượng";
+                form.dgv_listDetailBill.Columns["ImageProduct"].HeaderText = "Hình ảnh";
+                form.dgv_listDetailBill.Columns["UnitPriceExport"].Visible = false;
+
+            }
+            else
+            {
+                form.dgv_listDetailBill.DataSource = billService.GetListProductExportBill(dgv_listbill.Rows[e.RowIndex].Cells["IdBill"].Value.ToString().Trim());
+                form.dgv_listDetailBill.Columns["IdProduct"].HeaderText = "Mã sản phẩm";
+                form.dgv_listDetailBill.Columns["NameProduct"].HeaderText = "Tên sản phẩm";
+                form.dgv_listDetailBill.Columns["UnitPriceExport"].Visible = true;
+                form.dgv_listDetailBill.Columns["Unit"].HeaderText = "Đơn vị";
+                form.dgv_listDetailBill.Columns["UnitPriceExport"].HeaderText = "Giá bán";
+                form.dgv_listDetailBill.Columns["QuantityProduct"].HeaderText = "Số lượng";
+                form.dgv_listDetailBill.Columns["ImageProduct"].HeaderText = "Hình ảnh";
+                form.dgv_listDetailBill.Columns["UnitPriceImport"].Visible = false;
+            }
+            form.ShowDialog();
         }
     }
 }

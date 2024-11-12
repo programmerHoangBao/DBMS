@@ -184,9 +184,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
 
                 result = ((int)outputParam.Value == 1);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                   MessageBox.Show("An error occurred: " + ex.Message, "Notification",
                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally

@@ -33,6 +33,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiTitlePanelCalculateRevenue = new Sunny.UI.UITitlePanel();
             this.uiPanelAnnualRevenue = new Sunny.UI.UIPanel();
             this.uiButtonCalculateAnnualRevenue = new Sunny.UI.UIButton();
@@ -51,6 +56,9 @@
             this.uiSymbolLabelInput = new Sunny.UI.UISymbolLabel();
             this.uiPanelShowRevenue = new Sunny.UI.UIPanel();
             this.uiDataGridViewRevenue = new Sunny.UI.UIDataGridView();
+            this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.uiDataGridViewSellProduct = new Sunny.UI.UIDataGridView();
+            this.buttonTopSeller = new Sunny.UI.UIButton();
             this.uiTitlePanelCalculateRevenue.SuspendLayout();
             this.uiPanelAnnualRevenue.SuspendLayout();
             this.uiPanelMonthlyRevenue.SuspendLayout();
@@ -58,6 +66,8 @@
             this.uiPanelInput.SuspendLayout();
             this.uiPanelShowRevenue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridViewRevenue)).BeginInit();
+            this.uiPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridViewSellProduct)).BeginInit();
             this.SuspendLayout();
             // 
             // uiTitlePanelCalculateRevenue
@@ -68,14 +78,14 @@
             this.uiTitlePanelCalculateRevenue.Controls.Add(this.uiPanelInput);
             this.uiTitlePanelCalculateRevenue.Dock = System.Windows.Forms.DockStyle.Right;
             this.uiTitlePanelCalculateRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTitlePanelCalculateRevenue.Location = new System.Drawing.Point(839, 0);
-            this.uiTitlePanelCalculateRevenue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanelCalculateRevenue.Location = new System.Drawing.Point(767, 0);
+            this.uiTitlePanelCalculateRevenue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.uiTitlePanelCalculateRevenue.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanelCalculateRevenue.Name = "uiTitlePanelCalculateRevenue";
-            this.uiTitlePanelCalculateRevenue.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
+            this.uiTitlePanelCalculateRevenue.Padding = new System.Windows.Forms.Padding(0, 24, 0, 0);
             this.uiTitlePanelCalculateRevenue.Radius = 20;
             this.uiTitlePanelCalculateRevenue.ShowText = false;
-            this.uiTitlePanelCalculateRevenue.Size = new System.Drawing.Size(417, 988);
+            this.uiTitlePanelCalculateRevenue.Size = new System.Drawing.Size(371, 754);
             this.uiTitlePanelCalculateRevenue.TabIndex = 0;
             this.uiTitlePanelCalculateRevenue.Text = "Tính Danh Thu";
             this.uiTitlePanelCalculateRevenue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -83,15 +93,16 @@
             // uiPanelAnnualRevenue
             // 
             this.uiPanelAnnualRevenue.AutoSize = true;
+            this.uiPanelAnnualRevenue.Controls.Add(this.buttonTopSeller);
             this.uiPanelAnnualRevenue.Controls.Add(this.uiButtonCalculateAnnualRevenue);
             this.uiPanelAnnualRevenue.Controls.Add(this.uiSymbolLabelCalculateAnnualRevenue);
             this.uiPanelAnnualRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiPanelAnnualRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelAnnualRevenue.Location = new System.Drawing.Point(0, 704);
+            this.uiPanelAnnualRevenue.Location = new System.Drawing.Point(0, 460);
             this.uiPanelAnnualRevenue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelAnnualRevenue.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelAnnualRevenue.Name = "uiPanelAnnualRevenue";
-            this.uiPanelAnnualRevenue.Size = new System.Drawing.Size(417, 284);
+            this.uiPanelAnnualRevenue.Size = new System.Drawing.Size(371, 294);
             this.uiPanelAnnualRevenue.TabIndex = 1;
             this.uiPanelAnnualRevenue.Text = null;
             this.uiPanelAnnualRevenue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -100,7 +111,7 @@
             // 
             this.uiButtonCalculateAnnualRevenue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButtonCalculateAnnualRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButtonCalculateAnnualRevenue.Location = new System.Drawing.Point(123, 92);
+            this.uiButtonCalculateAnnualRevenue.Location = new System.Drawing.Point(123, 62);
             this.uiButtonCalculateAnnualRevenue.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButtonCalculateAnnualRevenue.Name = "uiButtonCalculateAnnualRevenue";
             this.uiButtonCalculateAnnualRevenue.Radius = 40;
@@ -128,11 +139,11 @@
             this.uiPanelMonthlyRevenue.Controls.Add(this.uiSymbolLabelCalculateMonthlyRevenue);
             this.uiPanelMonthlyRevenue.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiPanelMonthlyRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelMonthlyRevenue.Location = new System.Drawing.Point(0, 464);
+            this.uiPanelMonthlyRevenue.Location = new System.Drawing.Point(0, 342);
             this.uiPanelMonthlyRevenue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelMonthlyRevenue.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelMonthlyRevenue.Name = "uiPanelMonthlyRevenue";
-            this.uiPanelMonthlyRevenue.Size = new System.Drawing.Size(417, 240);
+            this.uiPanelMonthlyRevenue.Size = new System.Drawing.Size(371, 118);
             this.uiPanelMonthlyRevenue.TabIndex = 1;
             this.uiPanelMonthlyRevenue.Text = null;
             this.uiPanelMonthlyRevenue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -141,7 +152,7 @@
             // 
             this.uiButtonCalculateMonthlyRevenue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButtonCalculateMonthlyRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButtonCalculateMonthlyRevenue.Location = new System.Drawing.Point(123, 106);
+            this.uiButtonCalculateMonthlyRevenue.Location = new System.Drawing.Point(123, 57);
             this.uiButtonCalculateMonthlyRevenue.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButtonCalculateMonthlyRevenue.Name = "uiButtonCalculateMonthlyRevenue";
             this.uiButtonCalculateMonthlyRevenue.Radius = 40;
@@ -169,11 +180,11 @@
             this.uiPanelDailyRevenue.Controls.Add(this.uiSymbolLabelCalculateDailyRevenue);
             this.uiPanelDailyRevenue.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiPanelDailyRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelDailyRevenue.Location = new System.Drawing.Point(0, 221);
+            this.uiPanelDailyRevenue.Location = new System.Drawing.Point(0, 215);
             this.uiPanelDailyRevenue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelDailyRevenue.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelDailyRevenue.Name = "uiPanelDailyRevenue";
-            this.uiPanelDailyRevenue.Size = new System.Drawing.Size(417, 243);
+            this.uiPanelDailyRevenue.Size = new System.Drawing.Size(371, 127);
             this.uiPanelDailyRevenue.TabIndex = 1;
             this.uiPanelDailyRevenue.Text = null;
             this.uiPanelDailyRevenue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -182,7 +193,7 @@
             // 
             this.uiButtonCalculateDailyRevenue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButtonCalculateDailyRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButtonCalculateDailyRevenue.Location = new System.Drawing.Point(123, 113);
+            this.uiButtonCalculateDailyRevenue.Location = new System.Drawing.Point(123, 55);
             this.uiButtonCalculateDailyRevenue.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButtonCalculateDailyRevenue.Name = "uiButtonCalculateDailyRevenue";
             this.uiButtonCalculateDailyRevenue.Radius = 40;
@@ -213,11 +224,11 @@
             this.uiPanelInput.Controls.Add(this.uiSymbolLabelInput);
             this.uiPanelInput.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiPanelInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelInput.Location = new System.Drawing.Point(0, 30);
+            this.uiPanelInput.Location = new System.Drawing.Point(0, 24);
             this.uiPanelInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelInput.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelInput.Name = "uiPanelInput";
-            this.uiPanelInput.Size = new System.Drawing.Size(417, 191);
+            this.uiPanelInput.Size = new System.Drawing.Size(371, 191);
             this.uiPanelInput.TabIndex = 0;
             this.uiPanelInput.Text = null;
             this.uiPanelInput.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -228,9 +239,9 @@
             this.uiLabelYear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.uiLabelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiLabelYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabelYear.Location = new System.Drawing.Point(60, 114);
+            this.uiLabelYear.Location = new System.Drawing.Point(29, 112);
             this.uiLabelYear.Name = "uiLabelYear";
-            this.uiLabelYear.Size = new System.Drawing.Size(70, 29);
+            this.uiLabelYear.Size = new System.Drawing.Size(59, 25);
             this.uiLabelYear.TabIndex = 2;
             this.uiLabelYear.Text = "Năm:";
             // 
@@ -240,9 +251,9 @@
             this.uiLabelMonth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.uiLabelMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiLabelMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabelMonth.Location = new System.Drawing.Point(60, 58);
+            this.uiLabelMonth.Location = new System.Drawing.Point(29, 56);
             this.uiLabelMonth.Name = "uiLabelMonth";
-            this.uiLabelMonth.Size = new System.Drawing.Size(88, 29);
+            this.uiLabelMonth.Size = new System.Drawing.Size(75, 25);
             this.uiLabelMonth.TabIndex = 2;
             this.uiLabelMonth.Text = "Tháng:";
             // 
@@ -250,7 +261,7 @@
             // 
             this.uiTextBoxYear.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.uiTextBoxYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTextBoxYear.Location = new System.Drawing.Point(149, 114);
+            this.uiTextBoxYear.Location = new System.Drawing.Point(118, 112);
             this.uiTextBoxYear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTextBoxYear.MinimumSize = new System.Drawing.Size(1, 16);
             this.uiTextBoxYear.Name = "uiTextBoxYear";
@@ -265,7 +276,7 @@
             // 
             this.uiTextBoxMonth.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.uiTextBoxMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTextBoxMonth.Location = new System.Drawing.Point(149, 58);
+            this.uiTextBoxMonth.Location = new System.Drawing.Point(118, 56);
             this.uiTextBoxMonth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTextBoxMonth.MinimumSize = new System.Drawing.Size(1, 16);
             this.uiTextBoxMonth.Name = "uiTextBoxMonth";
@@ -291,13 +302,13 @@
             // uiPanelShowRevenue
             // 
             this.uiPanelShowRevenue.Controls.Add(this.uiDataGridViewRevenue);
-            this.uiPanelShowRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiPanelShowRevenue.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiPanelShowRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiPanelShowRevenue.Location = new System.Drawing.Point(0, 0);
-            this.uiPanelShowRevenue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiPanelShowRevenue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.uiPanelShowRevenue.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelShowRevenue.Name = "uiPanelShowRevenue";
-            this.uiPanelShowRevenue.Size = new System.Drawing.Size(839, 988);
+            this.uiPanelShowRevenue.Size = new System.Drawing.Size(767, 426);
             this.uiPanelShowRevenue.TabIndex = 1;
             this.uiPanelShowRevenue.Text = null;
             this.uiPanelShowRevenue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -346,18 +357,96 @@
             this.uiDataGridViewRevenue.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.uiDataGridViewRevenue.RowTemplate.Height = 28;
             this.uiDataGridViewRevenue.SelectedIndex = -1;
-            this.uiDataGridViewRevenue.Size = new System.Drawing.Size(839, 988);
+            this.uiDataGridViewRevenue.Size = new System.Drawing.Size(767, 426);
             this.uiDataGridViewRevenue.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridViewRevenue.TabIndex = 0;
             // 
+            // uiPanel1
+            // 
+            this.uiPanel1.Controls.Add(this.uiDataGridViewSellProduct);
+            this.uiPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.uiPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiPanel1.Location = new System.Drawing.Point(0, 427);
+            this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiPanel1.Name = "uiPanel1";
+            this.uiPanel1.Size = new System.Drawing.Size(767, 327);
+            this.uiPanel1.TabIndex = 2;
+            this.uiPanel1.Text = "uiPanel1";
+            this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDataGridViewSellProduct
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridViewSellProduct.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.uiDataGridViewSellProduct.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.uiDataGridViewSellProduct.BackgroundColor = System.Drawing.Color.White;
+            this.uiDataGridViewSellProduct.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridViewSellProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.uiDataGridViewSellProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridViewSellProduct.DefaultCellStyle = dataGridViewCellStyle8;
+            this.uiDataGridViewSellProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiDataGridViewSellProduct.EnableHeadersVisualStyles = false;
+            this.uiDataGridViewSellProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiDataGridViewSellProduct.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.uiDataGridViewSellProduct.Location = new System.Drawing.Point(0, 0);
+            this.uiDataGridViewSellProduct.Name = "uiDataGridViewSellProduct";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridViewSellProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.uiDataGridViewSellProduct.RowHeadersWidth = 51;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiDataGridViewSellProduct.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.uiDataGridViewSellProduct.RowTemplate.Height = 24;
+            this.uiDataGridViewSellProduct.SelectedIndex = -1;
+            this.uiDataGridViewSellProduct.Size = new System.Drawing.Size(767, 327);
+            this.uiDataGridViewSellProduct.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridViewSellProduct.TabIndex = 0;
+            // 
+            // buttonTopSeller
+            // 
+            this.buttonTopSeller.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTopSeller.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonTopSeller.Location = new System.Drawing.Point(7, 140);
+            this.buttonTopSeller.MinimumSize = new System.Drawing.Size(1, 1);
+            this.buttonTopSeller.Name = "buttonTopSeller";
+            this.buttonTopSeller.Radius = 40;
+            this.buttonTopSeller.Size = new System.Drawing.Size(351, 40);
+            this.buttonTopSeller.TabIndex = 4;
+            this.buttonTopSeller.Text = "Sản phẩm bán nhiều nhất";
+            this.buttonTopSeller.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.buttonTopSeller.Click += new System.EventHandler(this.buttonTopSeller_Click);
+            // 
             // Form_ShowRevenue
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1256, 988);
+            this.ClientSize = new System.Drawing.Size(1138, 754);
+            this.Controls.Add(this.uiPanel1);
             this.Controls.Add(this.uiPanelShowRevenue);
             this.Controls.Add(this.uiTitlePanelCalculateRevenue);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form_ShowRevenue";
             this.Text = "Form_ShowRevenue";
             this.Load += new System.EventHandler(this.Form_ShowRevenue_Load);
@@ -370,6 +459,8 @@
             this.uiPanelInput.PerformLayout();
             this.uiPanelShowRevenue.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridViewRevenue)).EndInit();
+            this.uiPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridViewSellProduct)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -394,5 +485,8 @@
         private Sunny.UI.UIButton uiButtonCalculateAnnualRevenue;
         private Sunny.UI.UIPanel uiPanelMonthlyRevenue;
         private Sunny.UI.UIButton uiButtonCalculateMonthlyRevenue;
+        private Sunny.UI.UIPanel uiPanel1;
+        private Sunny.UI.UIDataGridView uiDataGridViewSellProduct;
+        private Sunny.UI.UIButton buttonTopSeller;
     }
 }

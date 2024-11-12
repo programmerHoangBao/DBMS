@@ -180,7 +180,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -210,10 +210,21 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 cmd.Parameters.AddWithValue("@QuantityProduct", product.QuantityProduct);
                 cmd.Parameters.AddWithValue("@IdTypeProduct", product.TypeProduct.IdTypeProduct);
                 cmd.Parameters.AddWithValue("@IdSupplier", product.Supplier.IdSupplier);
-                cmd.Parameters.AddWithValue("@ImageProduct", product.ImageProduct);
+                SqlParameter imageParam = new SqlParameter("@ImageProduct", SqlDbType.VarBinary);
+                if (product.ImageProduct != null)
+                {
+                    imageParam.Value = product.ImageProduct;
+                }
+                else
+                {
+                    imageParam.Value = DBNull.Value;
+                }
+                cmd.Parameters.Add(imageParam);
 
-                SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int);
-                resultParam.Direction = ParameterDirection.Output;
+                SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
                 cmd.Parameters.Add(resultParam);
 
                 cmd.ExecuteNonQuery();
@@ -222,7 +233,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
