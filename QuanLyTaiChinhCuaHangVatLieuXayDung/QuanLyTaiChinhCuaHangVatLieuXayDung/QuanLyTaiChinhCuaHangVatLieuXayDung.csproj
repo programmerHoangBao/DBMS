@@ -69,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AccountView\Form_ManagerAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AccountView\Form_ManagerAccount.Designer.cs">
+      <DependentUpon>Form_ManagerAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\BillViews\Form_ManagerBIll.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,30 @@
     <Compile Include="Forms\HomeViews\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LoginViews\Form_ForgotPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginViews\Form_ForgotPassword.Designer.cs">
+      <DependentUpon>Form_ForgotPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginViews\Form_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginViews\Form_Login.Designer.cs">
+      <DependentUpon>Form_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginViews\Form_Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginViews\Form_Register.Designer.cs">
+      <DependentUpon>Form_Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginViews\Form_SendEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginViews\Form_SendEmail.Designer.cs">
+      <DependentUpon>Form_SendEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ProductView\Form_ManagerProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +159,8 @@
     <Compile Include="Forms\TypeProductViews\Form_ManagerTypeProduct.Designer.cs">
       <DependentUpon>Form_ManagerTypeProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\AccountBase.cs" />
     <Compile Include="Model\Bill.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\DetailBill.cs" />
@@ -139,10 +171,12 @@
     <Compile Include="Model\TypeProduct.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\IAccountService.cs" />
     <Compile Include="Service\IBillService.cs" />
     <Compile Include="Service\ICustomerService.cs" />
     <Compile Include="Service\IDetailBillService.cs" />
     <Compile Include="Service\IExpenseSlipService.cs" />
+    <Compile Include="Service\Implements\AccountService.cs" />
     <Compile Include="Service\Implements\BillService.cs" />
     <Compile Include="Service\Implements\CustomerService.cs" />
     <Compile Include="Service\Implements\DetailBillService.cs" />
@@ -161,6 +195,9 @@
     <Compile Include="User_Control\UCDisplayProduct.Designer.cs">
       <DependentUpon>UCDisplayProduct.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\AccountView\Form_ManagerAccount.resx">
+      <DependentUpon>Form_ManagerAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BillViews\Form_ManagerBIll.resx">
       <DependentUpon>Form_ManagerBIll.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +215,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HomeViews\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginViews\Form_ForgotPassword.resx">
+      <DependentUpon>Form_ForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginViews\Form_Login.resx">
+      <DependentUpon>Form_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginViews\Form_Register.resx">
+      <DependentUpon>Form_Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginViews\Form_SendEmail.resx">
+      <DependentUpon>Form_SendEmail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductView\Form_ManagerProduct.resx">
       <DependentUpon>Form_ManagerProduct.cs</DependentUpon>
@@ -255,13 +304,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Database\QuanLyTaiChinhCuaHangXayDung_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>QuanLyTaiChinhCuaHangXayDung.mdf</DependentUpon>
-    </Content>
+    <None Include="Resources\Visibility1.ico" />
+    <None Include="Resources\Visibility_Off1.ico" />
+    <None Include="Resources\Visibility_Off.ico" />
+    <None Include="Resources\Visibility_Off.png" />
+    <None Include="Resources\Password.png" />
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
