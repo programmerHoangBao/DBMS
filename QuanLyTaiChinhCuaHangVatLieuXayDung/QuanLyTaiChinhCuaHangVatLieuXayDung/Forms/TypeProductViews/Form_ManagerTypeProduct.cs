@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
 
         private void dataGridViewShowTypeProducts_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            uiComboBoxIdTypeProduct.Enabled = false;
             try
             {
                 this.uiComboBoxIdTypeProduct.Text = this.uiDataGridViewShowTypeProducts.Rows[e.RowIndex].Cells["IdTypeProduct"].Value.ToString().Trim();
@@ -98,12 +100,10 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
                     MessageBox.Show("Thêm thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
-                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void btnUpdateTypeProduct_Click(object sender, EventArgs e)
@@ -124,12 +124,11 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
                     MessageBox.Show("Cập nhật thất bại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Notification",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void btnDeleteTypeProduct_Click(object sender, EventArgs e)
@@ -171,6 +170,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.TypeProductViews
 
         private void uiButtonRefresh_Click(object sender, EventArgs e)
         {
+            uiComboBoxIdTypeProduct.Enabled = true;
             try
             {
                 //biểu diển lại dữ liệu trên uiDataGridViewShowTypeProducts và uiComboBoxIdTypeProduct

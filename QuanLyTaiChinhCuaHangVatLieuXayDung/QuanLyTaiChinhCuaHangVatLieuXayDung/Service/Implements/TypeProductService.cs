@@ -136,10 +136,18 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
                 cmd.ExecuteNonQuery();
                 result = (int)outputParam.Value == 1;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessage = ex.Message;
+                if (ex.Message.Contains("Violation of UNIQUE KEY constraint"))
+                {
+                    errorMessage = "Loại sản phẩm đã tồn tại";
+                }
+                else if (ex.Message.Contains("Violation of PRIMARY KEY constraint"))
+                {
+                    errorMessage = "Mã sản phẩm đã tồn tại";
+                }
+                MessageBox.Show("An error occurred: " + errorMessage, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -173,8 +181,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service.Implements
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

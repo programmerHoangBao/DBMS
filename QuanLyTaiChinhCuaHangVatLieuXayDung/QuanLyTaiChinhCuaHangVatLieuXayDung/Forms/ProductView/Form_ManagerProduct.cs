@@ -136,9 +136,23 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
                 }
                 LoadData();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = ex.Message;
+                if (ex.Message.Contains("Input string was not in a correct format."))
+                {
+                    errorMessage = "Giá nhập, giá bán, số lượng phải là giá trị số";
+                }
+                else if (ex.Message.Contains("Object reference not set to an instance of an object."))
+                {
+                    errorMessage = "Loại sản phẩm hoặc Nhà cung cấp không tồn tại";
+                }    
+                MessageBox.Show("An error occurred: " + errorMessage, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -149,7 +163,16 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
             MemoryStream pic = new MemoryStream();
             try
             {
-                pictureBox1.Image.Save(pic, pictureBox1.Image.RawFormat);
+                //pictureBox1.Image.Save(pic, pictureBox1.Image.RawFormat);
+                // Kiểm tra xem pictureBox có ảnh hay không
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Save(pic, pictureBox1.Image.RawFormat);
+                }
+                else
+                {
+                    pic = new MemoryStream(new byte[0]);  // Mảng byte trống
+                }
 
                 Model.Product product = new Model.Product();
                 product.IdProduct = textBoxID.Text;
@@ -163,19 +186,35 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
                 product.Supplier = new Supplier();
                 product.Supplier.IdSupplier = comboBoxNhaCungCap.SelectedValue.ToString();
                 product.ImageProduct = pic.ToArray();
+           
                 if (productService.UpdateProduct(product))
                 {
                     MessageBox.Show("Sản phẩm đã được chỉnh sửa", "Thêm sản phẩm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData();
                 }
                 else
                 {
                     MessageBox.Show("Chỉnh sửa sản phẩm không thành công", "Thêm sản phẩm", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                LoadData();
+                
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessage = ex.Message;
+                if (ex.Message.Contains("Input string was not in a correct format."))
+                {
+                    errorMessage = "Giá nhập, giá bán, số lượng phải là giá trị số";
+                }
+                else if (ex.Message.Contains("Object reference not set to an instance of an object."))
+                {
+                    errorMessage = "Loại sản phẩm hoặc Nhà cung cấp không tồn tại";
+                }
+                MessageBox.Show("An error occurred: " + errorMessage, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("An error occurred: " + ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -217,7 +256,16 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            LoadData();
+            //LoadData();
+            textBoxID.Text = "";
+            textBoxID.Enabled = true;
+            textBoxTenSP.Text = "";
+            textBoxDonViTinh.Text = "";
+            textBoxGiaNhap.Text = "";
+            textBoxGiaBan.Text = "";
+            textBoxSoLuong.Text = "";
+            comboBoxLoaiSP.Text = "";
+            comboBoxNhaCungCap.Text = "";
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
@@ -263,6 +311,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
             comboBoxLoaiSP.Text = dataGridViewProduct.CurrentRow.Cells[6].Value.ToString();
             comboBoxNhaCungCap.Text = dataGridViewProduct.CurrentRow.Cells[7].Value.ToString();
 
+            textBoxID.Enabled = false;
             /*byte[] pic;
             pic = (byte[])dataGridViewProduct.CurrentRow.Cells[8].Value;
             MemoryStream picture = new MemoryStream(pic);
@@ -293,6 +342,37 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.ProductView
             {
                 // Nếu không có dữ liệu ảnh thì xóa ảnh hiện tại
                 pictureBox1.Image = null;
+            }
+        }
+
+        private void dataGridViewProduct_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Kiểm tra nếu cột đang được hiển thị là cột ảnh
+            if (dataGridViewProduct.Columns[e.ColumnIndex].Name == "ImageProduct")
+            {
+                // Kiểm tra nếu giá trị trong ô là null hoặc không hợp lệ
+                if (e.Value != null && e.Value is byte[] byteArray && byteArray.Length > 0)
+                {
+                    try
+                    {
+                        // Chuyển mảng byte thành ảnh
+                        using (MemoryStream ms = new MemoryStream(byteArray))
+                        {
+                            e.Value = Image.FromStream(ms);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Nếu xảy ra lỗi khi chuyển đổi, gán null hoặc ảnh mặc định
+                        e.Value = null;  // Hoặc gán một ảnh mặc định tại đây
+                        MessageBox.Show("Error displaying image: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    // Nếu không có ảnh, bạn có thể gán một ảnh mặc định hoặc bỏ trống
+                    e.Value = null;  // Hoặc gán ảnh mặc định tại đây
+                }
             }
         }
     }

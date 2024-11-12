@@ -80,5 +80,25 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.RevenueViews
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void buttonTopSeller_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dtDailyRevenue = this.revenueService.CalculateTopCellingProduct();
+
+                this.uiDataGridViewSellProduct.DataSource = dtDailyRevenue;
+                this.uiDataGridViewSellProduct.Columns["IdTypeProduct"].HeaderText = "Loại sản phẩm";
+                this.uiDataGridViewSellProduct.Columns["NameTypeProduct"].HeaderText = "Tên loại sản phẩm";
+                this.uiDataGridViewSellProduct.Columns["IdProduct"].HeaderText = "Sản phẩm";
+                this.uiDataGridViewSellProduct.Columns["NameProduct"].HeaderText = "Tên sản phẩm";
+                this.uiDataGridViewSellProduct.Columns["TotalQuantitySold"].HeaderText = "Số lượng";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

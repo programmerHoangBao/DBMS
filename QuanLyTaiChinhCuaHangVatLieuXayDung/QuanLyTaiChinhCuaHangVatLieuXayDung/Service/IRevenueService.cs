@@ -18,5 +18,6 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
 
         //Function tạo bảng hiển thị danh thu của các trong tất cả các năm kinh doanh
         DataTable CalculateAnnualRevenue();
+        DataTable CalculateTopCellingProduct();
     }
 }

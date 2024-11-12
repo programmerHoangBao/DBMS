@@ -89,5 +89,29 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
 
             return dtMonthlyRevenue;
         }
+        public DataTable CalculateTopCellingProduct()
+        {
+            DataTable dtDailyRevenue = new DataTable();
+            string sqlQuery = "SELECT * FROM Fn_GetTopSellingProductPerType()";
+
+            try
+            {
+                this.myDatabase.OpenConnection();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, this.myDatabase.GetConnection());
+                adapter.Fill(dtDailyRevenue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.myDatabase.CloseConnection();
+            }
+
+            return dtDailyRevenue;
+        }
     }
 }
