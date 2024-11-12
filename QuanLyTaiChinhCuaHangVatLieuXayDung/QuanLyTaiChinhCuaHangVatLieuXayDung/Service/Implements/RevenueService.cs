@@ -25,9 +25,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, this.myDatabase.GetConnection());
                 adapter.Fill(dtAnnualRevenue);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                MessageBox.Show("Bạn không có quyền", "Notification",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -52,9 +52,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 adapter.SelectCommand.Parameters.AddWithValue("@Year", year);
                 adapter.Fill(dtDailyRevenue);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                MessageBox.Show("Bạn không có quyền", "Notification",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -77,9 +77,9 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung.Service
                 adapter.SelectCommand.Parameters.AddWithValue("@Year", year);
                 adapter.Fill(dtMonthlyRevenue);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Notification",
+                MessageBox.Show("Bạn không có quyền", "Notification",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally

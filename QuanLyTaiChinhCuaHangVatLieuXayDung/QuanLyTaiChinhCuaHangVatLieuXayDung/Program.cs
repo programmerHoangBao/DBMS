@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.HomeViews;
+using QuanLyTaiChinhCuaHangVatLieuXayDung.Forms.LoginViews;
 
 namespace QuanLyTaiChinhCuaHangVatLieuXayDung
 {
@@ -17,7 +18,7 @@ namespace QuanLyTaiChinhCuaHangVatLieuXayDung
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Home());
+            Application.Run(new Form_Login());
         }
     }
 }

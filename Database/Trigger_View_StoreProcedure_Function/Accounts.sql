@@ -182,7 +182,7 @@ AS
 GO
 
 --Function lấy ra đối tượng Account bằng Id
-CREATE FUNCTION GetAccountById (@IdAccount CHAR(6))
+CREATE FUNCTION Fn_GetAccountById (@IdAccount CHAR(6))
 RETURNS TABLE 
 AS
 	RETURN 
@@ -196,4 +196,24 @@ AS
 		FROM Accounts AC 
 		WHERE AC.IdAccount = @IdAccount
 	);
+GO
+
+--Function lấy ra account bằng Username
+CREATE FUNCTION Fn_GetAccountByUsername
+(
+	 @Username NVARCHAR(50)
+)
+RETURNS TABLE
+AS
+	RETURN
+	(
+		SELECT 
+			AC.IdAccount, 
+			AC.Username, 
+			AC.PasswordUser, 
+			AC.Email, 
+			AC.RoleUser 
+		FROM Accounts AC 
+		WHERE AC.Username = @Username
+	)
 GO

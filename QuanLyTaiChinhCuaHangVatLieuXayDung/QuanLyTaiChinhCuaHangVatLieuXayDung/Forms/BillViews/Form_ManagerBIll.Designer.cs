@@ -47,10 +47,8 @@
             this.lbl_idSupOrCus = new Sunny.UI.UILabel();
             this.txt_idBill = new Sunny.UI.UITextBox();
             this.uiLabelAddress = new Sunny.UI.UILabel();
-            this.uiButtonUpdateBill = new Sunny.UI.UIButton();
             this.uiButtonSearchBill = new Sunny.UI.UIButton();
             this.uiButtonRefresh = new Sunny.UI.UIButton();
-            this.uiButtonDeleteBill = new Sunny.UI.UIButton();
             this.uiButtonInsertBill = new Sunny.UI.UIButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.uiPanelInformationBill = new Sunny.UI.UIPanel();
@@ -58,15 +56,15 @@
             this.uiPanelButton = new Sunny.UI.UIPanel();
             this.uiTitlePanelBill = new Sunny.UI.UITitlePanel();
             this.uiPanelSelectAndShowData = new Sunny.UI.UIPanel();
-            this.uiPanelSelect = new Sunny.UI.UIPanel();
             this.dgv_listbill = new Sunny.UI.UIDataGridView();
+            this.uiPanelSelect = new Sunny.UI.UIPanel();
             this.uiPanelInformationBill.SuspendLayout();
             this.uiPanelSearch.SuspendLayout();
             this.uiPanelButton.SuspendLayout();
             this.uiTitlePanelBill.SuspendLayout();
             this.uiPanelSelectAndShowData.SuspendLayout();
-            this.uiPanelSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_listbill)).BeginInit();
+            this.uiPanelSelect.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbb_selectTypeBill
@@ -109,7 +107,7 @@
             this.uiLabelSearchTerm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabelSearchTerm.Location = new System.Drawing.Point(49, 73);
             this.uiLabelSearchTerm.Name = "uiLabelSearchTerm";
-            this.uiLabelSearchTerm.Size = new System.Drawing.Size(216, 29);
+            this.uiLabelSearchTerm.Size = new System.Drawing.Size(176, 25);
             this.uiLabelSearchTerm.TabIndex = 1;
             this.uiLabelSearchTerm.Text = "Thông tin tìm kiếm:";
             // 
@@ -197,7 +195,7 @@
             this.lbl_typeBill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.lbl_typeBill.Location = new System.Drawing.Point(28, 100);
             this.lbl_typeBill.Name = "lbl_typeBill";
-            this.lbl_typeBill.Size = new System.Drawing.Size(158, 29);
+            this.lbl_typeBill.Size = new System.Drawing.Size(131, 25);
             this.lbl_typeBill.TabIndex = 1;
             this.lbl_typeBill.Text = "Loại hóa đơn:";
             // 
@@ -209,7 +207,7 @@
             this.lbl_idBill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.lbl_idBill.Location = new System.Drawing.Point(28, 61);
             this.lbl_idBill.Name = "lbl_idBill";
-            this.lbl_idBill.Size = new System.Drawing.Size(145, 29);
+            this.lbl_idBill.Size = new System.Drawing.Size(122, 25);
             this.lbl_idBill.TabIndex = 1;
             this.lbl_idBill.Text = "Mã hóa đơn:";
             // 
@@ -236,7 +234,7 @@
             this.lbl_idSupOrCus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.lbl_idSupOrCus.Location = new System.Drawing.Point(28, 139);
             this.lbl_idSupOrCus.Name = "lbl_idSupOrCus";
-            this.lbl_idSupOrCus.Size = new System.Drawing.Size(200, 29);
+            this.lbl_idSupOrCus.Size = new System.Drawing.Size(169, 25);
             this.lbl_idSupOrCus.TabIndex = 1;
             this.lbl_idSupOrCus.Text = "Mã nhà cung cấp:";
             // 
@@ -263,28 +261,15 @@
             this.uiLabelAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabelAddress.Location = new System.Drawing.Point(28, 184);
             this.uiLabelAddress.Name = "uiLabelAddress";
-            this.uiLabelAddress.Size = new System.Drawing.Size(231, 29);
+            this.uiLabelAddress.Size = new System.Drawing.Size(192, 25);
             this.uiLabelAddress.TabIndex = 1;
             this.uiLabelAddress.Text = "Chọn loại sản phẩm:";
-            // 
-            // uiButtonUpdateBill
-            // 
-            this.uiButtonUpdateBill.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButtonUpdateBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButtonUpdateBill.Location = new System.Drawing.Point(412, 19);
-            this.uiButtonUpdateBill.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButtonUpdateBill.Name = "uiButtonUpdateBill";
-            this.uiButtonUpdateBill.Radius = 32;
-            this.uiButtonUpdateBill.Size = new System.Drawing.Size(143, 47);
-            this.uiButtonUpdateBill.TabIndex = 0;
-            this.uiButtonUpdateBill.Text = "Cập nhật";
-            this.uiButtonUpdateBill.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             // 
             // uiButtonSearchBill
             // 
             this.uiButtonSearchBill.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButtonSearchBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButtonSearchBill.Location = new System.Drawing.Point(412, 98);
+            this.uiButtonSearchBill.Location = new System.Drawing.Point(412, 19);
             this.uiButtonSearchBill.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButtonSearchBill.Name = "uiButtonSearchBill";
             this.uiButtonSearchBill.Radius = 32;
@@ -292,12 +277,13 @@
             this.uiButtonSearchBill.TabIndex = 0;
             this.uiButtonSearchBill.Text = "Tìm kiếm";
             this.uiButtonSearchBill.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonSearchBill.Click += new System.EventHandler(this.uiButtonSearchBill_Click);
             // 
             // uiButtonRefresh
             // 
             this.uiButtonRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButtonRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButtonRefresh.Location = new System.Drawing.Point(272, 151);
+            this.uiButtonRefresh.Location = new System.Drawing.Point(272, 82);
             this.uiButtonRefresh.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButtonRefresh.Name = "uiButtonRefresh";
             this.uiButtonRefresh.Radius = 32;
@@ -305,19 +291,7 @@
             this.uiButtonRefresh.TabIndex = 0;
             this.uiButtonRefresh.Text = "Làm mới";
             this.uiButtonRefresh.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            // 
-            // uiButtonDeleteBill
-            // 
-            this.uiButtonDeleteBill.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButtonDeleteBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButtonDeleteBill.Location = new System.Drawing.Point(132, 98);
-            this.uiButtonDeleteBill.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButtonDeleteBill.Name = "uiButtonDeleteBill";
-            this.uiButtonDeleteBill.Radius = 32;
-            this.uiButtonDeleteBill.Size = new System.Drawing.Size(143, 47);
-            this.uiButtonDeleteBill.TabIndex = 0;
-            this.uiButtonDeleteBill.Text = "Xóa";
-            this.uiButtonDeleteBill.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiButtonRefresh.Click += new System.EventHandler(this.uiButtonRefresh_Click);
             // 
             // uiButtonInsertBill
             // 
@@ -351,12 +325,13 @@
             this.uiPanelInformationBill.Controls.Add(this.uiButton1);
             this.uiPanelInformationBill.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiPanelInformationBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelInformationBill.Location = new System.Drawing.Point(0, 40);
+            this.uiPanelInformationBill.Location = new System.Drawing.Point(0, 32);
             this.uiPanelInformationBill.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelInformationBill.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelInformationBill.Name = "uiPanelInformationBill";
-            this.uiPanelInformationBill.Size = new System.Drawing.Size(656, 336);
+            this.uiPanelInformationBill.Size = new System.Drawing.Size(504, 336);
             this.uiPanelInformationBill.TabIndex = 0;
+            this.uiPanelInformationBill.Text = null;
             this.uiPanelInformationBill.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiPanelSearch
@@ -366,30 +341,30 @@
             this.uiPanelSearch.Controls.Add(this.uiLabelSearchTerm);
             this.uiPanelSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiPanelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelSearch.Location = new System.Drawing.Point(0, 376);
+            this.uiPanelSearch.Location = new System.Drawing.Point(0, 368);
             this.uiPanelSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelSearch.Name = "uiPanelSearch";
-            this.uiPanelSearch.Size = new System.Drawing.Size(656, 170);
+            this.uiPanelSearch.Size = new System.Drawing.Size(504, 170);
             this.uiPanelSearch.TabIndex = 1;
+            this.uiPanelSearch.Text = null;
             this.uiPanelSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiPanelButton
             // 
             this.uiPanelButton.AutoSize = true;
             this.uiPanelButton.Controls.Add(this.uiButtonInsertBill);
-            this.uiPanelButton.Controls.Add(this.uiButtonUpdateBill);
-            this.uiPanelButton.Controls.Add(this.uiButtonDeleteBill);
             this.uiPanelButton.Controls.Add(this.uiButtonSearchBill);
             this.uiPanelButton.Controls.Add(this.uiButtonRefresh);
             this.uiPanelButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiPanelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelButton.Location = new System.Drawing.Point(0, 546);
+            this.uiPanelButton.Location = new System.Drawing.Point(0, 538);
             this.uiPanelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanelButton.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelButton.Name = "uiPanelButton";
-            this.uiPanelButton.Size = new System.Drawing.Size(656, 292);
+            this.uiPanelButton.Size = new System.Drawing.Size(504, 132);
             this.uiPanelButton.TabIndex = 1;
+            this.uiPanelButton.Text = null;
             this.uiPanelButton.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiTitlePanelBill
@@ -399,14 +374,14 @@
             this.uiTitlePanelBill.Controls.Add(this.uiPanelInformationBill);
             this.uiTitlePanelBill.Dock = System.Windows.Forms.DockStyle.Right;
             this.uiTitlePanelBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiTitlePanelBill.Location = new System.Drawing.Point(974, 0);
-            this.uiTitlePanelBill.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanelBill.Location = new System.Drawing.Point(945, 0);
+            this.uiTitlePanelBill.Margin = new System.Windows.Forms.Padding(4);
             this.uiTitlePanelBill.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanelBill.Name = "uiTitlePanelBill";
-            this.uiTitlePanelBill.Padding = new System.Windows.Forms.Padding(0, 40, 0, 0);
+            this.uiTitlePanelBill.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiTitlePanelBill.Radius = 40;
             this.uiTitlePanelBill.ShowText = false;
-            this.uiTitlePanelBill.Size = new System.Drawing.Size(656, 838);
+            this.uiTitlePanelBill.Size = new System.Drawing.Size(504, 670);
             this.uiTitlePanelBill.TabIndex = 2;
             this.uiTitlePanelBill.Text = "Hóa Đơn";
             this.uiTitlePanelBill.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -418,25 +393,13 @@
             this.uiPanelSelectAndShowData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiPanelSelectAndShowData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiPanelSelectAndShowData.Location = new System.Drawing.Point(0, 0);
-            this.uiPanelSelectAndShowData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiPanelSelectAndShowData.Margin = new System.Windows.Forms.Padding(4);
             this.uiPanelSelectAndShowData.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanelSelectAndShowData.Name = "uiPanelSelectAndShowData";
-            this.uiPanelSelectAndShowData.Size = new System.Drawing.Size(974, 838);
+            this.uiPanelSelectAndShowData.Size = new System.Drawing.Size(945, 670);
             this.uiPanelSelectAndShowData.TabIndex = 3;
+            this.uiPanelSelectAndShowData.Text = null;
             this.uiPanelSelectAndShowData.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiPanelSelect
-            // 
-            this.uiPanelSelect.Controls.Add(this.cbb_selectTypeBill);
-            this.uiPanelSelect.Dock = System.Windows.Forms.DockStyle.Top;
-            this.uiPanelSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiPanelSelect.Location = new System.Drawing.Point(0, 0);
-            this.uiPanelSelect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiPanelSelect.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiPanelSelect.Name = "uiPanelSelect";
-            this.uiPanelSelect.Size = new System.Drawing.Size(974, 76);
-            this.uiPanelSelect.TabIndex = 0;
-            this.uiPanelSelect.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgv_listbill
             // 
@@ -482,18 +445,35 @@
             this.dgv_listbill.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_listbill.RowTemplate.Height = 28;
             this.dgv_listbill.SelectedIndex = -1;
-            this.dgv_listbill.Size = new System.Drawing.Size(974, 762);
+            this.dgv_listbill.Size = new System.Drawing.Size(945, 594);
             this.dgv_listbill.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.dgv_listbill.TabIndex = 1;
+            this.dgv_listbill.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_listbill_CellClick);
+            this.dgv_listbill.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_listbill_CellDoubleClick);
+            // 
+            // uiPanelSelect
+            // 
+            this.uiPanelSelect.Controls.Add(this.cbb_selectTypeBill);
+            this.uiPanelSelect.Dock = System.Windows.Forms.DockStyle.Top;
+            this.uiPanelSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiPanelSelect.Location = new System.Drawing.Point(0, 0);
+            this.uiPanelSelect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiPanelSelect.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiPanelSelect.Name = "uiPanelSelect";
+            this.uiPanelSelect.Size = new System.Drawing.Size(945, 76);
+            this.uiPanelSelect.TabIndex = 0;
+            this.uiPanelSelect.Text = null;
+            this.uiPanelSelect.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiPanelSelect.Click += new System.EventHandler(this.uiPanelSelect_Click);
             // 
             // Form_ManagerBill
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1630, 838);
+            this.ClientSize = new System.Drawing.Size(1449, 670);
             this.Controls.Add(this.uiPanelSelectAndShowData);
             this.Controls.Add(this.uiTitlePanelBill);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_ManagerBill";
             this.Text = "Form_ManagerBill";
             this.Load += new System.EventHandler(this.Form_ManagerBill_Load);
@@ -505,8 +485,8 @@
             this.uiTitlePanelBill.ResumeLayout(false);
             this.uiTitlePanelBill.PerformLayout();
             this.uiPanelSelectAndShowData.ResumeLayout(false);
-            this.uiPanelSelect.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_listbill)).EndInit();
+            this.uiPanelSelect.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -521,10 +501,8 @@
         private Sunny.UI.UILabel lbl_idBill;
         private Sunny.UI.UITextBox txt_idSupOrCus;
         private Sunny.UI.UILabel lbl_idSupOrCus;
-        private Sunny.UI.UIButton uiButtonUpdateBill;
         private Sunny.UI.UIButton uiButtonSearchBill;
         private Sunny.UI.UIButton uiButtonRefresh;
-        private Sunny.UI.UIButton uiButtonDeleteBill;
         private Sunny.UI.UIButton uiButtonInsertBill;
         private Sunny.UI.UITextBox txt_idBill;
         private Sunny.UI.UIComboBox cbb_typeBill;
